@@ -1,0 +1,23 @@
+.container{
+  position: relative;
+  text-align: center;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+
+
+
+.centered {
+  position: absolute;
+  padding: 1em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color:darkred;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-style: italic;
+  font-size: 2em;
+  background-color: silver;
+  border-radius: 20px;
+}

@@ -1,28 +1,35 @@
 img{
-  margin-top: 0;
-  display: inline;
-  float: left;
-  width: 250px;
+margin-top: 1em;
+  position: relative;
+  width: 280px;
 }
 
-menu{
+#menuWrapper{
 display: flex;
-width: 80%;
 padding-top: 1em;
-justify-content: right;
+justify-content: center;
+float: right;
     }
 
-menu a{
-      margin-left: 1.5em;
-      text-decoration: none;
+    .rightMenu{
+      display: flex;
+      justify-content: center;
+    }
 
+
+    #menuWrapper a{
+      margin-right: 2em;
+      text-decoration: none;
       font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: rgb(69, 69, 69);
     }
 
-    menu a:hover{
+    #menuWrapper > a:hover{
+      padding-bottom: 3px;
       border-bottom: 2px solid black;
     }
+
+
 
 
 

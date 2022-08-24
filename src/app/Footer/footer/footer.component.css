@@ -1,0 +1,31 @@
+.footer{
+
+  font-family: 'Arial Narrow', Arial, sans-serif;
+  background: linear-gradient(0deg, rgba(153,0,0,1) 95%, rgba(255,255,255,1) 100%);
+  color: white;
+  width: 100%;
+  height: 15em;
+  padding: 1em;
+}
+
+#adresa{
+  display:flex;
+width: 20%;
+float: left;
+}
+
+#rightFooter{
+  display: flex;
+  justify-content: center;
+  float: right;
+}
+#iconLinkedIn{
+  width: 50px;
+  height: 50px;
+  margin-top: 0.3em;
+  margin-right: 1em;
+}
+#iconMetis{
+  margin-right: 2em;
+  width: 250px;
+}
