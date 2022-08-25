@@ -6,6 +6,8 @@ import { HeaderComponent } from './Header/header/header.component';
 import { FooterComponent } from './Footer/footer/footer.component';
 import { WelcomeComponent } from './WelcomePage/welcome/welcome.component';
 import { AboutMeComponent } from './aboutMe/about-me/about-me.component';
+import { SearchComponent } from './Search/search/search.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,10 +17,12 @@ import { AboutMeComponent } from './aboutMe/about-me/about-me.component';
     FooterComponent,
     WelcomeComponent,
     AboutMeComponent,
+    SearchComponent,
      ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

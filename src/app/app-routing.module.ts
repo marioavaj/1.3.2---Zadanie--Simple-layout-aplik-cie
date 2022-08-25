@@ -6,8 +6,7 @@ import  { PrihlaskaComponent} from './prihlaska/prihlaska.component';
 import { WelcomeComponent } from './WelcomePage/welcome/welcome.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
-{path: 'home', component: WelcomeComponent },
+{path: '', component: WelcomeComponent },
 {path: 'Referencie', component: ReferencieComponent},
 {path: 'Prihlaska', component: PrihlaskaComponent},
 

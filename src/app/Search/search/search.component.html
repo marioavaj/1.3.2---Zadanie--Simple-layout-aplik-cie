@@ -1,0 +1,5 @@
+<input [ngModel]="searchTerm" (ngModelChange)="filter($event)"   placeholder="Čo hľadáš?">
+
+<div *ngFor="let item of resultSet">{{item}}</div>
+
+
