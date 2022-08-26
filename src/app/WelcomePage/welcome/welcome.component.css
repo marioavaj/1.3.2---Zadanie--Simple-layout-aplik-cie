@@ -1,14 +1,13 @@
-body{
-  margin: 0;
-  padding: 0;
-}
+
 
 img{
-  position: static;
+
   width: 100%;
 }
 
 .container{
+  box-sizing: border-box;
+  margin: 0;
   position: relative;
   width: 100%;
   text-align: center;

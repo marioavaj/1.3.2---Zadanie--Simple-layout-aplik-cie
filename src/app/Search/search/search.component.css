@@ -21,7 +21,7 @@ div{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: cadetblue;
   background-color: gainsboro;
-}
+  }
 
 div:hover{
   cursor: pointer;
