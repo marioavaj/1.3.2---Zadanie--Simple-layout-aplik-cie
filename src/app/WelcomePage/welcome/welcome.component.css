@@ -4,6 +4,7 @@ body{
 }
 
 img{
+  position: static;
   width: 100%;
 }
 
