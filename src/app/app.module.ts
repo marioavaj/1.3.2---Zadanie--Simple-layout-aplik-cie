@@ -8,6 +8,8 @@ import { WelcomeComponent } from './WelcomePage/welcome/welcome.component';
 import { AboutMeComponent } from './aboutMe/about-me/about-me.component';
 import { SearchComponent } from './Search/search/search.component';
 import { FormsModule } from '@angular/forms';
+import { ProductComponent } from './product/product.component';
+import { ZoznamProduktovComponent } from './zoznam-produktov/zoznam-produktov.component';
 
 
 @NgModule({
@@ -18,6 +20,8 @@ import { FormsModule } from '@angular/forms';
     WelcomeComponent,
     AboutMeComponent,
     SearchComponent,
+    ProductComponent,
+    ZoznamProduktovComponent,
      ],
   imports: [
     BrowserModule,

@@ -1,0 +1,104 @@
+.productWrapper {
+  margin-left: 30%;
+  width: 40%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-bottom: 3em;
+  background-color: rgb(242, 242, 242);
+  border-radius: 10px;
+}
+
+.redRow {
+  height: 50px;
+  background-color: brown;
+  border-radius: 10px 10px 0 0;
+}
+
+.productCategoryWrapper {
+  display: grid;
+  grid-template-areas: "productname productName category";
+  margin: auto;
+  border: silver 1px solid;
+}
+
+.productName {
+  grid-area: productname;
+  margin-left: 0.7em;
+}
+
+.category {
+  width: 45%;
+  text-align: center;
+  grid-area: category;
+  font-weight: 600;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.redColumn {
+  background-color: brown;
+  border-radius: 0 0 0 10px;
+  width: 50px !important;
+  height: 100%;
+  grid-area: redColumn;
+}
+
+.price {
+  display: inline-block;
+  grid-area: price;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 50px !important;
+}
+
+.stockName {
+  grid-area: stockName;
+  text-align: center;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.stockCount {
+  grid-area: stockCount;
+  margin-top: auto;
+  margin-bottom: auto;
+  float: left;
+  width: 50px;
+}
+.descriptionName {
+  margin-right: 1em;
+
+  grid-area: descriptionName;
+  margin-left: 1em;
+  padding-bottom: 0.5em;
+  border-bottom: silver 1px solid;
+}
+
+.description {
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+  grid-area: textDescription;
+  text-align: justify;
+  font-size: 0.8em;
+}
+
+.vendorsName {
+  grid-area: VendorsName;
+  margin-left: 1em;
+  margin-right: 1em;
+  padding-bottom: 0.5em;
+  border-bottom: silver 1px solid;
+}
+
+.infoProductGrid {
+  border-left: silver 1px solid;
+  border-right: silver 1px solid;
+  border-bottom: silver 1px solid;
+  display: grid;
+  grid-template-areas:
+    "redColumn priceName price price stockName stockCount"
+    "redColumn descriptionName descriptionName descriptionName descriptionName descriptionName"
+    "redColumn textDescription textDescription textDescription textDescription textDescription"
+    "redColumn VendorsName VendorsName VendorsName VendorsName VendorsName"
+    "redColumn Vendor Vendor Vendor Vendor Vendor";
+  border-radius: 0 0 10px 10px;
+}

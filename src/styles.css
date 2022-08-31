@@ -1,7 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
-body{
-padding: 0;
-margin: 0;
+body {
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
+}
 
+.category {
+  background-color: rgb(102, 102, 102);
+  color: white;
+  padding: 0.5em;
+  border-radius: 5px 5px 5px 5px;
+  margin-right: 1em;
+  font-size: 0.8em;
+}
+
+.vendor {
+  display: inline-block;
+  font-weight: 600;
+  text-align: center;
+  margin-left: 1em;
+  margin-bottom: 1em;
+  background-color: rgb(102, 102, 102);
+  color: white;
+  padding: 0.5em;
+  border-radius: 5px 5px 5px 5px;
+  margin-right: 1em;
+  font-size: 0.8em;
+}
+
+.alertColor {
+  background-color: rgb(255, 0, 0);
+  padding: 5px;
+  border-radius: 5px;
+  display: inline-block;
+  color: white;
+}
+
+.priceName {
+  grid-area: priceName;
+  margin-left: 1em;
+  font-size: 1.25em;
 }

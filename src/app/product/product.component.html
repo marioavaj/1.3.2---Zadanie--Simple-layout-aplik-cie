@@ -1,0 +1,36 @@
+<div class="productWrapper">
+  <div class="redRow"></div>
+
+  <div class="productCategoryWrapper">
+    <h2 class="productName">
+      <ng-content select="[name]"></ng-content>
+    </h2>
+    <span class="category categoryStyle">
+      <ng-content select="[category]"></ng-content>
+    </span>
+  </div>
+
+  <div class="infoProductGrid">
+    <div class="redColumn"></div>
+
+    <h2 class="priceName">
+      <ng-content select="[priceName]"></ng-content>
+    </h2>
+
+    <div class="price">
+      <ng-content select="[price]"></ng-content>
+    </div>
+
+    <h2 class="stockName">Stock:</h2>
+    <div class="stockCount">
+      <ng-content select="[stockCount]"></ng-content>
+    </div>
+    <h3 class="descriptionName"></h3>
+    <div class="description">
+      <ng-content select="[description]"></ng-content>
+    </div>
+    <h3 class="vendorsName">Vendors:</h3>
+
+    <ng-content select="[vendor]"></ng-content>
+  </div>
+</div>

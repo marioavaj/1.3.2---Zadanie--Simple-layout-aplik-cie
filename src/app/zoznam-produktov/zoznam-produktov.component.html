@@ -1,0 +1,27 @@
+<app-product *ngFor="let product of productList">
+  <div name>{{ product.name }}</div>
+  <div category>{{ product.category }}</div>
+  <div price>{{ product.price }}</div>
+  <div stockCount *ngIf="product.stockCount !== 0">
+    {{ product.stockCount }}
+  </div>
+
+  <div class="alertColor" stockCount *ngIf="product.stockCount === 0">
+    Nedostupný
+  </div>
+
+  <h2 class="priceName" priceName *ngIf="product.price > 0">Price:</h2>
+  <h2 priceName *ngIf="product.price === undefined"></h2>
+
+  <h2 class="description" description *ngIf="product.description > 0">
+    Description:
+  </h2>
+  <h2 description *ngIf="product.description === undefined"></h2>
+
+  <div description>{{ product.description }}</div>
+  <ng-container vendor *ngFor="let vendor of product.vendors">
+    <div class="vendor" *ngIf="vendor.stockCount > 0">
+      {{ vendor.name }}
+    </div>
+  </ng-container>
+</app-product>
