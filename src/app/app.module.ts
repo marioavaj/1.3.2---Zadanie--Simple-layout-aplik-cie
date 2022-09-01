@@ -10,6 +10,7 @@ import { SearchComponent } from './Search/search/search.component';
 import { FormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
 import { ZoznamProduktovComponent } from './zoznam-produktov/zoznam-produktov.component';
+import { HighlightDirective } from './Shared/directives/highligh.directive';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { ZoznamProduktovComponent } from './zoznam-produktov/zoznam-produktov.co
     SearchComponent,
     ProductComponent,
     ZoznamProduktovComponent,
+    HighlightDirective,
      ],
   imports: [
     BrowserModule,

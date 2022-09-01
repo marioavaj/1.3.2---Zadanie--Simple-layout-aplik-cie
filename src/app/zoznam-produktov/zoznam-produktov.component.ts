@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ZoznamProduktovComponent implements OnInit {
   productList: any[];
-
+  public date = new Date();
   constructor() {}
 
   ngOnInit(): void {
