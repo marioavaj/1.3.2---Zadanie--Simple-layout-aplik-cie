@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ZoznamProduktovComponent implements OnInit {
   productList: any[];
-  public date = new Date();
+  public date = new Date().toLocaleString();
+  lastReview:string;
   constructor() {}
 
   ngOnInit(): void {
@@ -85,5 +86,9 @@ export class ZoznamProduktovComponent implements OnInit {
         ],
       },
     ];
+  }
+
+  lastReviewDisplayed(review:any):void{
+this.lastReview = (this.date+ ": " + review);
   }
 }

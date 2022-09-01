@@ -11,7 +11,7 @@ export class ProductComponent implements OnInit {
 
   reviewFromInput:string;
 
-public date = new Date();
+public date = new Date().toLocaleString();//lokalny cas sformatovany
 
   constructor() {}
 
