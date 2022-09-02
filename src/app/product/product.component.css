@@ -9,7 +9,7 @@
 
 .redRow {
   height: 50px;
-  height: 100%;
+  width:  100%;
   background-color: brown;
   border-radius: 10px 10px 0 0;
 }
@@ -37,7 +37,7 @@
 
 .redColumn {
   background-color: brown;
-  border-radius: 0 0 0 10px;
+  border-radius: 0 0 0 0;
   width: 50px !important;
   grid-area: redColumn;
 }
@@ -83,7 +83,8 @@
 }
 
 .vendor {
-  grid-area: vendor;
+  display: inline-block;
+
 }
 
 .reviewName {
@@ -126,30 +127,30 @@
     "redColumn textarea textarea textarea textarea textarea";
 
 
-  border-radius: 0 0 10px 10px;
+
   border-left: silver 1px solid;
   border-right: silver 1px solid;
-  border-bottom: silver 1px solid;
+
 }
 .reviews{
   text-align: center;
   height: 27px;
   color: bisque;
-  background-color: rgb(162, 0, 0);
-
-  border-radius: 10px 10px 0 0;
+  background-color: brown;
 }
+
 .reviewsList{
-  padding-left: 2em;
+  padding: 1em;
   height: 100%;
   background-color: rgb(242, 242, 242);
-}
+  border-top: silver 1px solid;
+  }
 
 .reviewsBottom{
 
   height: 27px;
 
-  background-color: rgb(162, 0, 0);
+  background-color:brown;
 
   border-radius: 0 0 10px 10px;
 }

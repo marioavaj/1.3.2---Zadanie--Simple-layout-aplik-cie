@@ -46,7 +46,7 @@
     <input (click) ="addReview(reviewFromInput)" class="submit" type="submit" value="Submit" />
     </form>
     </div>
-    <div class="reviews">Rezenzie</div>
+    <div class="reviews"></div>
     <ng-container>
         <div class="reviewsList" *ngFor="let review of data.reviews">{{date| date: 'mediumDate'}} / {{date | date: 'shortTime'}} : {{review}} </div>
   </ng-container>
