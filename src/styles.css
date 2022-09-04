@@ -43,9 +43,8 @@ body {
 }
 
 .vendor {
-    position: relative;;
+    position: relative;
     font-weight: 600;
-
     text-align: center;
     margin-left: 1em;
     margin-bottom: 1em;

@@ -13,6 +13,7 @@ import { ZoznamProduktovComponent } from './zoznam-produktov/zoznam-produktov.co
 import { HighlightDirective } from './Shared/directives/highligh.directive';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +25,7 @@ import { HighlightDirective } from './Shared/directives/highligh.directive';
     ProductComponent,
     ZoznamProduktovComponent,
     HighlightDirective,
+
      ],
   imports: [
     BrowserModule,

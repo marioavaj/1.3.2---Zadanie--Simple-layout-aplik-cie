@@ -1,32 +1,25 @@
-#wrapper{
-  position:relative;
+#wrapper {
+  position: relative;
   z-index: 100;
-
-
 }
 
-
-input
-{
- width: 200px;
-height: 25px;
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-
+input {
+  width: 200px;
+  height: 25px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-div{
+div {
   margin: 0;
   width: 207px;
   height: 25px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: cadetblue;
   background-color: gainsboro;
-  }
+}
 
-div:hover{
+div:hover {
   cursor: pointer;
   background-color: cadetblue;
   color: white;
-  transition: .4s;
-
+  transition: 0.4s;
 }
