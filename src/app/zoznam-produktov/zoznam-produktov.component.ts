@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from '../models/Product';
 
 @Component({
   selector: 'app-zoznam-produktov',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./zoznam-produktov.component.css'],
 })
 export class ZoznamProduktovComponent implements OnInit {
-  productList: any[];
+  productList: Product[];
   public date = new Date().toLocaleString();
   lastReview:string;
   constructor() {}
@@ -29,6 +30,19 @@ export class ZoznamProduktovComponent implements OnInit {
         ],
       },
       {
+        name: 'Acer SP 50 Intel',
+        category: 'Gaming',
+        price: 666,
+        stockCount: 0,
+        description:
+          'Herný notebook – Intel Core i5 9300H Coffee Lake, 15.6" IPS matný 1920 × 1080 120Hz, RAM 8GB DDR4, NVIDIA GeForce GTX 1650 4GB, SSD 512GB, numerická klávesnica, podsvietená klávesnica, webkamera, USB-C, WiFi 6, 56 Wh batéria, hmotnosť 2.5kg, Windows 10 Home, HDD upgrade kit (AN515-54-54KC) ',
+        vendors: [
+          { name: 'Alza', stockCount: 0 },
+          { name: 'Asbis', stockCount: 0 },
+          { name: 'Nay', stockCount: 0 },
+        ],
+      },
+      {
         name: 'Lenovo Legion 5 Pro',
         category: 'Gaming',
         price: 1539,
@@ -41,6 +55,21 @@ export class ZoznamProduktovComponent implements OnInit {
           { name: 'MediaMarkt', stockCount: 10 },
           { name: 'Asbis', stockCount: 10 },
           { name: 'Nay', stockCount: 10 },
+        ],
+      },
+      {
+        name: 'Lenovo Ibm 7300',
+        category: 'Gaming',
+        price: 456,
+        stockCount: 0,
+        description:
+          'Herný notebook – AMD Ryzen 7 5800H, 16" IPS antireflexný 2560 × 1600 165Hz, RAM 16GB DDR4, NVIDIA GeForce RTX 3070 8GB 140 W, SSD 1000GB, numerická klávesnica, podsvietená RGB klávesnica, webkamera, USB-C, WiFi 6, 80 Wh batéria, hmotnosť 2.45kg, bez operačného systému',
+        vendors: [
+          { name: 'Alza', stockCount: 0 },
+          { name: 'Agem', stockCount: 0 },
+          { name: 'MediaMarkt', stockCount: 0 },
+          { name: 'Asbis', stockCount: 0 },
+
         ],
       },
       {

@@ -29,12 +29,14 @@ if(newValue.length>1){
 
     if(item.toLowerCase().match(newValue.toLowerCase())) {
       result.push(item);
-      console.log(result)
+
     }
 });
-console.log(newValue)
+
   this.resultSet = result;
+  console.log(result)
 } else this.resultSet = [];
+
 }
 }
 

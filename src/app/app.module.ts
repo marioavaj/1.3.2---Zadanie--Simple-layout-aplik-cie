@@ -7,11 +7,12 @@ import { FooterComponent } from './Footer/footer/footer.component';
 import { WelcomeComponent } from './WelcomePage/welcome/welcome.component';
 import { AboutMeComponent } from './aboutMe/about-me/about-me.component';
 import { SearchComponent } from './Search/search/search.component';
-import { FormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
 import { ZoznamProduktovComponent } from './zoznam-produktov/zoznam-produktov.component';
 import { HighlightDirective } from './Shared/directives/highligh.directive';
-
+import { FilterComponent } from './filter/filter.component';
+import { FilterOptionComponent } from './filter-option/filter-option.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,12 +26,15 @@ import { HighlightDirective } from './Shared/directives/highligh.directive';
     ProductComponent,
     ZoznamProduktovComponent,
     HighlightDirective,
+    FilterComponent,
+    FilterOptionComponent,
 
      ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

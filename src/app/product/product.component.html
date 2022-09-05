@@ -1,8 +1,7 @@
-
 <div class="productWrapper">
   <div class="redRow"></div>
   <div class="productCategoryWrapper">
-    <h2 appHighlight class="productName">
+    <h2 class="productName">
       {{ data.name }}
     </h2>
     <span class="category categoryStyle">
@@ -13,44 +12,57 @@
   <div class="infoProductGrid">
     <div class="redColumn"></div>
 
-    <h2 appHighlight class="priceName">
-      <ng-content select="[priceName]"></ng-content>
+    <h2 class="priceName">
+      <h2 class="priceName" priceName *ngIf="data.price">Price:</h2>
     </h2>
 
     <div class="price">
       {{ data.price }}
     </div>
-    <h2 appHighlight class="stockName">Stock:</h2>
+    <h2 class="stockName">Stock:</h2>
+    <ng-container>
+      <div class="stockCount" *ngIf="data.stockCount !== 0">
+        {{ data.stockCount }}
+      </div>
+      <div class="alertColor" *ngIf="data.stockCount === 0">Nedostupný</div>
+    </ng-container>
 
-    <div class="stockCount" *ngIf="data.stockCount !== 0">
-      {{ data.stockCount }}
-    </div>
-    <div class="alertColor" *ngIf="data.stockCount === 0">Nedostupný</div>
-
-    <h3 appHighlight class="descriptionName">Description:</h3>
+    <h3 class="descriptionName" *ngIf="data.description">Description:</h3>
+    <h3 class="descriptionName" *ngIf="!data.description"></h3>
     <div class="description">
       {{ data.description }}
     </div>
-    <h3 appHighlight class="vendorsName">Vendors:</h3>
-    <ng-content select="[vendor]"></ng-content>
+    <h3 class="vendorsName">Vendors:</h3>
+    <ng-container vendor *ngFor="let vendor of data.vendors">
+      <div class="vendor" *ngIf="vendor.stockCount > 0">
+        {{ vendor.name }}
+      </div>
+    </ng-container>
     <br />
     <h3 class="reviewName">Recenzie</h3>
     <form class="review" action="">
-      <textarea [(ngModel)] = "reviewFromInput"
+      <textarea
+        [(ngModel)]="reviewFromInput"
         type="submit"
         name="review"
         class="textarea"
         cols="60"
         rows="5"
       ></textarea>
-    <input (click) ="addReview(reviewFromInput)" class="submit" type="submit" value="Submit" />
+      <input
+        (click)="addReview(reviewFromInput)"
+        class="submit"
+        type="submit"
+        value="Submit"
+      />
     </form>
+  </div>
+  <div class="reviews"></div>
+  <ng-container>
+    <div class="reviewsList" *ngFor="let review of data.reviews">
+      {{ date | date: "mediumDate" }} / {{ date | date: "shortTime" }} :
+      {{ review }}
     </div>
-    <div class="reviews"></div>
-    <ng-container>
-        <div class="reviewsList" *ngFor="let review of data.reviews">{{date| date: 'mediumDate'}} / {{date | date: 'shortTime'}} : {{review}} </div>
   </ng-container>
   <div class="reviewsBottom"></div>
 </div>
-
-
