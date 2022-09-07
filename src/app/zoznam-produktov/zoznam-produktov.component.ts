@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../models/Product';
 
 @Component({
@@ -7,9 +7,12 @@ import { Product } from '../models/Product';
   styleUrls: ['./zoznam-produktov.component.css'],
 })
 export class ZoznamProduktovComponent implements OnInit {
+
+
   productList: Product[];
   public date = new Date().toLocaleString();
   lastReview:string;
+  filteredData: Product[];
   constructor() {}
 
   ngOnInit(): void {
@@ -120,4 +123,13 @@ export class ZoznamProduktovComponent implements OnInit {
   lastReviewDisplayed(review:any):void{
 this.lastReview = (this.date+ ": " + review);
   }
+
+  onFilterDone(item: Product[]) {
+
+
+  console.log(item)
+
 }
+}
+
+

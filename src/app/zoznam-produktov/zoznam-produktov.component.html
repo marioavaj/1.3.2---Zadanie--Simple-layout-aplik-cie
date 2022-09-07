@@ -1,11 +1,12 @@
 
-<app-filter [whereIsSearching] = "productList"></app-filter>
+<a routerLink="product-template">Produkt šablóna</a>
+<router-outlet></router-outlet>
+<app-filter [whereIsSearching] = "productList" (outputEvent)="onFilterDone($event)"></app-filter>
 
 
 <div class="lastRerview">
   <div style="font-weight: 600;">Posledná recenzia</div><br>
   {{lastReview}}
 </div>
-
-<app-product [data]="product" (reviewAdd) = "lastReviewDisplayed($event)" *ngFor="let product of productList">
+<app-product [data]="filteredProducts" (reviewAdd) = "lastReviewDisplayed($event)" *ngFor="let filteredProducts of productList">
 </app-product>
