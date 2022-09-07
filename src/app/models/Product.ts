@@ -1,4 +1,4 @@
-export interface Product {
+export class Product {
   name: string;
   category: string;
   price?: number;
@@ -10,7 +10,7 @@ export interface Product {
 
 }
 
-export interface Vendor{
+export class Vendor{
 
     name: string;
      stockCount: number}

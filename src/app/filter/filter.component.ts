@@ -1,4 +1,17 @@
-import { Component, OnInit, Input, Output, OnChanges, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  OnChanges,
+  DoCheck,
+  AfterContentInit,
+  AfterContentChecked,
+  AfterViewInit,
+  AfterViewChecked,
+  OnDestroy,
+  EventEmitter,
+} from '@angular/core';
 import { Product } from '../models/Product';
 
 @Component({
@@ -6,66 +19,74 @@ import { Product } from '../models/Product';
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.css'],
 })
-export class FilterComponent implements OnInit, OnChanges, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
-
-
-
+export class FilterComponent
+  implements
+    OnInit,
+    OnChanges,
+    DoCheck,
+    AfterContentInit,
+    AfterContentChecked,
+    AfterViewInit,
+    AfterViewChecked,
+    OnDestroy
+{
   @Input('whereIsSearching') data: Product[];
-  @Output ()
+  @Output() outputEvent: EventEmitter<any> = new EventEmitter<any>();
 
   whatIsSearched: string;
-  resultSet: string[];
+  resultSet: Product[];
 
+
+
+  //zavola sa pred hocijakym life-hookom, ak ma komponent zavislosti, nacitaj ich do konstruktoru
   constructor() {}
 
-//prvy hook ale konstruktor sa vykonava prvy, vzkona sa iba vtedy ked je @input, vzkona sa tolko krat kolko krat sa zavola @input, @outputu sa to netyka
+  //prvy hook ale konstruktor sa vykonava skor, vykona sa iba vtedy ked je @input, vykona sa tolko krat kolko krat sa zavola @input, @outputu sa to netyka, zavola sa pred ngOnInit, vzdy ked sa zmeni hodnota premennych vstupujucich do komponentu, Poskytne objekt s predchadzajucou a novou hodnotou
   ngOnChanges() {}
 
-
-  //spusti sa po ngOnChanges, spusta sa iba raz!!!!!!!! este nie je nacitany html!!!!! Spracovanie pociatocnych dat, externe sluzby, asznchronne
+  //spusti sa po ngOnChanges, spusta sa iba raz!!!!!!!! este nie je nacitany html!!!!! Spracovanie pociatocnych dat, externe sluzby, asynchronne, idealne miesto pre inicializovanie dat z DB
   ngOnInit(): void {}
 
   //ideálne na implementovanie vlastných mechanizmov na detekovanie zmien, ktore ngOnChanges() nie je schobny detekovat.
-    ngDoCheck() {
+  ngDoCheck() {}
 
-
-
-  }
-
-  //spusti sa 1x po ngDoCheck, po spusteni vsetkych ngcontentov a <app...
+  //iba pre komponent.Spusti sa 1x po ngDoCheck, po spusteni vsetkych ngcontentov a <app..., zavola sa ked vlastnosti zobrazovaneho komponentu su inicializovane
   ngAfterContentInit() {}
 
-
+  //iba pre komponent, vola s po kazdej kontrole komponentu alebo direktivy aj vtedy ak sa ich obsah nezmenil
   ngAfterContentChecked() {}
-
+  //interface iba pre komponent, zavola sa !x hned po afterContentInit() ked vlastnosti child template boli inicializovane
   ngAfterViewInit() {}
-
+  //interface iba pre komponent, zavola sa vzdy ked angular zbada zmeny vo vlastnostiach  child komponentu. Uzitocne vtedy ak komponent ocakava nieco z child komponentu.
   ngAfterViewChecked() {}
 
-  //Spusta sa predtym ako sa chysta angular zlikvidovat komponenntu alebo direktivu, treba riesit unsubscribe from observables, from DOM events, stop interval timers, unregister all callback
+  //Spusta sa 1x tesne predtym ako sa chysta angular zlikvidovat komponenntu alebo direktivu, treba riesit unsubscribe from observables, from DOM events, stop interval timers, unregister all callback. Posledna sanca ako poupratovat po komponente. Ak napr.komponent spusta externy servis, ktory sa pri zruseni komponentu tiez musi zrusit.
   ngOnDestroy() {}
 
-  selectItem(item:string):void{
-
-this.whatIsSearched=item;
-this.resultSet = [];
+  selectItem(item: string): void {
+    this.whatIsSearched = item;
+    this.resultSet = [];
   }
 
   filter(whatIsSearched: string): void {
-    const result: string[] = [];
-    if (whatIsSearched.length > 1) {
+    const result: Product[] = [];
+    if (this.data && whatIsSearched.length >= 2) {
       this.data.forEach((item) => {
         if (
           item.name
             .toLocaleLowerCase()
             .includes(whatIsSearched.toLocaleLowerCase())
         ) {
-          result.push(item.name);
+          result.push(item);
         }
+        this.outputEvent.emit(result);
       });
 
       this.resultSet = result;
-      console.log('najdene  ' + this.resultSet);
     } else this.resultSet = [];
+
   }
+
+
+
 }
