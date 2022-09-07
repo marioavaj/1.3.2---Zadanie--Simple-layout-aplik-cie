@@ -69,7 +69,7 @@ export class FilterComponent
   }
 
   filter(whatIsSearched: string): void {
-    const result: Product[] = [];
+    let result: Product[] = [];
     if (this.data && whatIsSearched.length >= 2) {
       this.data.forEach((item) => {
         if (
@@ -83,7 +83,11 @@ export class FilterComponent
       });
 
       this.resultSet = result;
-    } else this.resultSet = [];
+    } else{
+      this.resultSet = [];
+      result = this.data
+      this.outputEvent.emit(result);
+    }
 
   }
 

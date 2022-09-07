@@ -8,5 +8,5 @@
   <div style="font-weight: 600;">Posledná recenzia</div><br>
   {{lastReview}}
 </div>
-<app-product [data]="filteredProducts" (reviewAdd) = "lastReviewDisplayed($event)" *ngFor="let filteredProducts of productList">
+<app-product [data]="filteredProducts" (reviewAdd) = "lastReviewDisplayed($event)" *ngFor="let filteredProducts of filteredData">
 </app-product>

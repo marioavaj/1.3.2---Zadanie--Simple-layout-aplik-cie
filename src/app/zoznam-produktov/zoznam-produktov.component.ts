@@ -7,11 +7,9 @@ import { Product } from '../models/Product';
   styleUrls: ['./zoznam-produktov.component.css'],
 })
 export class ZoznamProduktovComponent implements OnInit {
-
-
   productList: Product[];
   public date = new Date().toLocaleString();
-  lastReview:string;
+  lastReview: string;
   filteredData: Product[];
   constructor() {}
 
@@ -72,7 +70,6 @@ export class ZoznamProduktovComponent implements OnInit {
           { name: 'Agem', stockCount: 0 },
           { name: 'MediaMarkt', stockCount: 0 },
           { name: 'Asbis', stockCount: 0 },
-
         ],
       },
       {
@@ -118,18 +115,16 @@ export class ZoznamProduktovComponent implements OnInit {
         ],
       },
     ];
+    this.filteredData = this.productList;
   }
 
-  lastReviewDisplayed(review:any):void{
-this.lastReview = (this.date+ ": " + review);
+  lastReviewDisplayed(review: any): void {
+    this.lastReview = this.date + ': ' + review;
   }
 
   onFilterDone(item: Product[]) {
 
+      this.filteredData = item;
 
-  console.log(item)
-
+  }
 }
-}
-
-
