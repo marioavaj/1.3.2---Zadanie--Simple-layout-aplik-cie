@@ -1,3 +1,4 @@
+import { IfStmt } from '@angular/compiler';
 import {
   Component,
   OnInit,
@@ -30,19 +31,27 @@ export class FilterComponent
     AfterViewChecked,
     OnDestroy
 {
+  @Input() onStock: boolean;
+
   @Input('whereIsSearching') data: Product[];
   @Output() outputEvent: EventEmitter<any> = new EventEmitter<any>();
 
-  whatIsSearched: string;
+  @Input() whatIsSearched: string = '';
   resultSet: Product[];
-
-
 
   //zavola sa pred hocijakym life-hookom, ak ma komponent zavislosti, nacitaj ich do konstruktoru
   constructor() {}
 
   //prvy hook ale konstruktor sa vykonava skor, vykona sa iba vtedy ked je @input, vykona sa tolko krat kolko krat sa zavola @input, @outputu sa to netyka, zavola sa pred ngOnInit, vzdy ked sa zmeni hodnota premennych vstupujucich do komponentu, Poskytne objekt s predchadzajucou a novou hodnotou
-  ngOnChanges() {}
+  ngOnChanges(): void {
+    if (this.onStock === undefined) {
+      this.onStock = false;
+    }
+    console.log('filter onStock je ' + this.onStock);
+
+    console.log(this.whatIsSearched);
+    this.filter(this.whatIsSearched);
+  }
 
   //spusti sa po ngOnChanges, spusta sa iba raz!!!!!!!! este nie je nacitany html!!!!! Spracovanie pociatocnych dat, externe sluzby, asynchronne, idealne miesto pre inicializovanie dat z DB
   ngOnInit(): void {}
@@ -70,27 +79,39 @@ export class FilterComponent
 
   filter(whatIsSearched: string): void {
     let result: Product[] = [];
+
     if (this.data && whatIsSearched.length >= 2) {
       this.data.forEach((item) => {
         if (
           item.name
             .toLocaleLowerCase()
-            .includes(whatIsSearched.toLocaleLowerCase())
+            .includes(whatIsSearched.toLocaleLowerCase()) &&
+          this.onStock === false &&
+          item.stockCount >= 0
         ) {
           result.push(item);
+          this.outputEvent.emit(result);
         }
-        this.outputEvent.emit(result);
+
+       else if (
+          item.name
+            .toLocaleLowerCase()
+            .includes(whatIsSearched.toLocaleLowerCase()) &&
+          this.onStock === true &&
+          item.stockCount > 0
+        ) {
+          result.push(item);
+          this.outputEvent.emit(result);
+        }
+
       });
 
       this.resultSet = result;
-    } else{
+    } else {
       this.resultSet = [];
-      result = this.data
-      this.outputEvent.emit(result);
+      result = this.data;
     }
 
+    this.outputEvent.emit(result);
   }
-
-
-
 }

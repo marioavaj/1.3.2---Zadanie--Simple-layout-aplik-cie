@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
@@ -8,7 +8,8 @@ import { FormBuilder } from '@angular/forms';
 })
 export class FilterOptionComponent implements OnInit {
 
-  onStockCheckBox:boolean = false;
+  @Input() onStockCheckBox:boolean;
+  @Output() checkBoXInput: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder) { }
 
@@ -20,7 +21,7 @@ export class FilterOptionComponent implements OnInit {
 
   onChange(item:any):void{
     this.onStockCheckBox = !this.onStockCheckBox;
-    console.log(this.onStockCheckBox);
+    this.checkBoXInput.emit(this.onStockCheckBox);
 
   }
 

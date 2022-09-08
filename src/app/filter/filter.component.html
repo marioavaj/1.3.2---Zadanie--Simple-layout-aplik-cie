@@ -1,7 +1,6 @@
 <div id="searching">
   <div class="inputWrapper">
-  <input [(ngModel)]="whatIsSearched" (ngModelChange) = "filter($event)"  placeholder="Vyhľadávanie produktov">
+  <input  [(ngModel)]="whatIsSearched" (ngModelChange) = "filter($event)" placeholder="Vyhľadávanie produktov">
   <!--<button>Hľadat</button>-->
   <div class="findedData" *ngFor="let item of resultSet; index as i " (click)="selectItem(item.name)"> {{i+1}} {{item.name}}</div></div>
-  <app-filter-option></app-filter-option>
   </div>

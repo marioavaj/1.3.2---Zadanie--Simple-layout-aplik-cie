@@ -11,6 +11,7 @@ export class ZoznamProduktovComponent implements OnInit {
   public date = new Date().toLocaleString();
   lastReview: string;
   filteredData: Product[];
+  onStockCheckBox:boolean;
   constructor() {}
 
   ngOnInit(): void {
@@ -126,5 +127,9 @@ export class ZoznamProduktovComponent implements OnInit {
 
       this.filteredData = item;
 
+  }
+  inputCheckBox(onStock:boolean):void{
+this.onStockCheckBox = onStock;
+console.log("checkbox je " + this.onStockCheckBox);
   }
 }

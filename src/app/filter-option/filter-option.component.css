@@ -1,4 +1,6 @@
 .container {
+  margin-top: 5px;
+
   display: block;
   position: relative;
   padding-left: 35px;
@@ -16,6 +18,7 @@
   cursor: pointer;
   height: 0;
   width: 0;
+
 }
 
 /* Create a custom checkbox */
@@ -26,6 +29,7 @@
   height: 25px;
   width: 25px;
   background-color: #eee;
+  border: 1px solid black;
 }
 
 /* On mouse-over, add a grey background color */
@@ -35,7 +39,7 @@
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
-  background-color: green;
+  background-color: rgb(0, 41, 128);
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
