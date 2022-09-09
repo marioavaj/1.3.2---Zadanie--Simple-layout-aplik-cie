@@ -36,7 +36,7 @@ export class FilterComponent
   @Input('whereIsSearching') data: Product[];
   @Output() outputEvent: EventEmitter<any> = new EventEmitter<any>();
 
-  @Input() whatIsSearched: string = "";
+  @Input() whatIsSearched: string;
   resultSet: Product[];
 
   //zavola sa pred hocijakym life-hookom, ak ma komponent zavislosti, nacitaj ich do konstruktoru
@@ -47,16 +47,13 @@ export class FilterComponent
     if (this.onStock === undefined) {
       this.onStock = false;
     }
-
-
-
     this.filter(this.whatIsSearched);
   }
 
   //spusti sa po ngOnChanges, spusta sa iba raz!!!!!!!! este nie je nacitany html!!!!! Spracovanie pociatocnych dat, externe sluzby, asynchronne, idealne miesto pre inicializovanie dat z DB
   ngOnInit(): void {
 
-    this.whatIsSearched = " ";
+    this.whatIsSearched = "";
   }
 
   //ideálne na implementovanie vlastných mechanizmov na detekovanie zmien, ktore ngOnChanges() nie je schobny detekovat.
@@ -83,22 +80,7 @@ export class FilterComponent
   filter(whatIsSearched: string): void {
     let result: Product[] = [];
 
-    this.data.forEach((item)=> {
-    if (
-      whatIsSearched==" " &&
-      this.onStock === true &&
-      item.stockCount === 0
-    ) {
-
-
-    } else {
-      result.push(item);
-      this.outputEvent.emit(result);
-    }
-  });
-
-
-    if (this.data && whatIsSearched.length >= 2) {
+    if (this.data && whatIsSearched?.length >= 2 || this.data && this.onStock === true ) {
 
       this.data.forEach((item) => {
 
@@ -113,16 +95,16 @@ export class FilterComponent
           this.outputEvent.emit(result);
         }
 
-       else if (
+       else if  (
           item.name
             .toLocaleLowerCase()
             .includes(whatIsSearched.toLocaleLowerCase()) &&
           this.onStock === true &&
           item.stockCount > 0
-        ) {
+        )
           result.push(item);
           this.outputEvent.emit(result);
-        }
+
 
       });
 
