@@ -8,6 +8,9 @@
 }
 
 .redRow {
+  display: flex;
+  justify-content: right;
+  color: white;
   height: 50px;
   width:  100%;
   background-color: brown;
@@ -125,9 +128,6 @@
     "redColumn Vendor Vendor Vendor Vendor Vendor"
     "redColumn review review review review review"
     "redColumn textarea textarea textarea textarea textarea";
-
-
-
   border-left: silver 1px solid;
   border-right: silver 1px solid;
 
