@@ -1,4 +1,3 @@
-import { IfStmt } from '@angular/compiler';
 import {
   Component,
   OnInit,
@@ -31,7 +30,7 @@ export class FilterComponent
     AfterViewChecked,
     OnDestroy
 {
-  @Input() onStock: boolean;
+  @Input() onStock: boolean = false;
 
   @Input('whereIsSearching') data: Product[];
   @Output() outputEvent: EventEmitter<any> = new EventEmitter<any>();
@@ -44,16 +43,15 @@ export class FilterComponent
 
   //prvy hook ale konstruktor sa vykonava skor, vykona sa iba vtedy ked je @input, vykona sa tolko krat kolko krat sa zavola @input, @outputu sa to netyka, zavola sa pred ngOnInit, vzdy ked sa zmeni hodnota premennych vstupujucich do komponentu, Poskytne objekt s predchadzajucou a novou hodnotou
   ngOnChanges(): void {
-    if (this.onStock === undefined) {
-      this.onStock = false;
-    }
+    // if (this.onStock === undefined) {
+    //   this.onStock = false;
+    // }
     this.filter(this.whatIsSearched);
   }
 
   //spusti sa po ngOnChanges, spusta sa iba raz!!!!!!!! este nie je nacitany html!!!!! Spracovanie pociatocnych dat, externe sluzby, asynchronne, idealne miesto pre inicializovanie dat z DB
   ngOnInit(): void {
-
-    this.whatIsSearched = "";
+    this.whatIsSearched = '';
   }
 
   //ideálne na implementovanie vlastných mechanizmov na detekovanie zmien, ktore ngOnChanges() nie je schobny detekovat.
@@ -80,11 +78,12 @@ export class FilterComponent
   filter(whatIsSearched: string): void {
     let result: Product[] = [];
 
-    if (this.data && whatIsSearched?.length >= 2 || this.data && this.onStock === true ) {
-
+    if (
+      (this.data && whatIsSearched?.length >= 2) ||
+      (this.data && this.onStock === true)
+    ) {
       this.data.forEach((item) => {
-
-     if (
+        if (
           item.name
             .toLocaleLowerCase()
             .includes(whatIsSearched.toLocaleLowerCase()) &&
@@ -93,9 +92,7 @@ export class FilterComponent
         ) {
           result.push(item);
           this.outputEvent.emit(result);
-        }
-
-       else if  (
+        } else if (
           item.name
             .toLocaleLowerCase()
             .includes(whatIsSearched.toLocaleLowerCase()) &&
@@ -103,9 +100,7 @@ export class FilterComponent
           item.stockCount > 0
         )
           result.push(item);
-          this.outputEvent.emit(result);
-
-
+        this.outputEvent.emit(result);
       });
 
       this.resultSet = result;
