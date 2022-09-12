@@ -1,0 +1,12 @@
+<div class="content"> 
+    <br>
+<a routerLink="/zoznam-produktov">...Späť na zoznam produktov</a>
+<h2>Detail produktu</h2>
+<div class="detail"  *ngIf="product">
+    <h3>{{ product.name }}</h3>
+    <h4>Price: {{ product.price }} Euro</h4>
+    <p>Description:</p> 
+    <p>{{ product.description }}</p>
+  </div>
+</div>
+

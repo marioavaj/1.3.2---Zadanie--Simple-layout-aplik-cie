@@ -17,6 +17,7 @@ export class ZoznamProduktovComponent implements OnInit {
   ngOnInit(): void {
     this.productList = [
       {
+        id: 1,
         name: 'Acer Nitro 5 Obsidian',
         category: 'Gaming',
         price: 849,
@@ -32,6 +33,7 @@ export class ZoznamProduktovComponent implements OnInit {
         ],
       },
       {
+        id: 2,
         name: 'Acer SP 50 Intel',
         category: 'Gaming',
         price: 666,
@@ -45,6 +47,7 @@ export class ZoznamProduktovComponent implements OnInit {
         ],
       },
       {
+        id: 3,
         name: 'Lenovo Legion 5 Pro',
         category: 'Gaming',
         price: 1539,
@@ -60,6 +63,7 @@ export class ZoznamProduktovComponent implements OnInit {
         ],
       },
       {
+        id:4,
         name: 'Lenovo Ibm 7300',
         category: 'Gaming',
         price: 456,
@@ -74,6 +78,7 @@ export class ZoznamProduktovComponent implements OnInit {
         ],
       },
       {
+        id:5,
         name: 'Macbook Pro 13" M1 SK2020',
         category: 'MacBook',
         price: 1459,
@@ -89,6 +94,7 @@ export class ZoznamProduktovComponent implements OnInit {
         ],
       },
       {
+        id:6,
         name: 'Dell Vostro 3500',
         category: 'Kancelária',
         stockCount: 0,
@@ -103,6 +109,7 @@ export class ZoznamProduktovComponent implements OnInit {
         ],
       },
       {
+        id: 7,
         name: 'Asus Zenbook 13',
         category: 'Ultrabook',
         price: 1149,
@@ -133,3 +140,4 @@ this.onStockCheckBox = onStock;
 console.log("checkbox je " + this.onStockCheckBox);
   }
 }
+

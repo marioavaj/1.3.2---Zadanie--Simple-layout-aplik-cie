@@ -1,4 +1,6 @@
 export class Product {
+  id: number;
+  [x: string]: any;
   name: string;
   category: string;
   price?: number;

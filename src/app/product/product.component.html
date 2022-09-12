@@ -2,10 +2,14 @@
   <div   class="redRow">X:{{x}}  Y:{{y}}  </div>
   <div class="productCategoryWrapper">
     <h2 class="productName">
+      <a
+      [title]="data.name"
+      [routerLink]="['/zoznam-produktov', data.id]">
       {{ data.name }}
+    </a>      
     </h2>
     <span class="category categoryStyle">
-      {{ data.category }}
+      {{ data.category }}     
     </span>
   </div>
 

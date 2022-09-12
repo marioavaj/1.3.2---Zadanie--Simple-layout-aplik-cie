@@ -13,6 +13,7 @@ import { HighlightDirective } from './Shared/directives/highligh.directive';
 import { FilterComponent } from './filter/filter.component';
 import { FilterOptionComponent } from './filter-option/filter-option.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HighlightDirective,
     FilterComponent,
     FilterOptionComponent,
+    ProductDetailComponent,
 
      ],
   imports: [
