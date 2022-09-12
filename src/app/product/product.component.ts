@@ -1,87 +1,87 @@
 import {
-  Component,
-  DoCheck,
-  AfterViewInit,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewChild,
-  AfterContentChecked,
-  AfterContentInit,
-  AfterViewChecked,
-  OnChanges,
-  OnDestroy,
-  SimpleChanges,
-  HostListener,
-} from '@angular/core';
-import { Product } from '../models/Product';
-
-@Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css'],
-})
-export class ProductComponent
-  implements
-    OnInit,
-    OnChanges,
+    Component,
     DoCheck,
-    AfterContentInit,
-    AfterContentChecked,
     AfterViewInit,
+    ElementRef,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    ViewChild,
+    AfterContentChecked,
+    AfterContentInit,
     AfterViewChecked,
-    OnDestroy
-{
-  @Input() data: Product;
-  @Output() reviewAdd: EventEmitter<any> = new EventEmitter<any>();
+    OnChanges,
+    OnDestroy,
+    SimpleChanges,
+    HostListener
+} from '@angular/core';
+import {Product} from '../models/Product';
 
-  @ViewChild('productPosition') productPosition: ElementRef;
+@Component({selector: 'app-product', templateUrl: './product.component.html', styleUrls: ['./product.component.css']})
+export class ProductComponent
+implements
+OnInit,
+OnChanges,
+DoCheck,
+AfterContentInit,
+AfterContentChecked,
+AfterViewInit,
+AfterViewChecked,
+OnDestroy {
+    @Input()data : Product;
+    @Output()reviewAdd : EventEmitter < any > = new EventEmitter<any>();
+
+    @ViewChild('productPosition')productPosition : ElementRef < HTMLElement >;
 
 
+    reviewFromInput : string;
 
-  reviewFromInput: string;
+    x : number;
+    y : number;
 
-  x: number;
-  y: number;
+    public date = new Date().toLocaleString(); // lokalny cas sformatovany
 
-  public date = new Date().toLocaleString(); //lokalny cas sformatovany
+    constructor() {}
+    ngOnChanges(changes : SimpleChanges): void {}
+    ngAfterContentInit(): void {}
+    ngAfterViewChecked(): void {}
+    ngOnDestroy(): void {}
+    ngAfterViewInit(): void {}
+    ngDoCheck(): void {
 
-  constructor() {}
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log("zmena doCheck")
-    if (this.productPosition) {
-      this.getPosition();
+        this.x = this.productPosition ?. nativeElement.offsetLeft;
+        this.y = this.productPosition ?. nativeElement.offsetTop;
+
+
     }
-  }
-  ngAfterContentInit(): void {}
-  ngAfterViewChecked(): void {}
-  ngOnDestroy(): void {}
-  ngAfterViewInit(): void {}
-  ngDoCheck(): void {
 
-  }
 
-  ngAfterContentChecked(): void {}
+    ngAfterContentChecked(): void {}
 
-  ngOnInit(): void {}
+    ngOnInit(): void {}
 
-  addReview(review: string) {
-    if (this.data) {
-      //kontrola ci premenna data existuje
-      if (!this.data.reviews) {
-        //kontrola ci v data existuje objekt reviews
-        this.data.reviews = []; //ak plati podmienka ze neexistuje, vytvori ho
-      }
-      this.data.reviews.push(review);
-      this.reviewAdd.emit(review); // sprava pre parenta ze vlozil recenziu
-      this.reviewFromInput = '';
+    addReview(review : string) {
+        if (this.data) { // kontrola ci premenna data existuje
+            if (!this.data.reviews) { // kontrola ci v data existuje objekt reviews
+                this.data.reviews = []; // ak plati podmienka ze neexistuje, vytvori ho
+            }
+            this.data.reviews.push(review);
+            this.reviewAdd.emit(review); // sprava pre parenta ze vlozil recenziu
+            this.reviewFromInput = '';
+        }
     }
-  }
 
-  getPosition() {
-    this.x = this.productPosition.nativeElement.offsetLeft;
-    this.y = this.productPosition.nativeElement.offsetTop;
-  }
+    /*@HostListener('window:scroll', ['$event'])
+    getPosition($event) {
+        console.log(this.productPosition.nativeElement.offsetTop)
+        //this.x = this.productPosition?.nativeElement.offsetLeft;
+        //this.y = this.productPosition?.nativeElement.offsetTop;
+
+        const position = this.productPosition?.nativeElement.getBoundingClientRect()
+        this.x = position.x.toFixed(0);
+        this.y = position.y.toFixed(0);
+
+    }*/
+
 }
