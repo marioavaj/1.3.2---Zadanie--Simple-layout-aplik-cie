@@ -35,3 +35,11 @@
     margin: 2em;
 
   }
+
+  @media only screen and (max-width: 640px) {
+    .detail{
+      background-color: bisque;
+      width: 85%;
+      margin: 2em;   
+  }
+}

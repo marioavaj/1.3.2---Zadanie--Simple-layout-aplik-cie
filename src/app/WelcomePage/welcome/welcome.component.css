@@ -21,12 +21,11 @@ padding: 0;
 }
 
 .vhSpace{
-  height: 40vh;
+  height: 30vh;
 }
 .centered {
   position: absolute;
-  
-  top: 50%;
+    top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   color:darkred;
@@ -37,17 +36,20 @@ padding: 0;
   border-radius: 20px;
 }
 
-.centered {
-  position: absolute;
+.centeredUnder600 {
+  display: none;
+  position: relative;
+  width: 98%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   color:darkred;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-style: italic;
-  font-size: 2em;
+  font-size: 1.5em;
   background-color: rgba(192, 192, 192, 0.757);
-  border-radius: 20px;
+  padding: .5em;
+  
 }
 
 @media only screen and (max-width: 1000px) {
@@ -74,11 +76,10 @@ padding: 0;
 
 @media only screen and (max-width: 600px) {
   .centered{
-  font-size: 1em;
-  padding: .5em;
-  top: 20%;
-  left: 20%;
-  transform: translate(-15%, -2%);
+  display: none;
+  }
+  .centeredUnder600{
+    display: block;
   }
 
   .container{
@@ -91,6 +92,11 @@ padding: 0;
   .centered{
  display: none;
   }
+  .centeredUnder600{
+    top: 60%;
+    font-size: 1.2em;
+  }
+  
 }
 
 
