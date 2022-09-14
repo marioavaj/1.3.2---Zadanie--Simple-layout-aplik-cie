@@ -11,6 +11,8 @@ h1{
 }
 
 
+
+
 .category {
   background-color: rgb(102, 102, 102);
   color: white;
@@ -25,19 +27,22 @@ h1{
 .alertColor {
 
   display: inline-block;
-  width: 65%;
-  height: 25px;
+  font-size: .8em;
+  
   text-align: center;
   background-color: rgb(255, 0, 0);
-  padding: 5px;
+  padding: 2px;
   border-radius: 5px;
   color: white;
   margin-top: auto;
   margin-bottom: auto;
 }
 
+.priceStockValue{
+  font-size: 0.5em;
+}
 .priceName {
-  grid-area: priceName;
+  
   margin-left: 1em;
   font-size: 1.25em;
 }
@@ -55,15 +60,15 @@ h1{
     position: relative;
     font-weight: 600;
     text-align: center;
-    margin-left: 1em;
-    margin-bottom: 1em;
+   
+    
     background-color: rgb(255, 162, 0);
     color: white;
     padding: 0.5em;
     border-radius: 5px 5px 5px 5px;
-    margin-right: .5em;
+    
     font-size: 0.8em;
   }
 
 
-
+  

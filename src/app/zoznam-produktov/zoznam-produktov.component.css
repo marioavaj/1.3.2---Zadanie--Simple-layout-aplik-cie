@@ -1,6 +1,7 @@
 .lastRerview{
-  margin-left: 30%;
-  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin-bottom: 3em;
   background-color: rgb(242, 242, 242);
@@ -8,8 +9,19 @@
 }
 
 .searchingWraper{
-  display: flex;
-  flex-direction: row;
+  display:flex;
+  flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 2em;
+margin-bottom: 2em;
 }
+
+.productList{
+ display: flex;
+ flex-wrap: wrap;
+  width: 82%;
+}
+.productWrapper{
+  display: flex;
+  justify-content: center;
+}
+

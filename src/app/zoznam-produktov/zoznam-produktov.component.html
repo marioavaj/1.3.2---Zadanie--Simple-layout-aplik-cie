@@ -1,14 +1,25 @@
 
-
-<router-outlet></router-outlet>
 <div class="searchingWraper">
-<app-filter  [whereIsSearching] = "productList" [onStock] = "onStockCheckBox" (outputEvent)="onFilterDone($event)"></app-filter>
-<app-filter-option [onStockCheckBox] = "false" (checkBoXInput) = "inputCheckBox($event)"></app-filter-option>
+    <app-filter [whereIsSearching]="productList" [onStock]="onStockCheckBox" (outputEvent)="onFilterDone($event)"></app-filter>
+    <app-filter-option [onStockCheckBox]="false" (checkBoXInput)="inputCheckBox($event)"></app-filter-option>
 </div>
 
 <div class="lastRerview">
-  <div style="font-weight: 600;">Posledná recenzia</div><br>
-  {{lastReview}}
-</div>
-<app-product [data]="filteredProducts" (reviewAdd) = "lastReviewDisplayed($event)" *ngFor="let filteredProducts of filteredData">
-</app-product>
+    <div style="font-weight: 600;">Posledná recenzia</div>
+    <br>
+        {{lastReview}}
+    </div>
+<div class="productWrapper"> 
+    <div class="productList">  
+      <app-product [data]="filteredProducts" (reviewAdd)="lastReviewDisplayed($event)" *ngFor="let filteredProducts of filteredData"></app-product>
+    </div> 
+    </div>
+
+    
+      
+   
+
+
+
+
+

@@ -2,23 +2,28 @@ img {
   margin-top: 1em;
   position: relative;
   width: 280px;
+  
 }
 
 #menuWrapper {
-  display: flex;
-  padding-top: 1em;
-  justify-content: right;
-  float: right;
+margin: 1em;
+display: flex;
+box-sizing: border-box;
+    
 }
 
 #menuWrapper a {
-  margin-right: 2em;
+  padding-top: .8em;
+  margin-right: 1em;
   text-decoration: none;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   color: rgb(69, 69, 69);
+  text-align: center;
+  
 }
 
 #menuWrapper > a:hover {
+  
   padding-bottom: 3px;
   border-bottom: 2px solid black;
 }
@@ -26,11 +31,31 @@ img {
 .search {
   display: flex;
   justify-content: center;
-  margin-bottom: auto;
-  margin-top: auto;
+
+  margin: auto;
+  
 }
 
 .headerWrapper {
-  display: grid;
-  grid-template-columns: auto auto auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-between;
 }
+
+@media only screen and (max-width: 640px) {
+  .headerWrapper{
+   display: block;
+  }
+  #menuWrapper {
+    justify-content: center;
+        
+    }
+
+    img{
+      display: flex;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 1em;
+    }
+
+ }

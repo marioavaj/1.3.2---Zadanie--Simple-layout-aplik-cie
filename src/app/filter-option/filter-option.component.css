@@ -1,6 +1,7 @@
 .container {
   margin-top: 5px;
-
+width: 120px;
+float: left;
   display: block;
   position: relative;
   padding-left: 35px;
@@ -65,4 +66,8 @@
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+.findedDataWrapper{
+  position: absolute;
 }

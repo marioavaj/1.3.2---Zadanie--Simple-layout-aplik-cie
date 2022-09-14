@@ -1,25 +1,14 @@
 .footer{
-  bottom: 0;
-margin: 0;
+  display: flex;
+  justify-content: space-between;  
   font-family: 'Arial Narrow', Arial, sans-serif;
   background: linear-gradient(0deg, rgba(153,0,0,1) 95%, rgba(255,255,255,1) 100%);
   color: white;
-  width: 98.3%;
-  height: 7em;
+  height: 10em;
   padding: 1em;
+  margin-top: 2em;
 }
 
-#adresa{
-  display:flex;
-width: 20%;
-float: left;
-}
-
-#rightFooter{
-  display: flex;
-  justify-content: center;
-  float: right;
-}
 #iconLinkedIn{
   width: 50px;
   height: 50px;
@@ -29,4 +18,13 @@ float: left;
 #iconMetis{
 
   width: 250px;
+}
+
+@media only screen and (max-width: 506px) {
+  .footer{
+    display: block;
+    width: 100vw;
+    height: 100%;
+    text-align: center;
+}
 }

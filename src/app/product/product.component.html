@@ -1,5 +1,6 @@
 <div #productPosition class="productWrapper">
   <div   class="redRow">X:{{x}}  Y:{{y}}  </div>
+
   <div class="productCategoryWrapper">
     <h2 class="productName">
       <a
@@ -8,7 +9,7 @@
       {{ data.name }}
     </a>      
     </h2>
-    <span class="category categoryStyle">
+    <span class="category ">
       {{ data.category }}     
     </span>
   </div>
@@ -16,42 +17,43 @@
   <div class="infoProductGrid">
     <div class="redColumn"></div>
 
-    <h2 class="priceName">
-      <h2 class="priceName" priceName *ngIf="data.price">Price:</h2>
-    </h2>
-
-    <div class="price">
-      {{ data.price }}
-    </div>
-    <h2 class="stockName">Stock:</h2>
-    <ng-container>
-      <div class="stockCount" *ngIf="data.stockCount !== 0">
-        {{ data.stockCount }}
+    <div class="PriceStockWrapper">
+    
+      <div class="price">
+      <span class="title" *ngIf="data.price">Price:</span>
+        <div class="priceStockValue" *ngIf="data.price !=undefined">{{ data.price +"€"}}</div>
       </div>
-      <div class="alertColor" *ngIf="data.stockCount === 0">Nedostupný</div>
+      
+      <div class="stock">
+    <span class="title stock">Stock:</span>
+     <ng-container>
+      <div class="priceStockValue"  *ngIf="data.stockCount !== 0">
+        {{ data.stockCount }}       </div>
+      <div  class="alertColor" *ngIf="data.stockCount === 0">Nedostupný</div>
     </ng-container>
+  </div>
+  
+</div>
 
-    <h3 class="descriptionName" *ngIf="data.description">Description:</h3>
+    <span class="descriptionName" *ngIf="data.description">Description:</span>
     <h3 class="descriptionName" *ngIf="!data.description"></h3>
     <div class="description">
       {{ data.description }}
     </div>
-    <h3 class="vendorsName">Vendors:</h3>
-    <ng-container vendor *ngFor="let vendor of data.vendors">
+    <span class="vendorName">Vendors:</span>
+    <ng-container class="vendorsFlex" vendor *ngFor="let vendor of data.vendors">
       <div class="vendor" *ngIf="vendor.stockCount > 0">
         {{ vendor.name }}
       </div>
     </ng-container>
-    <br />
-    <h3 class="reviewName">Recenzie</h3>
+    <span class="descriptionName">Reviews</span>
     <form class="review" action="">
       <textarea
         [(ngModel)]="reviewFromInput"
         type="submit"
         name="review"
         class="textarea"
-        cols="60"
-        rows="5"
+         rows="3"
       ></textarea>
       <input
         (click)="addReview(reviewFromInput)"
@@ -64,7 +66,7 @@
   <div class="reviews"></div>
   <ng-container>
     <div class="reviewsList" *ngFor="let review of data.reviews">
-      {{ date | date: "mediumDate" }} / {{ date | date: "shortTime" }} :
+      {{ date }} :
       {{ review }}
     </div>
   </ng-container>
