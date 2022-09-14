@@ -20,9 +20,7 @@ padding: 0;
 
 }
 
-.vhSpace{
-  height: 30vh;
-}
+
 .centered {
   position: absolute;
     top: 50%;
@@ -40,9 +38,9 @@ padding: 0;
   display: none;
   position: relative;
   width: 98%;
-  top: 50%;
+  
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 8%);
   color:darkred;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-style: italic;
@@ -51,6 +49,8 @@ padding: 0;
   padding: .5em;
   
 }
+
+
 
 @media only screen and (max-width: 1000px) {
   .centered{
@@ -80,6 +80,8 @@ padding: 0;
   }
   .centeredUnder600{
     display: block;
+    top: 70%;
+
   }
 
   .container{
