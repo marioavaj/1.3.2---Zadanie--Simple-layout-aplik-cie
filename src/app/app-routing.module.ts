@@ -6,6 +6,7 @@ import { WelcomeComponent } from './WelcomePage/welcome/welcome.component';
 import { ZoznamProduktovComponent } from './zoznam-produktov/zoznam-produktov.component';
 import { ProductComponent } from './product/product.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ZivotopisComponent } from './zivotopis/zivotopis.component';
 
 const routes: Routes = [
   { path: '',
@@ -25,6 +26,9 @@ const routes: Routes = [
     title: 'Zoznam produktov',
   component: ZoznamProduktovComponent,  
 },
+{ path: 'profil',
+  title: 'Profil',
+   component: ZivotopisComponent },
 ];
 
 @NgModule({

@@ -14,6 +14,7 @@ import { FilterComponent } from './filter/filter.component';
 import { FilterOptionComponent } from './filter-option/filter-option.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ZivotopisComponent } from './zivotopis/zivotopis.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     FilterComponent,
     FilterOptionComponent,
     ProductDetailComponent,
+    ZivotopisComponent,
 
      ],
   imports: [

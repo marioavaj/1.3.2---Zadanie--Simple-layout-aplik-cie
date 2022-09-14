@@ -1,0 +1,58 @@
+@font-face {
+    font-family:  'IngridDarling';
+    src: url('/assets/fonts/IngridDarling.ttf')  format('truetype'),
+    url('/assets/fonts/IngridDarling-Regular.woff') format('woff')
+
+  }
+
+
+
+figure{
+    margin: 2em auto 1em auto;
+    width: 160px;
+}
+
+figure > img{
+    border-radius: 1000px;
+    width: 160px;
+   }
+.aboutMe{
+    max-width: 820px;
+    margin: 0 auto 0 auto;
+    text-align: justify;
+    
+}
+
+.textAboutMe{
+    font-family: 'IngridDarling' !important ;
+    font-size: 2.5em;
+    font-weight: 300;
+    padding: 1em;
+}
+
+.logos{
+    width: 144px;
+    margin: 0.7em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.logoWrapper{
+    max-width: 60vw;
+    margin: 0 auto;
+}
+
+.logoWrapper>h1{
+    margin: 0 auto 0 auto;
+    font-size: 4em;
+    font-family: 'IngridDarling' !important;
+    font-weight: 500;
+
+}
+
+@media only screen and (max-width: 817px) {
+    .logoWrapper{
+        max-width: 90vw;
+
+  }
+
+}
