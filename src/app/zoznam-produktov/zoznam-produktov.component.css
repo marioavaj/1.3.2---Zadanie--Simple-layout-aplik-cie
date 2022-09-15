@@ -32,11 +32,6 @@ margin-bottom: 2em;
 
 @media only screen and (max-width: 740px){
   .space{
-    height: 23vh;
-  }
-}
-@media only screen and (max-width: 389px){
-  .space{
-    height: 26vh;
+    height: 15vh;
   }
 }
