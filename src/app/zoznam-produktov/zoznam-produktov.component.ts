@@ -127,9 +127,9 @@ export class ZoznamProduktovComponent implements OnInit {
     this.filteredData = this.productList;
   }
 
-  lastReviewDisplayed(review: any): void {
+  lastReviewDisplayed(review: any, name:string): void {
      this.date = new Date().toLocaleString();
-    this.lastReview = this.date + ': ' + review;
+    this.lastReview = this.date+ ' na produkt ' + name+ ': ' + review;
   }
 
   onFilterDone(item: Product[]) {
@@ -139,7 +139,7 @@ export class ZoznamProduktovComponent implements OnInit {
   }
   inputCheckBox(onStock:boolean):void{
 this.onStockCheckBox = onStock;
-console.log("checkbox je " + this.onStockCheckBox);
+
   }
 }
 

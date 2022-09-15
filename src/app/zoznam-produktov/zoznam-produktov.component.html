@@ -14,7 +14,7 @@
     </div>
 <div class="productWrapper"> 
     <div class="productList">  
-      <app-product [data]="filteredProducts" (reviewAdd)="lastReviewDisplayed($event)" *ngFor="let filteredProducts of filteredData"></app-product>
+      <app-product [data]="filteredProducts" (reviewAdd)="lastReviewDisplayed($event, filteredProducts.name)" *ngFor="let filteredProducts of filteredData"></app-product>
     </div> 
     </div>
 
