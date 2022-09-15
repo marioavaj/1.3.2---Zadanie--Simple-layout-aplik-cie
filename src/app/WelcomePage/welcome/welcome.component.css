@@ -1,4 +1,17 @@
+.space{
+  height: 10vh;
+}
 
+@media only screen and (max-width: 740px){
+  .space{
+    height: 12vh;
+  }
+}
+@media only screen and (max-width: 389px){
+  .space{
+    height: 17vh;
+  }
+}
 
 img{
 position: relative;

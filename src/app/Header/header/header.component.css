@@ -6,26 +6,31 @@ img {
 }
 
 #menuWrapper {
+ 
 margin: 1em;
+border: 2px;
 display: flex;
 box-sizing: border-box;
+
     
 }
 
 #menuWrapper a {
-  padding-top: .8em;
+  padding-top: 1em;
   margin-right: 1em;
+  
   text-decoration: none;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   color: rgb(69, 69, 69);
   text-align: center;
+  border-bottom: 2px solid rgb(255, 255, 255);
+
   
 }
 
 #menuWrapper > a:hover {
-  
-  padding-bottom: 3px;
-  border-bottom: 2px solid black;
+  position: relative;
+    border-bottom: 2px solid black;
 }
 
 .search {
@@ -37,8 +42,14 @@ box-sizing: border-box;
 
 .headerWrapper {
   display: flex;
+  width: 100vw;
   flex-wrap: wrap;
   justify-content:space-between;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  position: fixed;
+  z-index: 1000;
+  background-color: white;
+  top: -1px;
 }
 
 @media only screen and (max-width: 640px) {
