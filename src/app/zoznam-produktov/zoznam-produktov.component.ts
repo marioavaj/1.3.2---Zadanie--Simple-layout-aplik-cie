@@ -8,7 +8,8 @@ import { Product } from '../models/Product';
 })
 export class ZoznamProduktovComponent implements OnInit {
   productList: Product[];
-  public date = new Date().toLocaleString();
+  date;
+  
   lastReview: string;
   filteredData: Product[];
   onStockCheckBox:boolean;
@@ -127,6 +128,7 @@ export class ZoznamProduktovComponent implements OnInit {
   }
 
   lastReviewDisplayed(review: any): void {
+     this.date = new Date().toLocaleString();
     this.lastReview = this.date + ': ' + review;
   }
 

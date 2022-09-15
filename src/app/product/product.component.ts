@@ -62,14 +62,17 @@ OnDestroy {
     ngOnInit(): void {}
 
     addReview(review : string) {
+        if(review?.length>0){
+        this.date = new Date().toLocaleString();
         if (this.data) { // kontrola ci premenna data existuje
             if (!this.data.reviews) { // kontrola ci v data existuje objekt reviews
                 this.data.reviews = []; // ak plati podmienka ze neexistuje, vytvori ho
             }
-            this.data.reviews.push(review);
+            this.data.reviews.push(this.date + " | " + review);
             this.reviewAdd.emit(review); // sprava pre parenta ze vlozil recenziu
             this.reviewFromInput = '';
         }
+    }
     }
 
     /*@HostListener('window:scroll', ['$event'])
