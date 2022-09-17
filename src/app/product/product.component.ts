@@ -49,14 +49,9 @@ OnDestroy {
     ngOnDestroy(): void {}
     ngAfterViewInit(): void {}
     ngDoCheck(): void {
-
         this.x = this.productPosition ?. nativeElement.offsetLeft;
         this.y = this.productPosition ?. nativeElement.offsetTop;
-
-
     }
-
-
     ngAfterContentChecked(): void {}
 
     ngOnInit(): void {}

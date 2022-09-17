@@ -1,10 +1,11 @@
-export class Product {
+export interface Product {
   id: number;
-  [x: string]: any;
   name: string;
   category: string;
   price?: number;
   stockCount: number;
+  sold: number,
+  lastMonthSold: number,
   description?: string;
   vendors: Vendor[];
   reviews?: string[]
@@ -12,9 +13,10 @@ export class Product {
 
 }
 
-export class Vendor{
+export interface Vendor{
 
     name: string;
      stockCount: number}
 
 
+     

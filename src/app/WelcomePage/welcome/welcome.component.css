@@ -1,17 +1,9 @@
 .space{
-  height: 10vh;
+  height: 9vh;
 }
 
-@media only screen and (max-width: 740px){
-  .space{
-    height: 13vh;
-  }
-}
-@media only screen and (max-width: 389px){
-  .space{
-    height: 13vh;
-  }
-}
+
+
 
 img{
 position: relative;
@@ -51,7 +43,6 @@ padding: 0;
   display: none;
   position: relative;
   width: 98%;
-  
   left: 50%;
   transform: translate(-50%, 8%);
   color:darkred;
@@ -73,6 +64,7 @@ padding: 0;
   left: 20%;
   transform: translate(-15%, -2%);
   } 
+
   }
 
 
@@ -83,6 +75,9 @@ padding: 0;
   top: 20%;
   left: 20%;
   transform: translate(-15%, -2%);
+  }
+  .space{
+    height: 7vh;
   }
 
 }
@@ -99,6 +94,10 @@ padding: 0;
 
   .container{
     display: block;
+  }
+
+  .space{
+    height: 5vh;
   }
 
 }

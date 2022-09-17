@@ -1,0 +1,46 @@
+
+
+<div class="space"></div>
+
+<h1>Štatistika predaja</h1>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> price </th>
+      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="stockCount">
+      <th mat-header-cell *matHeaderCellDef> stockCount </th>
+      <td mat-cell *matCellDef="let element"> {{element.stockCount}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="sold">
+      <th mat-header-cell *matHeaderCellDef> sold </th>
+      <td mat-cell *matCellDef="let element"> {{element.sold}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastMonthSold">
+      <th mat-header-cell *matHeaderCellDef> lastMonthSold </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastMonthSold}} </td>
+    </ng-container>
+
+
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  

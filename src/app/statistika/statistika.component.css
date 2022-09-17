@@ -1,0 +1,24 @@
+.space{
+    height: 10vh;
+}
+
+.mat-elevation-z8{
+    margin: auto;
+    width: 50vw;
+}
+
+table{
+    background-color: white;
+   }
+
+   th{
+    background-color: gray;
+    color: rgb(212, 212, 212);
+    border-bottom: 1px gray;   }
+
+   td{
+    color: rgb(44, 122, 119);
+    border-bottom: rgb(194, 194, 194);
+   }
+
+

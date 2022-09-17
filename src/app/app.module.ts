@@ -15,7 +15,11 @@ import { FilterOptionComponent } from './filter-option/filter-option.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ZivotopisComponent } from './zivotopis/zivotopis.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule} from '@angular/material/slider';
+import {MatMenuModule} from '@angular/material/menu';
+import { StatistikaComponent } from './statistika/statistika.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -32,13 +36,19 @@ import { ZivotopisComponent } from './zivotopis/zivotopis.component';
     FilterOptionComponent,
     ProductDetailComponent,
     ZivotopisComponent,
-
+    StatistikaComponent,
+   
      ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatSliderModule,
+    MatMenuModule,
+    MatTableModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

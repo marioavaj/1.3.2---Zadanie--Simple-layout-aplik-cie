@@ -12,5 +12,18 @@
     <a routerLink="referencie"  >Referencie</a>
     <a routerLink="prihlaska">Prihláška</a>
     <a routerLink="zoznam-produktov">Produkty</a>
+    <a routerLink="statistika">Štatistiky</a>
+
   </menu>
+
+  <mat-menu #appMenu = "matMenu" class="hamburgerMenuWrapper"> 
+    <button mat-menu-item routerLink="profil">Profil</button>
+    <button mat-menu-item routerLink="referencie"  >Referencie</button>
+    <button mat-menu-item routerLink="prihlaska">Prihláška</button>
+    <button mat-menu-item routerLink="zoznam-produktov">Produkty</button>
+    <button mat-menu-item routerLink="statistiky">Štatistiky</button>
+
+  </mat-menu>
+  <button mat-button [matMenuTriggerFor]="appMenu" class="hamburgerMenu"><i class="fa-solid fa-bars"></i></button>
+
 </div>

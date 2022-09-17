@@ -6,7 +6,7 @@
   }
 
   .space{
-    height: 10vh;
+    height: 7vh;
   }
 
 figure{
@@ -113,3 +113,8 @@ span{
     margin: 0 auto;
 }
 
+@media only screen and (max-width: 640px) {
+    .space{
+        height: 7vh;
+    }
+    }

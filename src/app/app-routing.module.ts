@@ -7,6 +7,7 @@ import { ZoznamProduktovComponent } from './zoznam-produktov/zoznam-produktov.co
 import { ProductComponent } from './product/product.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ZivotopisComponent } from './zivotopis/zivotopis.component';
+import { StatistikaComponent } from './statistika/statistika.component';
 
 const routes: Routes = [
   { path: '',
@@ -29,6 +30,11 @@ const routes: Routes = [
 { path: 'profil',
   title: 'Profil',
    component: ZivotopisComponent },
+
+   { path: 'statistika',
+   title: 'Štatistiky',
+    component: StatistikaComponent }
+  
 ];
 
 @NgModule({

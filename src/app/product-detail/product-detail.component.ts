@@ -24,7 +24,6 @@ export class ProductDetailComponent implements OnInit {
   console.log(productIdFromRoute);
   console.log(ProductDetails.productDetails);
   this.product = ProductDetails.productDetails.find((p) => p.id === productIdFromRoute);
-  console.log(this.product);
   
   }
 
