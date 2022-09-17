@@ -18,11 +18,44 @@ table{
    th{
     background-color: gray;
     color: rgb(212, 212, 212);
-    border-bottom: 1px gray;   }
+    border-bottom: 1px gray;  
+}
 
    td{
     color: rgb(44, 122, 119);
     border-bottom: rgb(194, 194, 194);
    }
+
+   .mat-column-name{
+    width: 250px;
+   }
+
+   .mat-column-price{
+    width: 50px;
+    text-align: right;
+   }
+   .mat-column-stockCount{
+    width: 50px;
+    text-align: right;
+   }
+   .mat-column-sold{
+    width: 50px;
+    text-align: right;
+   }
+
+   .mat-column-lastMonthSold{
+    width: 50px;
+    text-align: right;
+   }
+
+   .mat-column-obrat{
+    width: 100px;
+    text-align: right;
+   }
+   .tableHeader{
+    text-align: right !important;
+    
+   }
+
 
 
