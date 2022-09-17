@@ -20,6 +20,10 @@ import { MatSliderModule} from '@angular/material/slider';
 import {MatMenuModule} from '@angular/material/menu';
 import { StatistikaComponent } from './statistika/statistika.component';
 import { MatTableModule } from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSortModule } from '@angular/material/sort';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +41,8 @@ import { MatTableModule } from '@angular/material/table';
     ProductDetailComponent,
     ZivotopisComponent,
     StatistikaComponent,
-   
+    
+      
      ],
   imports: [
     BrowserModule,
@@ -48,7 +53,9 @@ import { MatTableModule } from '@angular/material/table';
     MatSliderModule,
     MatMenuModule,
     MatTableModule,
-    
+    MatPaginatorModule,
+    MatFormFieldModule, 
+    MatSortModule  
   ],
   providers: [],
   bootstrap: [AppComponent]
