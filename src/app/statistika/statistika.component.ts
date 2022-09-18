@@ -3,7 +3,7 @@ import {ProductDetails} from '../models/Product-details';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort, Sort} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import {LiveAnnouncer} from '@angular/cdk/a11y';
+
 
 
 export interface Product {
@@ -22,7 +22,8 @@ export interface Vendor{
     name: string;
      stockCount: number}
 
-     let dataToTable: Product[] = ProductDetails.productDetails; 
+     
+     
 
 /**
  * @title Basic use of `<table mat-table>`
@@ -35,33 +36,37 @@ export interface Vendor{
 })
 
 export class StatistikaComponent implements AfterViewInit, OnInit {
+  dataToTable: Product[] = ProductDetails.productDetails; 
+  emptyStockItem: Product[];
   displayedColumns: string[] = ['name', 'price', 'stockCount', 'sold','lastMonthSold', 'obrat' ];
   dataSource: MatTableDataSource<Product>;
+  dataSource1: MatTableDataSource<Product>;
+  
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private _liveAnnouncer: LiveAnnouncer) { }
+  constructor() { }
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource(dataToTable);
+    this.dataSource = new MatTableDataSource(this.dataToTable);
+    this.emptyStockItem = this.dataToTable.filter((item) => {
+      return item.stockCount === 0;
+          });
+          this.dataSource1 = new MatTableDataSource(this.emptyStockItem);
+
+
+    
+     
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    
   }
 
-  announceSortChange(sortState: Sort) {
-    // This example uses English messages. If your application supports
-    // multiple language, you would internationalize these strings.
-    // Furthermore, you can customize the message to add additional
-    // details about the values being sorted.
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
-  }
+  
+ 
 }
 
 
