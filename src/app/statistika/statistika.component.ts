@@ -1,8 +1,9 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ProductDetails} from '../models/Product-details';
 import {MatPaginator} from '@angular/material/paginator';
-import {MatSort, Sort} from '@angular/material/sort';
+import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {SelectionModel} from '@angular/cdk/collections';
 
 
 export interface Product {
@@ -39,10 +40,13 @@ OnInit {
         'stockCount',
         'sold',
         'lastMonthSold',
-        'obrat'
+        'obrat'        
     ];
     dataSource : MatTableDataSource < Product >;
     dataSource1 : MatTableDataSource < Product >;
+    
+    
+
     lastMonthSoldSum : number = 0;
     soldSum : number = 0;
     avgItemSum : number = 0;
@@ -51,6 +55,8 @@ OnInit {
 
     @ViewChild(MatPaginator)paginator : MatPaginator;
     @ViewChild(MatSort)sort : MatSort;
+
+    
 
     constructor() {}
     ngOnInit(): void {
@@ -79,9 +85,18 @@ OnInit {
     ngAfterViewInit() {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+          };
 
+          clearTable() {
+            this.dataSource.data = [];
+          }
 
+          addData() {
+            this.dataSource.data = this.dataToTable;
+          }
     }
 
 
-}
+
+ 
+

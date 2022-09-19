@@ -11,8 +11,19 @@ body{
     
 }
 
+.nameOfTable{
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+   justify-content: baseline;
+
+}
+
+.mat-raised-button{
+    margin: .5em;
+}
 table{
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     width: 100%;
    }
 
@@ -81,6 +92,10 @@ text-align: justify;
     .mat-card-subtitle{
         color: rgb(152, 0, 0);
         font-size: 1.5em;
+    }
+
+    .mat-checkbox-inner-container-no-side-margin{
+        border: 1px solid gray !important;
     }
 
 

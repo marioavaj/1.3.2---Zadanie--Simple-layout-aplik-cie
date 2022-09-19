@@ -24,6 +24,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSortModule } from '@angular/material/sort';
 import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import {MatCardModule} from '@angular/material/card';
     MatPaginatorModule,
     MatFormFieldModule, 
     MatSortModule,
-    MatCardModule  
+    MatCardModule,  
+    MatButtonModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
