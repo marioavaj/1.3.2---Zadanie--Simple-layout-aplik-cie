@@ -101,15 +101,41 @@
 </div>
 
 <div class="cards">
-<div *ngFor="let item of dataToTable " class="oneCard" >
+
 <mat-card class="example-card">
   <mat-card-title-group>
-    <mat-card-title>{{item.name}}</mat-card-title>
-    <mat-card-subtitle>{{item.price}} € </mat-card-subtitle>
+    <mat-card-title>Celkový obrat za posledný mesiac</mat-card-title>
+    <mat-card-subtitle>{{lastMonthSoldSum}} € </mat-card-subtitle>
   </mat-card-title-group>
   <mat-card-content>
-   {{item.description}}
-  </mat-card-content>
+   </mat-card-content>
 </mat-card>
-</div>
+
+<mat-card class="example-card">
+  <mat-card-title-group>
+    <mat-card-title>Celkový obrat za celé obdobie</mat-card-title>
+    <mat-card-subtitle>{{soldSum}} € </mat-card-subtitle>
+  </mat-card-title-group>
+  <mat-card-content>
+   </mat-card-content>
+</mat-card>
+
+<mat-card class="example-card">
+  <mat-card-title-group>
+    <mat-card-title>Priemerná cena predávaných produktov</mat-card-title>
+    <mat-card-subtitle>{{avgItemSum}} € </mat-card-subtitle>
+  </mat-card-title-group>
+  <mat-card-content>
+   </mat-card-content>
+</mat-card>
+
+<mat-card class="example-card">
+  <mat-card-title-group>
+    <mat-card-title>Najpredávanejší produkt</mat-card-title>
+    <mat-card-subtitle>{{maxSoldItemName}} </mat-card-subtitle>
+  </mat-card-title-group>
+  <mat-card-content>
+   </mat-card-content>
+</mat-card>
+
 </div>
