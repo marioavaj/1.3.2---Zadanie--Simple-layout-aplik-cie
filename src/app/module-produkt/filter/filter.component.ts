@@ -12,9 +12,9 @@ import {
     OnDestroy,
     EventEmitter
 } from '@angular/core';
-import {Product} from '../models/Product';
+import {Product} from '../../models/Product';
 
-@Component({selector: 'app-filter', templateUrl: './filter.component.html', styleUrls: ['./filter.component.css']})
+@Component( {selector: 'app-filter', templateUrl: './filter.component.html', styleUrls: ['./filter.component.css']})
 export class FilterComponent
 implements
 OnInit,
@@ -85,7 +85,7 @@ console.log( "na zaciatku" +result)
                     this.outputEvent.emit(result);
                 } else if (item.name.toLocaleLowerCase().includes(whatIsSearched.toLocaleLowerCase()) && this.onStock === true && item.stockCount > 0) 
                     result.push(item);
-console.log( "v strede" +result)
+
                 
                 this.outputEvent.emit(result);
             });
@@ -97,7 +97,7 @@ console.log( "v strede" +result)
         }
 
         this.outputEvent.emit(result);
-console.log( "na konci" +result)
+
 
     }
 }

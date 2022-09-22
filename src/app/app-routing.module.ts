@@ -3,9 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReferencieComponent } from './referencie/referencie.component';
 import { PrihlaskaComponent } from './prihlaska/prihlaska.component';
 import { WelcomeComponent } from './WelcomePage/welcome/welcome.component';
-import { ZoznamProduktovComponent } from './zoznam-produktov/zoznam-produktov.component';
-import { ProductComponent } from './product/product.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductDetailComponent } from './module-produkt/product-detail/product-detail.component';
 import { ZivotopisComponent } from './zivotopis/zivotopis.component';
 import { StatistikaComponent } from './statistika/statistika.component';
 
@@ -23,9 +21,12 @@ const routes: Routes = [
   { path: 'prihlaska',
   title: 'Prihláška',
    component: PrihlaskaComponent },
+
   { path: 'zoznam-produktov',
     title: 'Zoznam produktov',
-  component: ZoznamProduktovComponent,  
+  loadChildren:()=>import ('./module-produkt/module-produkt.module')
+  .then(mod=>mod.ModuleProduktModule)
+  
 },
 { path: 'profil',
   title: 'Profil',

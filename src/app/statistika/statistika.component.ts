@@ -3,30 +3,8 @@ import {ProductDetails} from '../models/Product-details';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import {SelectionModel} from '@angular/cdk/collections';
+import {Product} from '../models/Product';
 
-
-export interface Product {
-    id: number;
-    name: string;
-    category: string;
-    price: number;
-    stockCount: number;
-    sold: number,
-    lastMonthSold: number,
-    description: string;
-    vendors: Vendor[];
-    reviews: string[]
-}
-export interface Vendor {
-    name: string;
-    stockCount: number
-}
-
-
-/**
- * @title Basic use of `<table mat-table>`
- */
 
 @Component({selector: 'app-statistika', templateUrl: './statistika.component.html', styleUrls: ['./statistika.component.css']})
 
@@ -40,12 +18,11 @@ OnInit {
         'stockCount',
         'sold',
         'lastMonthSold',
-        'obrat'        
+        'obrat'
     ];
     dataSource : MatTableDataSource < Product >;
     dataSource1 : MatTableDataSource < Product >;
-    
-    
+
 
     lastMonthSoldSum : number = 0;
     soldSum : number = 0;
@@ -56,7 +33,6 @@ OnInit {
     @ViewChild(MatPaginator)paginator : MatPaginator;
     @ViewChild(MatSort)sort : MatSort;
 
-    
 
     constructor() {}
     ngOnInit(): void {
@@ -67,14 +43,13 @@ OnInit {
         this.dataSource1 = new MatTableDataSource(this.emptyStockItem);
 
         this.dataToTable.forEach((element) => {
-            this.lastMonthSoldSum += (element.lastMonthSold * element.price);
-            this.soldSum += (element.sold * element.price);
-            this.avgItemSum += Math.round(element.price / (this.dataToTable.length));
+            this.lastMonthSoldSum += (element.lastMonthSold * element.price !);
+            this.soldSum += (element.sold * element.price !);
+            this.avgItemSum += Math.round(element.price !/ (this.dataToTable.length));
 
             if (element.sold > this.maxSoldItem) {
                 this.maxSoldItem = element.sold;
                 this.maxSoldItemName = element.name;
-
             }
 
         });
@@ -85,18 +60,34 @@ OnInit {
     ngAfterViewInit() {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-          };
+    };
 
-          clearTable() {
-            this.dataSource.data = [];
-          }
-
-          addData() {
-            this.dataSource.data = this.dataToTable;
-          }
+    clearTable() {
+        this.dataSource.data = [];
     }
 
+    addData() {
+        this.dataSource.data = this.dataToTable;
+    }
 
-
- 
-
+    dataToTableUnderThousand : Product[] = [];
+    checked : boolean = true;
+    onChange() {
+        console.log(this.checked);
+        if (this.checked) {
+            console.log(this.checked);
+            this.dataToTable.forEach((element) => {
+                if (element.price!<= 1000) {
+                this.dataToTableUnderThousand.push(element)
+                 }
+                 this.dataSource.data = this.dataToTableUnderThousand;
+                 this.checked = false;
+            })
+           
+          } else  {     
+            this.dataSource.data = this.dataToTable;
+            this.dataToTableUnderThousand = [];
+            this.checked = true;
+          }            
+             }
+  }

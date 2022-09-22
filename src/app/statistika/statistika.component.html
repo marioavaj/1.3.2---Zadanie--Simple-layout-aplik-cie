@@ -8,6 +8,7 @@
   <div class="nameOfTable">
   <button mat-raised-button (click)="clearTable()">Clear table</button>
   <button mat-raised-button (click)="addData()">Add data</button>
+  <mat-checkbox (click)="onChange()" style="margin: auto 0 auto .2em;">0-1000 €</mat-checkbox>
   </div>
 
   <table mat-table [dataSource]="dataSource" matSort>

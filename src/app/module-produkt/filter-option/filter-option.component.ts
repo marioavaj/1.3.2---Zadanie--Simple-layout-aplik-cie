@@ -19,7 +19,7 @@ export class FilterOptionComponent implements OnInit {
 
 
 
-  onChange(item:any):void{
+  onChange():void{
     this.onStockCheckBox = !this.onStockCheckBox;
     this.checkBoXInput.emit(this.onStockCheckBox);
 

@@ -12,12 +12,17 @@ body{
 }
 
 .nameOfTable{
+background-color: rgb(221, 221, 221);
     display: flex;
     margin-top: auto;
     margin-bottom: auto;
-   justify-content: baseline;
+   }
 
-}
+   .mat-checkbox-inner-container{
+    padding: 1em !important;
+   }
+    
+   
 
 .mat-raised-button{
     margin: .5em;
