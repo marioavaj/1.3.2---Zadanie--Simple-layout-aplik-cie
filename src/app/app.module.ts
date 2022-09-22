@@ -14,7 +14,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {ModuleProduktModule} from './module-produkt/module-produkt.module';
 import { RouterModule } from '@angular/router';
 import { ModuleStatistikaModule } from './module-statistika/module-statistika.module';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 @NgModule({
     declarations: [
         AppComponent,
@@ -37,7 +37,8 @@ import { ModuleStatistikaModule } from './module-statistika/module-statistika.mo
         ReactiveFormsModule,
         ModuleProduktModule,
         ModuleStatistikaModule,
-        MatMenuModule
+        MatMenuModule,
+        BrowserAnimationsModule      
     ],
     providers: [],
     bootstrap: [AppComponent]
