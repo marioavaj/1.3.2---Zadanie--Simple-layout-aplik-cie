@@ -5,7 +5,7 @@ import { PrihlaskaComponent } from './prihlaska/prihlaska.component';
 import { WelcomeComponent } from './WelcomePage/welcome/welcome.component';
 import { ProductDetailComponent } from './module-produkt/product-detail/product-detail.component';
 import { ZivotopisComponent } from './zivotopis/zivotopis.component';
-import { StatistikaComponent } from './statistika/statistika.component';
+
 
 const routes: Routes = [
   { path: '',
@@ -34,7 +34,8 @@ const routes: Routes = [
 
    { path: 'statistika',
    title: 'Štatistiky',
-    component: StatistikaComponent }
+   loadChildren:()=>import ('./module-statistika/module-statistika.module')
+   .then(mod=>mod.ModuleStatistikaModule) }
   
 ];
 
