@@ -4,7 +4,7 @@ import { Product } from '../../models/Product';
 @Component({
   selector: 'app-zoznam-produktov',
   templateUrl: './zoznam-produktov.component.html',
-  styleUrls: ['./zoznam-produktov.component.css'],
+  styleUrls: ['./zoznam-produktov.component.scss'],
 })
 export class ZoznamProduktovComponent implements OnInit {
   productList: Product[];

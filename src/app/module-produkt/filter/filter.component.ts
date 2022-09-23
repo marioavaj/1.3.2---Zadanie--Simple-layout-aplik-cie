@@ -14,7 +14,8 @@ import {
 } from '@angular/core';
 import {Product} from '../../models/Product';
 
-@Component( {selector: 'app-filter', templateUrl: './filter.component.html', styleUrls: ['./filter.component.css']})
+@Component({selector: 'app-filter', templateUrl: './filter.component.html',
+ styleUrls: ['./filter.component.scss']})
 export class FilterComponent
 implements
 OnInit,
@@ -41,9 +42,9 @@ OnDestroy {
     // ZAVOLA SA NAD KAZDOU ZMENOU V KOMPONENTOCH, KTORE SU AKTUALNE VYKRESLENE V DOM
     ngOnChanges(): void {
         if (this.onStock === undefined) {
-         this.onStock = false;
-         }
-        this.filter(this.whatIsSearched); 
+            this.onStock = false;
+        }
+        this.filter(this.whatIsSearched);
     }
 
     // spusti sa po ngOnChanges, spusta sa iba raz!!!!!!!! este nie je nacitany html!!!!! Spracovanie pociatocnych dat, externe sluzby, asynchronne, idealne miesto pre inicializovanie dat z DB
@@ -52,10 +53,7 @@ OnDestroy {
     }
 
     // ideálne na implementovanie vlastných mechanizmov na detekovanie zmien, ktore ngOnChanges() nie je schobny detekovat.
-    ngDoCheck() {
-        
-        
-    }
+    ngDoCheck() {}
 
     // iba pre komponent.Spusti sa 1x po ngDoCheck, po spusteni vsetkych ngcontentov a <app..., zavola sa ked vlastnosti zobrazovaneho komponentu su inicializovane
     ngAfterContentInit() {}
@@ -77,16 +75,17 @@ OnDestroy {
 
     filter(whatIsSearched : string): void {
         let result: Product[] = [];
-console.log( "na zaciatku" +result)
-        if ((this.data && whatIsSearched?.length >= 2 || (this.data && this.onStock === true)) ) {
+        console.log("na zaciatku" + result)
+        if ((this.data && whatIsSearched ?. length >= 2 || (this.data && this.onStock === true))) {
             this.data.forEach((item) => {
                 if (item.name.toLocaleLowerCase().includes(whatIsSearched.toLocaleLowerCase()) && this.onStock === false && item.stockCount >= 0) {
                     result.push(item);
                     this.outputEvent.emit(result);
                 } else if (item.name.toLocaleLowerCase().includes(whatIsSearched.toLocaleLowerCase()) && this.onStock === true && item.stockCount > 0) 
                     result.push(item);
-
                 
+
+
                 this.outputEvent.emit(result);
             });
 

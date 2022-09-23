@@ -6,7 +6,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Product} from '../../models/Product';
 
 
-@Component({selector: 'app-statistika', templateUrl: './statistika.component.html', styleUrls: ['./statistika.component.css']})
+@Component({selector: 'app-statistika', templateUrl: './statistika.component.html',
+ styleUrls: ['./statistika.component.scss']})
 
 export class StatistikaComponent implements AfterViewInit,
 OnInit {
