@@ -12,7 +12,7 @@
     <br>
         {{lastReview}}
     </div>
-<div class="productWrapper"> 
+<div class="productsWrapper"> 
     <div class="productList">  
       <app-product [data]="filteredProducts" (reviewAdd)="lastReviewDisplayed($event, filteredProducts.name)" *ngFor="let filteredProducts of filteredData"></app-product>
     </div> 

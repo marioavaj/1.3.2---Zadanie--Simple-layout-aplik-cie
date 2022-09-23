@@ -1,0 +1,16 @@
+
+//profilPages
+$boxShadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+$FontWeightTitle: 500;
+$transformScale: 1.2;
+$TextColor: rgb(0, 74, 194);
+
+//productPages
+$borderColor: rgb(46, 93, 181) ;
+$borderStyle: 1px solid;
+$borderStyleComplet: $borderColor + $borderStyle;
+
+//productPages (zmeni farbu kategorie produktu)
+@function changeProductColor($color){
+    @return adjust-hue($color, 80deg) ;
+}

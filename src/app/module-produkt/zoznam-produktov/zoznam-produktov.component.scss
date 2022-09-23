@@ -1,7 +1,12 @@
+@mixin FlexWrap{
+  display:flex;
+  flex-wrap: wrap;
+}
+
+
 .space{
   height:12vh;
 }
-
 
 .lastRerview{
   margin-left: auto;
@@ -14,21 +19,24 @@
 }
 
 .searchingWraper{
-  display:flex;
-  flex-wrap: wrap;
+  @include FlexWrap;
   justify-content: center;
-margin-bottom: 2em;
+  margin-bottom: 2em;
 }
 
 .productList{
- display: flex;
- flex-wrap: wrap;
+  @include FlexWrap;
+  justify-content: center;
+  background-color: white;
  
 }
-.productWrapper{
-  display: flex;
+.productsWrapper{
+  @include FlexWrap;
   justify-content: center;
+  background-color: white;
 }
+
+
 
 @media only screen and (max-width: 740px){
   .space{
