@@ -54,6 +54,8 @@ figure {
 
 
 .logoWrapper {
+    @extend  %FlexCenter;
+    flex-wrap: wrap;
     @include verticalCenter;
     max-width: 99vw;
     justify-content: center;
@@ -75,6 +77,8 @@ figure {
 
 .educationWrapper {
     @include verticalCenter;
+    @extend  %FlexCenter;
+    flex-wrap: wrap;
     max-width: 99vw;
     justify-content: center;
 
