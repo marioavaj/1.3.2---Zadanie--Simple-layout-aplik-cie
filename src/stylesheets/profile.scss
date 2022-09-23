@@ -1,0 +1,102 @@
+@import './variables';
+@import './mixins';
+
+
+.space {
+    height: 7vh;
+}
+
+figure {
+    margin: 2em auto 1em auto;
+    width: 160px;
+
+    img {
+        border-radius: 1000px;
+        width: 160px;
+        box-shadow: $boxShadow ;
+    }
+}
+
+.aboutMe {
+    max-width: 820px;
+    margin: 0 auto 0 auto;
+    text-align: justify;
+
+       .textAboutMe {
+        font-family: 'IngridDarling' !important;
+        font-size: 2.5em;
+        font-weight: 300;
+        padding: 0 1em;
+        color: $TextColor;
+
+    }
+
+    .textAboutMeStars {
+        @extend %FlexCenter;
+        font-family: 'IngridDarling' !important;
+        font-size: 2.5em;
+        font-weight: 300;
+        color: $TextColor;
+
+    }
+}
+
+.headerTitles {
+    max-width: 820px;
+    margin: 0 auto 0 auto;
+    @extend %FlexCenter;
+    font-size: 4em;
+    font-family: 'IngridDarling' !important;
+    font-weight: $FontWeightTitle;
+    color: $TextColor;
+
+}
+
+
+.logoWrapper {
+    @include verticalCenter;
+    max-width: 99vw;
+    justify-content: center;
+
+    .logos {
+        width: 144px;
+        margin: 0.7em;
+        box-shadow: $boxShadow;
+        transition: all .5s;
+    }
+
+    .logos:hover {
+        transform: scale($transformScale);
+        cursor: grabbing;
+        transition: all .5s;
+    }
+
+}
+
+.educationWrapper {
+    @include verticalCenter;
+    max-width: 99vw;
+    justify-content: center;
+
+    .metisLogo {
+        max-width: 300px;
+        box-shadow: $boxShadow;
+        margin-bottom: .5em;
+    }
+
+    .educationText {
+        box-shadow: $boxShadow;
+        padding: 3px 3px 0 3px;
+        margin-left: 0.5em;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 1.2em;
+    }
+
+}
+
+
+@media only screen and (max-width: 640px) {
+    .space {
+        height: 7vh;
+    }
+}

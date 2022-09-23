@@ -1,0 +1,24 @@
+@mixin verticalCenter{
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  @mixin flexSpaceBetween{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  //product.scss
+  %FontSizeMargin{
+    font-size: 1.5em;
+    margin: .6em;
+    }
+
+    //profile.scss
+
+    %FlexCenter{
+    display: flex;
+    justify-content: center;
+}
+
+
