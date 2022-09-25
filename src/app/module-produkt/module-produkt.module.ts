@@ -30,6 +30,10 @@ import { SortByPipePipe } from './sort-by-pipe.pipe';
         FilterOptionComponent,
         ProductDetailComponent,
         RouterModule
-    ]
+    ],
+
+    providers: [
+        SortByPipePipe 
+    ],
 })
 export class ModuleProduktModule {}

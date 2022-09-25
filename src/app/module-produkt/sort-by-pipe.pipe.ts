@@ -14,16 +14,16 @@ export class SortByPipePipe implements PipeTransform {
   private cache: any;
   sortedData:Product[];
 
-  transform(value: any[], args: boolean): any {
+  transform(value: Product[], args: boolean): any {
     if(value !== this.cache){
       this.cache = this.newValue(value, args)
     }
     return this.cache
   }
-  newValue(productList: any[], args: boolean ):any{
-   let value = args ;
+  newValue(productList: Product[], args: boolean ):any{
+   
    this.productList=productList;
-    if(value === false){
+    if(args === false){
     function compare( a:Product, b:Product ) {
      
       if ( a.name < b.name ){
@@ -39,8 +39,7 @@ export class SortByPipePipe implements PipeTransform {
     console.log(this.sortedData);
   }else {
     function compare( a:Product, b:Product ) {
-
-     
+    
       if ( a.name > b.name ){
         return -1;
       }

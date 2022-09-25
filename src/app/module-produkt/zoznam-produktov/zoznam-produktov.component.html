@@ -5,7 +5,15 @@
 <div class="searchingWraper">
     <app-filter [whereIsSearching]="productList" [onStock]="onStockCheckBox" (outputEvent)="onFilterDone($event)"></app-filter>
     <app-filter-option [onStockCheckBox]="false" (checkBoXInput)="inputCheckBox($event)"></app-filter-option>
-    <input type="checkbox" (click)="isClicked()">Sort by
+        
+    <input type="checkbox" (click)="isClicked()" checked>
+    <span *ngIf='sortByClicked'>
+       Sorted A-Z
+    </span>
+    <span *ngIf='!sortByClicked'>
+        Sorted Z-A
+     </span>
+    
 </div>
 
 <div class="lastRerview">
@@ -15,9 +23,9 @@
     </div>
 <div class="productsWrapper"> 
     <div class="productList">  
-      <app-product [data]="filteredProducts" (reviewAdd)="lastReviewDisplayed($event, filteredProducts.name)" *ngFor="let filteredProducts of filteredData "></app-product>
+      <app-product [data]="filteredProducts" (reviewAdd)="lastReviewDisplayed($event, filteredProducts.name)" *ngFor="let filteredProducts of filteredData"></app-product>
     </div>
-    <div>{{productList | sortByPipe: sortByClicked }}</div>
+    <div>{{filteredData | sortByPipe: sortByClicked }}</div>
     </div>
 
     
