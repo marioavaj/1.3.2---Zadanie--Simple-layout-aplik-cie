@@ -8,6 +8,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ProductDetailComponent} from '../module-produkt/product-detail/product-detail.component';
 import {RouterModule} from '@angular/router'
 import { ProductRoutingModule } from './produkt-routing.module';
+import { SortByPipePipe } from './sort-by-pipe.pipe';
 
 @NgModule({
     declarations: [
@@ -15,7 +16,8 @@ import { ProductRoutingModule } from './produkt-routing.module';
         ZoznamProduktovComponent,
         FilterComponent,
         FilterOptionComponent,
-        ProductDetailComponent
+        ProductDetailComponent,
+        SortByPipePipe
     ],
     imports: [
         CommonModule, FormsModule, ReactiveFormsModule,ProductRoutingModule

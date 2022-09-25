@@ -6,11 +6,11 @@ $transformScale: 1.2;
 $TextColor: rgb(0, 74, 194);
 
 //productPages
-$borderColor: rgb(46, 93, 181) ;
+$borderColor: rgb(15, 230, 230) ;
 $borderStyle: 1px solid;
 $borderStyleComplet: $borderColor + $borderStyle;
 
 //productPages (zmeni farbu kategorie produktu)
 @function changeProductColor($color){
-    @return adjust-hue($color, 80deg) ;
+    @return adjust-hue($color, 100deg) ;
 }
