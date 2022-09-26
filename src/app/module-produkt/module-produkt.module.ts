@@ -9,6 +9,8 @@ import {ProductDetailComponent} from '../module-produkt/product-detail/product-d
 import {RouterModule} from '@angular/router'
 import { ProductRoutingModule } from './produkt-routing.module';
 import { SortByPipePipe } from './sort-by-pipe.pipe';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 @NgModule({
     declarations: [
@@ -20,7 +22,7 @@ import { SortByPipePipe } from './sort-by-pipe.pipe';
         SortByPipePipe
     ],
     imports: [
-        CommonModule, FormsModule, ReactiveFormsModule,ProductRoutingModule
+        CommonModule, FormsModule, ReactiveFormsModule,ProductRoutingModule, MatCheckboxModule
     ],
 
     exports: [

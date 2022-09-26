@@ -5,14 +5,15 @@
 <div class="searchingWraper">
     <app-filter [whereIsSearching]="productList" [onStock]="onStockCheckBox" (outputEvent)="onFilterDone($event)"></app-filter>
     <app-filter-option [onStockCheckBox]="false" (checkBoXInput)="inputCheckBox($event)"></app-filter-option>
-        
-    <input type="checkbox" (click)="isClicked()" checked>
-    <span *ngIf='sortByClicked'>
-       Sorted A-Z
-    </span>
-    <span *ngIf='!sortByClicked'>
-        Sorted Z-A
-     </span>
+
+    <mat-checkbox (click)="isClicked()" style="margin: 5px 0 auto .2em; font-family: Verdana, Geneva, Tahoma, sans-serif">
+        <span *ngIf='sortByClicked'>
+            Sorted A-Z
+         </span>
+         <span *ngIf='!sortByClicked'>
+             Sorted Z-A
+          </span>
+    </mat-checkbox>
     
 </div>
 

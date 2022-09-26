@@ -36,10 +36,13 @@
   background-color: white;
 }
 
+::ng-deep {
+  .mat-checkbox-inner-container {
+      border: 1px solid black;
+      background-color: rgb(238, 238, 238); 
+      height: 25px !important;
+      width: 25px !important;
+     
 
-
-@media only screen and (max-width: 740px){
-  .space{
-    height: 10vh;
+    }
   }
-}
