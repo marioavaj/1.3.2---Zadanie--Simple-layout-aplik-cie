@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/Product';
-import { ProductDetails } from '../../models/Product-details';
-import { SortByPipePipe } from '../sort-by-pipe.pipe';
+import { ProductServiceService } from "../../Services/product-service.service";
 
 
 @Component({
@@ -10,27 +9,26 @@ import { SortByPipePipe } from '../sort-by-pipe.pipe';
   styleUrls: ['./zoznam-produktov.component.scss'],
 })
 export class ZoznamProduktovComponent implements OnInit {
-  productList: Product[];
-  date;
-  sortByClicked: boolean;
- 
   
+  productList: Product[];
+  sortByClicked: boolean;
   lastReview: string;
   filteredData: Product[];
   onStockCheckBox:boolean;
  
-  constructor() {}
-
-  ngOnInit(): void {
-   this.productList = ProductDetails.productDetails;
-   this.filteredData = this.productList;
-   this.sortByClicked = false;
-   
+  constructor(private productData: ProductServiceService ) {
+    
   }
 
+  ngOnInit(): void {
+    this.productList = this.productData.getProductList();
+   this.filteredData = this.productList;
+   this.sortByClicked = false;
+      }
+
   lastReviewDisplayed(review: any, name:string): void {
-     this.date = new Date().toLocaleString();
-    this.lastReview = this.date+ ' na produkt ' + name+ ': ' + review;
+     let date = new Date().toLocaleString();
+    this.lastReview = date+ ' na produkt ' + name+ ': ' + review;
   }
 
   onFilterDone(item: Product[]) {
@@ -42,8 +40,6 @@ this.onStockCheckBox = onStock;
 
   isClicked(){
 this.sortByClicked = !this.sortByClicked;
-    
-console.log(this.sortByClicked);
   }
 }
 

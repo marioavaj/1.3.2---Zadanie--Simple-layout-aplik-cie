@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../models/Product';
-import {ProductDetails} from '../../models/Product-details';
+import { ProductServiceService } from "../../Services/product-service.service";
+
 
 @Component({
   selector: 'app-product-detail',
@@ -12,7 +13,7 @@ export class ProductDetailComponent implements OnInit {
   product: Product | undefined;
   
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private productData: ProductServiceService) {
     
    }
 
@@ -22,7 +23,7 @@ export class ProductDetailComponent implements OnInit {
   
   const productIdFromRoute = Number(routeParams.get('productId'));
  
-  this.product = ProductDetails.productDetails.find((p) => p.id === productIdFromRoute);
+  this.product = this.productData.getProductList().find((p) => p.id === productIdFromRoute);
   
   }
 

@@ -1,17 +1,22 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {ProductDetails} from '../../models/Product-details';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Product} from '../../models/Product';
+import { ProductServiceService } from "../../Services/product-service.service";
 
 
 @Component({selector: 'app-statistika', templateUrl: './statistika.component.html',
  styleUrls: ['./statistika.component.scss']})
 
 export class StatistikaComponent implements AfterViewInit,
-OnInit {
-    dataToTable : Product[] = ProductDetails.productDetails;
+OnInit 
+{
+
+    constructor(private productData: ProductServiceService ) {
+    
+    }
+    dataToTable : Product[] = this.productData.getProductList();
     emptyStockItem : Product[];
     displayedColumns : string[] = [
         'name',
@@ -35,7 +40,7 @@ OnInit {
     @ViewChild(MatSort)sort : MatSort;
 
 
-    constructor() {}
+    
     ngOnInit(): void {
         this.dataSource = new MatTableDataSource(this.dataToTable);
         this.emptyStockItem = this.dataToTable.filter((item) => {
@@ -90,5 +95,9 @@ OnInit {
             this.dataToTableUnderThousand = [];
             this.checked = true;
           }            
+             }
+
+             bestsellers(){
+                this.dataSource.data =  this.productData.getBestseller();
              }
   }
