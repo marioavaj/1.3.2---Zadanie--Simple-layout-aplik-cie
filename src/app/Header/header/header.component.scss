@@ -5,9 +5,16 @@ img {
   
 }
 
+.basket{
+  font-size: 2em;
+  top:4px;
+
+  
+ }
+
 #menuWrapper {
-padding-top: 2em;
-margin: 0.5em;
+
+margin-right: 3em;
 border: 2px;
 display: flex;
 box-sizing: border-box;
@@ -17,6 +24,8 @@ box-sizing: border-box;
 
 #menuWrapper a {
    margin-right: 1em;
+   margin-top: auto;
+   margin-bottom: auto;
    text-decoration: none;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   color: rgb(69, 69, 69);
