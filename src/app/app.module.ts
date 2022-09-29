@@ -15,6 +15,8 @@ import {ModuleProduktModule} from './module-produkt/module-produkt.module';
 import { RouterModule } from '@angular/router';
 import { ModuleStatistikaModule } from './module-statistika/module-statistika.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ShoppingCartBadgeComponent } from './module-produkt/shopping-cart-badge/shopping-cart-badge.component';
+
 
 @NgModule({
     declarations: [
@@ -25,10 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         AboutMeComponent,
         SearchComponent,
         HighlightDirective,
-        ZivotopisComponent,
-        
-        
-
+        ZivotopisComponent,  
+        ShoppingCartBadgeComponent
 
     ],
     imports: [

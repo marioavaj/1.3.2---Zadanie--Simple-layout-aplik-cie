@@ -10,7 +10,9 @@ import {RouterModule} from '@angular/router'
 import { ProductRoutingModule } from './produkt-routing.module';
 import { SortByPipePipe } from './sort-by-pipe.pipe';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
+import { CountdownComponent } from '../countdown/countdown.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
     declarations: [
@@ -19,10 +21,12 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
         FilterComponent,
         FilterOptionComponent,
         ProductDetailComponent,
-        SortByPipePipe
+        SortByPipePipe,
+        CountdownComponent,
+        
     ],
     imports: [
-        CommonModule, FormsModule, ReactiveFormsModule,ProductRoutingModule, MatCheckboxModule
+        CommonModule, FormsModule, ReactiveFormsModule,ProductRoutingModule, MatCheckboxModule, MatBadgeModule,MatTooltipModule
     ],
 
     exports: [
@@ -31,7 +35,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
         FilterComponent,
         FilterOptionComponent,
         ProductDetailComponent,
-        RouterModule
+        RouterModule,
+        CountdownComponent,
+        MatBadgeModule
     ],
 
     providers: [

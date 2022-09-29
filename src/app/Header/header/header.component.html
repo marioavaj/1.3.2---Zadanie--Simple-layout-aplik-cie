@@ -13,6 +13,7 @@
     <a routerLink="prihlaska">Prihláška</a>
     <a routerLink="zoznam-produktov">Produkty</a>
     <a routerLink="statistika">Štatistiky</a>
+    <app-shopping-cart-badge></app-shopping-cart-badge>
   </menu>
 
   <mat-menu #appMenu = "matMenu" class="hamburgerMenuWrapper"> 
@@ -21,7 +22,7 @@
     <button mat-menu-item routerLink="prihlaska">Prihláška</button>
     <button mat-menu-item routerLink="zoznam-produktov">Produkty</button>
     <button mat-menu-item routerLink="statistika">Štatistiky</button>
-  </mat-menu>
+    </mat-menu>
   <button mat-button [matMenuTriggerFor]="appMenu" class="hamburgerMenu"><i class="fa-solid fa-bars"></i></button>
 
 </div>

@@ -22,8 +22,7 @@
       <div class="price">
       <span class="title" *ngIf="data.price">Price:</span>
         <div class="priceStockValue" *ngIf="data.price !=undefined">{{ data.price +"€"}}</div>
-      </div>
-      
+      </div>      
       <div class="stock">
     <span class="title stock">Stock:</span>
      <ng-container>
@@ -31,8 +30,8 @@
         {{ data.stockCount }}       </div>
       <div  class="alertColor" *ngIf="data.stockCount === 0">Nedostupný</div>
     </ng-container>
-  </div>
-  
+      </div>
+      
 </div>
 
     <span class="descriptionName" *ngIf="data.description">Description:</span>
@@ -40,6 +39,7 @@
     <div class="description">
       {{ data.description }}
     </div>
+    <button class="addToCart" (click)="addToCart()">Add to cart</button>
     <span class="vendorName">Vendors:</span>
     <ng-container class="vendorsFlex" vendor *ngFor="let vendor of data.vendors">
       <div class="vendor" *ngIf="vendor.stockCount > 0">

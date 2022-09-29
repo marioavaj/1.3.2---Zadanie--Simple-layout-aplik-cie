@@ -2,6 +2,8 @@
 <div class="space">
 
 </div>
+<app-countdown></app-countdown>
+
 <div class="searchingWraper">
     <app-filter [whereIsSearching]="productList" [onStock]="onStockCheckBox" (outputEvent)="onFilterDone($event)"></app-filter>
     <app-filter-option [onStockCheckBox]="false" (checkBoXInput)="inputCheckBox($event)"></app-filter-option>

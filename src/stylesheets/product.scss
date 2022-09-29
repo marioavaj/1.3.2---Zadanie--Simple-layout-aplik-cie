@@ -216,6 +216,15 @@
       border-radius: 5px 5px 5px 5px;
       font-size: 0.8em;
     }
+
+    .addToCart{
+      background-color: rgb(0, 255, 64);
+      border: none;
+      float: right;
+      margin-right: 1em;
+      border-radius: 5px;
+      height: 30px;
+    }
   
   @media only screen and (max-width: 425px) {
     .price {
