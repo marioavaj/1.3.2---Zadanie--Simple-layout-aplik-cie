@@ -16,7 +16,7 @@ import { RouterModule } from '@angular/router';
 import { ModuleStatistikaModule } from './module-statistika/module-statistika.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShoppingCartBadgeComponent } from './module-produkt/shopping-cart-badge/shopping-cart-badge.component';
-
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
     declarations: [
@@ -40,7 +40,8 @@ import { ShoppingCartBadgeComponent } from './module-produkt/shopping-cart-badge
         ModuleProduktModule,
         ModuleStatistikaModule,
         MatMenuModule,
-        BrowserAnimationsModule      
+        BrowserAnimationsModule,
+        MatButtonModule    
     ],
     providers: [],
     bootstrap: [AppComponent]

@@ -1,0 +1,61 @@
+.space{
+    height: 100px;
+}
+
+
+.itemInCart{
+    display: grid;
+    grid-template-columns: [first] 350px [line2] 80px [line3] 80px [line4] 20px [end];
+    max-width: 550px;
+    border-bottom: 1px solid gray;
+    padding-left: 4px;
+
+    div{
+        padding-top: 5px;
+        padding-bottom: 5px;        
+    }
+
+    button{
+        width: 20px;
+        height: 20px;
+        border-radius: 1000px;
+        border: none;
+        background-color: crimson;
+        color: white;
+        box-shadow: 1px 4px 13px -3px rgba(0,0,0,1);
+        padding-bottom: 5px;
+        margin-top: auto;
+        margin-bottom: auto;
+
+    }
+
+}  
+
+.cartWrapper{
+    box-shadow: 1px 4px 13px -3px rgba(0,0,0,1);
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+
+.itemInCartHeader{
+    display: grid;
+    grid-template-columns: [first] 350px [line2] 80px [line3] 80px [line4] 20px [end];
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(167, 3, 3);
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 4px;
+    box-shadow: 1px 4px 13px -3px rgba(0,0,0,1);
+}
+
+.total{
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+}

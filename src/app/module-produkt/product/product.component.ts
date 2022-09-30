@@ -63,11 +63,7 @@ DoCheck {
     }
 
     addToCart() {
-        this.clickedItem = this.data;
-        console.log(this.clickedItem);
-        this.createItem.putData(this.data); 
-
-        
+        this.createItem.putData(this.data);       
     }
 }
 

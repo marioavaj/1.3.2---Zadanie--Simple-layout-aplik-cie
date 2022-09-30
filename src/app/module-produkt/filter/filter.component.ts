@@ -75,7 +75,6 @@ OnDestroy {
 
     filter(whatIsSearched : string): void {
         let result: Product[] = [];
-        console.log("na zaciatku" + result)
         if ((this.data && whatIsSearched ?. length >= 2 || (this.data && this.onStock === true))) {
             this.data.forEach((item) => {
                 if (item.name.toLocaleLowerCase().includes(whatIsSearched.toLocaleLowerCase()) && this.onStock === false && item.stockCount >= 0) {

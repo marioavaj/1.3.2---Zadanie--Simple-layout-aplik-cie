@@ -5,21 +5,16 @@ img {
   
 }
 
-.basket{
-  font-size: 2em;
-  top:4px;
+.cart{
+margin: auto 2em auto 0;
+font-size: 2em;
+}
 
-  
- }
+
 
 #menuWrapper {
-
-margin-right: 3em;
-border: 2px;
 display: flex;
-box-sizing: border-box;
-
-    
+box-sizing: border-box;    
 }
 
 #menuWrapper a {
@@ -30,9 +25,7 @@ box-sizing: border-box;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   color: rgb(69, 69, 69);
   text-align: center;
-  border-bottom: 2px solid rgb(255, 255, 255);
-
-  
+  border-bottom: 2px solid rgb(255, 255, 255);  
 }
 
 #menuWrapper > a:hover {
@@ -61,8 +54,10 @@ box-sizing: border-box;
 }
 
 .hamburgerMenu {
-  display: none;
+  display: none !important;
 }
+
+
 
 @media only screen and (max-width: 640px) {
   .headerWrapper{

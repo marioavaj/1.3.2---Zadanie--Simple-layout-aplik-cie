@@ -36,7 +36,7 @@ export class SortByPipePipe implements PipeTransform {
      }
     
     this.sortedData = this.productList.sort( compare);
-    console.log(this.sortedData);
+    
   }else {
     function compare( a:Product, b:Product ) {
     
@@ -50,7 +50,7 @@ export class SortByPipePipe implements PipeTransform {
      }
     
     this.sortedData = this.productList.sort( compare);
-    console.log(this.sortedData);
+    
 }  
 }
     

@@ -13,6 +13,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CountdownComponent } from '../countdown/countdown.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { ShoppingCartListComponent } from './shopping-cart-list/shopping-cart-list.component';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
     declarations: [
@@ -23,10 +26,13 @@ import {MatTooltipModule} from '@angular/material/tooltip';
         ProductDetailComponent,
         SortByPipePipe,
         CountdownComponent,
+        ShoppingCartListComponent,
         
     ],
     imports: [
-        CommonModule, FormsModule, ReactiveFormsModule,ProductRoutingModule, MatCheckboxModule, MatBadgeModule,MatTooltipModule
+        CommonModule, FormsModule, 
+        ReactiveFormsModule,ProductRoutingModule, 
+        MatCheckboxModule, MatBadgeModule,MatTooltipModule,MatButtonModule
     ],
 
     exports: [

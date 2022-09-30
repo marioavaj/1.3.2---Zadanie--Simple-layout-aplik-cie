@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
-
 import { ShopingCartServiceService } from 'src/app/Services/shoping-cart-service.service';
 
 @Component({
@@ -19,10 +17,7 @@ export class ShoppingCartBadgeComponent implements OnInit {
   ngOnInit(): void {
     this.data.dataStream.subscribe((newValue)=>{
       this.shopingCartItems = newValue;
-      console.log("ikona kosiku \n " + this.shopingCartItems);
-      this.getNumberOfItems(); 
-        
-    console.log(this.counter);
+      this.getNumberOfItems();    
     });    
     }
 
@@ -31,9 +26,7 @@ export class ShoppingCartBadgeComponent implements OnInit {
     for (let i = 0; i < this.shopingCartItems.length; i++) {
         this.counter++;
         this.numberOfItems = this.counter; 
-    }
-        console.log("pocet poloziek v kosiku  " + this.counter);   
-}
-  
+    }         
+}  
 }
 

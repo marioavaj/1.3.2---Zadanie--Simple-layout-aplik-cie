@@ -28,6 +28,7 @@ const routes: Routes = [
   .then(mod=>mod.ModuleProduktModule)
   
 },
+
 { path: 'profil',
   title: 'Profil',
    component: ZivotopisComponent },
@@ -36,8 +37,7 @@ const routes: Routes = [
    title: 'Štatistiky',
    loadChildren:()=>import ('./module-statistika/module-statistika.module')
    .then(mod=>mod.ModuleStatistikaModule) }
-  
-];
+  ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
