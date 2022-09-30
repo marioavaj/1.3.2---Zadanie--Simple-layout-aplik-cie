@@ -7,15 +7,21 @@
     <app-search></app-search>
     </div>-->
 
+    
   <menu id="menuWrapper">
+    
     <a routerLink="profil">Profil</a>
     <a routerLink="referencie"  >Referencie</a>
     <a routerLink="prihlaska">Prihláška</a>
     <a routerLink="zoznam-produktov">Produkty</a>
     <a routerLink="statistika">Štatistiky</a>
-    <i class="fa-solid fa-basket-shopping basket"></i>
-    <app-shopping-cart-badge></app-shopping-cart-badge>
-     </menu>
+  </menu>
+     
+  <div class="cart">
+      <a routerLink="shopping-cart"><i class="fa-solid fa-basket-shopping"></i></a>
+      <app-shopping-cart-badge></app-shopping-cart-badge>
+    </div> 
+      
 
   <mat-menu #appMenu = "matMenu" class="hamburgerMenuWrapper"> 
     <button mat-menu-item routerLink="profil">Profil</button>

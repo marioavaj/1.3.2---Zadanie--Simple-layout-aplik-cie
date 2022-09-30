@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">  
+
+<div class="space">
+
+</div>
+
+<div class="itemInCartHeader" >
+<div>Name</div>
+        <div>Price</div>
+        <div>Sum</div>
+        
+    </div>
+
+
+    
+    <div class="cartWrapper">
+    <div *ngFor="let item of shopingCartItems;">
+
+        <div class="itemInCart">
+        <div>{{item.name}}</div>
+        <div>{{item.price }} €</div>
+        <div>{{item.price }} €</div>
+        <button>x</button>
+        </div>    
+        </div>
+    </div>
+
+        <div class="total">Total Price: 4545 E</div>
+
+    
+
+
+
