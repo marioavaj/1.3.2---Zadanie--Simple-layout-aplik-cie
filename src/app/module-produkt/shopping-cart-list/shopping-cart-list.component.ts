@@ -10,15 +10,16 @@ import { ShopingCartServiceService } from 'src/app/Services/shoping-cart-service
 export class ShoppingCartListComponent implements OnInit, DoCheck {
 
   deleteItemFromCart:any;
-  shopingCartItems: any = [];
-  total?;
+  shopingCartItems;
+  total?:number;
   constructor(private data:ShopingCartServiceService) { }
 
   ngOnInit(): void {
+      
     this.data.dataStream.subscribe((newValue)=>{
       this.shopingCartItems =newValue;           
     });  
-    this.total = 0;
+    this.total = 0;    
     this.totalSum();
 }
 

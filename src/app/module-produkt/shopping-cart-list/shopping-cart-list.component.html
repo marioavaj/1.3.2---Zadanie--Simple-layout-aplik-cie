@@ -1,18 +1,12 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">  
-
 <div class="space">
-
 </div>
 
+<div *ngIf="shopingCartItems.length>0">
 <div class="itemInCartHeader" >
 <div>Name</div>
         <div>Price</div>
-        <div>Sum</div>
-        
+        <div>Sum</div>        
     </div>
-
-
-    
     <div class="cartWrapper">
     <div *ngFor="let item of shopingCartItems;">
 
@@ -24,10 +18,9 @@
         </div>    
         </div>
     </div>
-
         <div class="total">Total Price: {{total}}</div>
+    </div>
 
-    
 
-
+    <div class="emptyCart" *ngIf="shopingCartItems.length==0">Shopping cart is empty</div>
 
