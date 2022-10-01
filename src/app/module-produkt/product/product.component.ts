@@ -8,6 +8,7 @@ import {
     Output,
     ViewChild
 } from '@angular/core';
+import { ProductServiceService } from 'src/app/Services/product-service.service';
 import { ShopingCartServiceService } from 'src/app/Services/shoping-cart-service.service';
 
 
@@ -31,7 +32,7 @@ DoCheck {
 
     public date = new Date().toLocaleString(); // lokalny cas sformatovany
 
-    constructor(private createItem: ShopingCartServiceService) {
+    constructor(private createItem: ShopingCartServiceService, private newStockCount: ProductServiceService) {
               
     }
 
@@ -63,7 +64,11 @@ DoCheck {
     }
 
     addToCart() {
-        this.createItem.putData(this.data);       
+        this.createItem.putData(this.data); 
+        this.data.stockCount--; 
+        console.log(this.data.stockCount);
+        this.newStockCount.minusStockCount(this.data.id, this.data.stockCount);
+
     }
 }
 

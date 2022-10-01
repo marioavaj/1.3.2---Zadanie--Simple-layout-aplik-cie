@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import {Product} from '../models/Product';
 
 @Injectable({providedIn: 'root'})
@@ -7,11 +8,19 @@ export class ProductServiceService {
     productData : Product[];
     productById : Product[];
     sortedData : Product[];
+    private toLocalStorage:any
+    newStockCount = new BehaviorSubject<any>(0);
 
     constructor() {}
 
 
-    getProductList(): Product[]{
+    getProductList(): any{
+        let fromLS=JSON.parse(localStorage.getItem("productData")!)
+       this.productData = fromLS;
+console.log(this.productData);
+
+if (this.productData == null ){
+    
         this.productData = [
             {
                 id: 1,
@@ -219,9 +228,10 @@ export class ProductServiceService {
                 ],
                 reviews: []
             },
-        ];
-        return this.productData;
-    }
+        ]; console.log(this.productData );
+        
+         }return this.productData;
+}
 
     getProductById(id : number): Product[]{
         this.productData.forEach(element => {
@@ -269,6 +279,37 @@ getproductBy():Product[]{
 
         this.sortedData = this.productData.sort(compare);
 
-        return this.sortedData
+        return this.sortedData;
 
-}}
+}
+
+minusStockCount(idProduct: number, newStockCount:number){
+   
+      
+        const indexOfObject = this.productData.findIndex(object => {
+           return object.id === idProduct;        
+            } 
+        );      
+        this.productData[indexOfObject].stockCount = newStockCount;
+        this.toLocalStorage = JSON.stringify(this.productData);
+        localStorage.setItem("productData", this.toLocalStorage)
+        this.newStockCount.next(this.productData); 
+}
+
+plusStockCount(id, newStockCount){
+    const indexOfObject = this.productData.findIndex(object => {
+        return object.id === id;        
+         } 
+     );      
+this.productData[indexOfObject].stockCount = newStockCount;
+console.log("po pripocitani v servise" + this.productData[id].stockCount)
+this.toLocalStorage = JSON.stringify(this.productData);
+ localStorage.setItem("productData", this.toLocalStorage)
+ this.newStockCount.next(this.productData); 
+
+}
+
+
+
+}
+

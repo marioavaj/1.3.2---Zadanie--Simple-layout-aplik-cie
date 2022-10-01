@@ -1,4 +1,5 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
+import { ProductServiceService } from 'src/app/Services/product-service.service';
 import { ShopingCartServiceService } from 'src/app/Services/shoping-cart-service.service';
 
 
@@ -12,7 +13,7 @@ export class ShoppingCartListComponent implements OnInit, DoCheck {
   deleteItemFromCart:any;
   shopingCartItems;
   total?:number;
-  constructor(private data:ShopingCartServiceService) { }
+  constructor(private data:ShopingCartServiceService, private newStockCount: ProductServiceService) { }
 
   ngOnInit(): void {
       
@@ -27,9 +28,13 @@ ngDoCheck(): void {
 
 }
 
-deleteItem(id:number){
+deleteItem(id:number, stockCount:number){
+  stockCount++;
+  console.log("po pripocitani" + stockCount)
 this.data.deleteItem(id);
   this.totalSum();
+  this.newStockCount.plusStockCount(id, stockCount);
+  
 }
 
 totalSum():void{

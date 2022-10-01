@@ -22,6 +22,7 @@ export class ZoznamProduktovComponent implements OnInit {
 
   ngOnInit(): void {
     this.productList = this.productData.getProductList();
+    console.log(this.productList);
    this.filteredData = this.productList;
    this.sortByClicked = false;
       }

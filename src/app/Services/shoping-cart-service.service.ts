@@ -9,6 +9,7 @@ export class ShopingCartServiceService {
 
     shopingCart:any[] = [];
     dataStream = new BehaviorSubject<any>(0);
+    
     numberOfItems : number;
     constructor() {}
 
@@ -19,13 +20,13 @@ export class ShopingCartServiceService {
             }
 
     deleteItem(item: number) {
-      console.log(this.shopingCart)
+      
       const indexOfObject = this.shopingCart.findIndex(object => {
          return object.id === item;        
           } 
       );      
       this.shopingCart.splice(indexOfObject, 1);
-      this.dataStream.next(this.shopingCart);
-      console.log(this.shopingCart);
-    }   
+      this.dataStream.next(this.shopingCart);      
+    }     
+    
 }
