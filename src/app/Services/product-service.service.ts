@@ -296,7 +296,7 @@ minusStockCount(idProduct: number, newStockCount:number){
         this.newStockCount.next(this.productData); 
 }
 
-plusStockCount(id, newStockCount){
+plusStockCount(id:number, newStockCount:number){
     const indexOfObject = this.productData.findIndex(object => {
         return object.id === id;        
          } 

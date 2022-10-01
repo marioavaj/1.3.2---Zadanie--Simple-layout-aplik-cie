@@ -39,7 +39,7 @@
     <div class="description">
       {{ data.description }}
     </div>
-    <button class="addToCart" (click)="addToCart()">Add to cart</button>
+    <button *ngIf="data.stockCount !== 0" class="addToCart" (click)="addToCart()">Add to cart</button>
     <span class="vendorName">Vendors:</span>
     <ng-container class="vendorsFlex" vendor *ngFor="let vendor of data.vendors">
       <div class="vendor" *ngIf="vendor.stockCount > 0">
