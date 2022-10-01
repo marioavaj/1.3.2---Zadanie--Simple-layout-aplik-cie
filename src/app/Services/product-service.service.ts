@@ -302,7 +302,6 @@ plusStockCount(id:number, newStockCount:number){
          } 
      );      
 this.productData[indexOfObject].stockCount = newStockCount;
-console.log("po pripocitani v servise" + this.productData[id].stockCount)
 this.toLocalStorage = JSON.stringify(this.productData);
  localStorage.setItem("productData", this.toLocalStorage)
  this.newStockCount.next(this.productData); 
