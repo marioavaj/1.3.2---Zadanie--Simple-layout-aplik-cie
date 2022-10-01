@@ -20,12 +20,12 @@
         <div>{{item.name}}</div>
         <div>{{item.price }} €</div>
         <div>{{item.price }} €</div>
-        <button>x</button>
+        <button (click)="deleteItem(item.id)" >x</button>
         </div>    
         </div>
     </div>
 
-        <div class="total">Total Price: 4545 E</div>
+        <div class="total">Total Price: {{total}}</div>
 
     
 

@@ -17,6 +17,7 @@ import { ModuleStatistikaModule } from './module-statistika/module-statistika.mo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShoppingCartBadgeComponent } from './module-produkt/shopping-cart-badge/shopping-cart-badge.component';
 import {MatButtonModule} from '@angular/material/button';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,8 @@ import {MatButtonModule} from '@angular/material/button';
         ModuleStatistikaModule,
         MatMenuModule,
         BrowserAnimationsModule,
-        MatButtonModule    
+        MatButtonModule,
+        MatTooltipModule   
     ],
     providers: [],
     bootstrap: [AppComponent]

@@ -5,7 +5,9 @@ import {Product} from '../models/Product';
 @Injectable({providedIn: 'root'})
 export class ShopingCartServiceService {
 
-    shopingCart:Product[] = [];
+   
+
+    shopingCart:any[] = [];
     dataStream = new BehaviorSubject<any>(0);
     numberOfItems : number;
     constructor() {}
@@ -16,6 +18,14 @@ export class ShopingCartServiceService {
       this.dataStream.next(this.shopingCart);
             }
 
-
-    
+    deleteItem(item: number) {
+      console.log(this.shopingCart)
+      const indexOfObject = this.shopingCart.findIndex(object => {
+         return object.id === item;        
+          } 
+      );      
+      this.shopingCart.splice(indexOfObject, 1);
+      this.dataStream.next(this.shopingCart);
+      console.log(this.shopingCart);
+    }   
 }

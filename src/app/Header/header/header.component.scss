@@ -8,7 +8,66 @@ img {
 .cart{
 margin: auto 2em auto 0;
 font-size: 2em;
+position: relative;
+  display: inline-block;
+
+
 }
+
+
+.cart .tooltiptext {
+  display: flex;
+  flex-direction: column;
+  visibility: hidden;
+  width: 200px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(220, 220, 220);
+  text-align: center;
+  border: 1px solid rgb(231, 231, 231);
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: auto;
+  left: 40px;
+  margin-left: -190px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+
+
+.cart:hover .tooltiptext {
+  
+  visibility: visible;
+  opacity: 1;
+}
+
+
+
+.itemNameInTooltip{
+  font-size: small !important;
+  color: black;
+  
+  float: left;
+  padding-left: 3px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -36,8 +95,7 @@ box-sizing: border-box;
 .search {
   display: flex;
   justify-content: center;
-  margin: auto;
-  
+  margin: auto;  
 }
 
 .headerWrapper {
