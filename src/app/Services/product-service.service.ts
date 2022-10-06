@@ -38,16 +38,24 @@ resolve(this.productData);
          }return this.productData;*/
 }
 
-    getProductById(id : number): Product[]{
+    getProductById(id : number): Promise<any[]>{
        
        
-        this.productData.forEach(element => {
-            if (id === element.id) {
-                this.productById.push(element);
-            }
-        });
+       
 
-        return this.productById;
+        return new Promise<Product[]>((resolve, rejecet) => {
+
+            setTimeout(()=>{
+                this.productData = ProductItems.productData; 
+                this.productData.forEach(element => {
+                    if (id === element.id) {
+                        this.productById.push(element);
+                    }
+                });
+    resolve(this.productData);
+    
+            }, 500)
+           });
     }
 
 

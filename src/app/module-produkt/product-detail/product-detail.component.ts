@@ -23,11 +23,11 @@ export class ProductDetailComponent implements OnInit {
   
   const productIdFromRoute = Number(routeParams.get('productId'));
  
-  this.product = this.productData.getProductList().then((products:any[])=>{
-    this.product = products;
+  this.productData.getProductList().then((products:any[])=>{
+    this.product = products.find((p) => p.id === productIdFromRoute);
    });
   
-   this.product.find((p) => p.id === productIdFromRoute);
+   
   
   }
 

@@ -40,7 +40,6 @@ OnInit {
 
     ngOnInit(): void {
         
-
         this.dataFromServer();
        
     
