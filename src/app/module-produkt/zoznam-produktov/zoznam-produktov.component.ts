@@ -10,19 +10,21 @@ import { ProductServiceService } from "../../Services/product-service.service";
 })
 export class ZoznamProduktovComponent implements OnInit {
   
-  productList: Product[];
+  productList: any[];
   sortByClicked: boolean;
   lastReview: string;
   filteredData: Product[];
   onStockCheckBox:boolean;
  
-  constructor(private productData: ProductServiceService ) {
+  constructor(private  ProductServiceService: ProductServiceService) {
     
   }
 
   ngOnInit(): void {
-    this.productList = this.productData.getProductList();
-    console.log(this.productList);
+     this.ProductServiceService.getProductList().then((products:any[])=>{
+      this.productList = products;
+     });
+   
    this.filteredData = this.productList;
    this.sortByClicked = false;
       }

@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShoppingCartBadgeComponent } from './module-produkt/shopping-cart-badge/shopping-cart-badge.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { FakeApiComponent } from './fake-api/fake-api.component';
 
 @NgModule({
     declarations: [
@@ -29,7 +30,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
         SearchComponent,
         HighlightDirective,
         ZivotopisComponent,  
-        ShoppingCartBadgeComponent
+        ShoppingCartBadgeComponent, FakeApiComponent
 
     ],
     imports: [

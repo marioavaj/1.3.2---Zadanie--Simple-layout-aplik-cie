@@ -30,8 +30,7 @@ ngDoCheck(): void {
 
 deleteItem(id:number, stockCount:number){
   stockCount++;
-  console.log("po pripocitani" + stockCount)
-this.data.deleteItem(id);
+  this.data.deleteItem(id);
   this.totalSum();
   this.newStockCount.plusStockCount(id, stockCount);
   

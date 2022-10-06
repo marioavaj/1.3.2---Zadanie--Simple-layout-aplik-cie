@@ -3,20 +3,18 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Product} from '../../models/Product';
-import { ProductServiceService } from "../../Services/product-service.service";
+import {ProductServiceService} from "../../Services/product-service.service";
 
 
-@Component({selector: 'app-statistika', templateUrl: './statistika.component.html',
- styleUrls: ['./statistika.component.scss']})
+@Component({selector: 'app-statistika', templateUrl: './statistika.component.html', styleUrls: ['./statistika.component.scss']})
 
 export class StatistikaComponent implements AfterViewInit,
-OnInit 
-{
+OnInit {
+    dataToTable : Product[];
 
-    constructor(private productData: ProductServiceService ) {
-    
-    }
-    dataToTable : Product[] = this.productData.getProductList();
+    constructor(private productData : ProductServiceService) {}
+
+
     emptyStockItem : Product[];
     displayedColumns : string[] = [
         'name',
@@ -40,32 +38,47 @@ OnInit
     @ViewChild(MatSort)sort : MatSort;
 
 
-    
     ngOnInit(): void {
-        this.dataSource = new MatTableDataSource(this.dataToTable);
-        this.emptyStockItem = this.dataToTable.filter((item) => {
-            return item.stockCount === 0;
+        
+
+        this.dataFromServer();
+       
+    
+    }
+
+    dataFromServer(){
+        this.productData.getProductList().then((products : any[]) => {
+            this.dataToTable = products;
+            this.dataSource = new MatTableDataSource(this.dataToTable);
+            this.emptyStockItem = this.dataToTable.filter((item) => {
+                return item.stockCount === 0;
+            });
+            this.dataSource1 = new MatTableDataSource(this.emptyStockItem);
+            this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+    
+            this.dataToTable.forEach((element) => {
+                this.lastMonthSoldSum += (element.lastMonthSold * element.price !);
+                this.soldSum += (element.sold * element.price !);
+                this.avgItemSum += Math.round(element.price !/ (this.dataToTable.length));
+    
+                if (element.sold > this.maxSoldItem) {
+                    this.maxSoldItem = element.sold;
+                    this.maxSoldItemName = element.name;
+                }
+            });
+
         });
-        this.dataSource1 = new MatTableDataSource(this.emptyStockItem);
 
-        this.dataToTable.forEach((element) => {
-            this.lastMonthSoldSum += (element.lastMonthSold * element.price !);
-            this.soldSum += (element.sold * element.price !);
-            this.avgItemSum += Math.round(element.price !/ (this.dataToTable.length));
 
-            if (element.sold > this.maxSoldItem) {
-                this.maxSoldItem = element.sold;
-                this.maxSoldItemName = element.name;
-            }
+        
 
-        });
 
 
     }
 
     ngAfterViewInit() {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        
     };
 
     clearTable() {

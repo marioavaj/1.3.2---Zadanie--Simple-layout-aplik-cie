@@ -5,6 +5,7 @@ import { PrihlaskaComponent } from './prihlaska/prihlaska.component';
 import { WelcomeComponent } from './WelcomePage/welcome/welcome.component';
 import { ProductDetailComponent } from './module-produkt/product-detail/product-detail.component';
 import { ZivotopisComponent } from './zivotopis/zivotopis.component';
+import { FakeApiComponent } from './fake-api/fake-api.component';
 
 
 const routes: Routes = [
@@ -36,7 +37,11 @@ const routes: Routes = [
    { path: 'statistika',
    title: 'Štatistiky',
    loadChildren:()=>import ('./module-statistika/module-statistika.module')
-   .then(mod=>mod.ModuleStatistikaModule) }
+   .then(mod=>mod.ModuleStatistikaModule) },
+   { path: 'fake-api',
+   title: 'Fake Api',
+    component: FakeApiComponent },
+
   ];
 
 @NgModule({

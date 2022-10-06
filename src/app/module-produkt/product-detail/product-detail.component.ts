@@ -10,7 +10,7 @@ import { ProductServiceService } from "../../Services/product-service.service";
   styleUrls: ['./product-detail.component.scss']
 })
 export class ProductDetailComponent implements OnInit {
-  product: Product | undefined;
+  product;
   
 
   constructor(private route: ActivatedRoute, private productData: ProductServiceService) {
@@ -23,7 +23,11 @@ export class ProductDetailComponent implements OnInit {
   
   const productIdFromRoute = Number(routeParams.get('productId'));
  
-  this.product = this.productData.getProductList().find((p) => p.id === productIdFromRoute);
+  this.product = this.productData.getProductList().then((products:any[])=>{
+    this.product = products;
+   });
+  
+   this.product.find((p) => p.id === productIdFromRoute);
   
   }
 
