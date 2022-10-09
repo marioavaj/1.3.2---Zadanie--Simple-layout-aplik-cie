@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FakeApiComponent } from './fake-api.component';
+import { ZamestnanciComponent } from './zamestnanci.component';
 
-describe('FakeApiComponent', () => {
-  let component: FakeApiComponent;
-  let fixture: ComponentFixture<FakeApiComponent>;
+describe('ZamestnanciComponent', () => {
+  let component: ZamestnanciComponent;
+  let fixture: ComponentFixture<ZamestnanciComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FakeApiComponent ]
+      declarations: [ ZamestnanciComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FakeApiComponent);
+    fixture = TestBed.createComponent(ZamestnanciComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

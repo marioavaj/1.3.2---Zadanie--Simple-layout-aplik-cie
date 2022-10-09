@@ -1,36 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from '../../models/Product';
-import { ProductServiceService } from "../../Services/product-service.service";
-
+import { ProductServiceService } from '../../Services/product-service.service';
 
 @Component({
-  selector: 'app-product-detail',
-  templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.scss']
+    selector: 'app-product-detail',
+    templateUrl: './product-detail.component.html',
+    styleUrls: ['./product-detail.component.scss'],
 })
 export class ProductDetailComponent implements OnInit {
-  product;
-  
+    product;
 
-  constructor(private route: ActivatedRoute, private productData: ProductServiceService) {
-    
-   }
+    constructor(
+        private route: ActivatedRoute,
+        private productData: ProductServiceService
+    ) {}
 
-  ngOnInit(): void {
+    ngOnInit(): void {
+        const routeParams = this.route.snapshot.paramMap;
 
-    const routeParams = this.route.snapshot.paramMap;
-  
-  const productIdFromRoute = Number(routeParams.get('productId'));
- 
-  this.productData.getProductList().then((products:any[])=>{
-    this.product = products.find((p) => p.id === productIdFromRoute);
-   });
-  
-   
-  
-  }
+        const productIdFromRoute = Number(routeParams.get('productId'));
 
-  
-
+        this.productData.getProductList().then((products: any[]) => {
+            this.product = products.find((p) => p.id === productIdFromRoute);
+        });
+    }
 }
