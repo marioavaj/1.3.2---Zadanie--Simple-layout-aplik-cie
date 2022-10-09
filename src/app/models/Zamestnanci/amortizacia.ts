@@ -1,8 +1,9 @@
+export abstract class Amortizacia {
+    stupenAmortizacie: number;
+    evidencneCislo: number;
+    nazov: string;
 
-export abstract class Amortizacia{
-stupenAmortizacie: Number;
+    vypocetAmortizacie() {}
 
-
- Amortizacia (){}
 
 }

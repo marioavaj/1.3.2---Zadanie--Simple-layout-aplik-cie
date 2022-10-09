@@ -1,8 +1,8 @@
 export interface KartaZamestnanca{
 
 meno: string;
-PrideleneNaradie?: string;
-PridelenyProjekt?: string;
+prideleneNaradie?: string;
+pridelenyProjekt?: string;
 prideleneAuto?:string
 
 }

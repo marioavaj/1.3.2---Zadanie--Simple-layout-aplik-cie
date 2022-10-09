@@ -2,18 +2,26 @@
 
 <div class="novyZamestnanec">
 <input  type="text" [ngModel] = "name" #nameInput>
-<button  (click)="insertName(nameInput.value)">Vloz</button>
+
+<button  (click)="insertName(nameInput.value)">Vloz noveho zamestnanca</button>
 </div>
 
 <p>Zoznam zamestnancov</p>
 <div class="wrapper" *ngFor="let zamestnanec of zoznamZamestnancov" >
 <div>Meno: {{zamestnanec.meno}}</div>
-<div>Prodelene naradie: {{zamestnanec.PrideleneNaradie}}</div>
+<div>Prodelene naradie: {{zamestnanec.prideleneNaradie}}</div>
 <div>Pridelene auto: {{zamestnanec.prideleneAuto}}</div>
-<div>Pracuje na: {{zamestnanec.PridelenyProjekt}}</div>
+<div>Pracuje na: {{zamestnanec.pridelenyProjekt}}</div>
+</div>
+<div class="space"></div>
+<div class="wrapper"   >
+<button (click)="zoznamPracovnychProstriedkov()">Vytlac zoznam pracovnych prostriedkov</button>
+<div *ngFor="let polozka of pracovneProstriedky">
+
+    <div>Evidencne cislo: {{polozka.evidencneCislo}}  Nazov: {{polozka.nazov}}</div>
+
 </div>
 
-
-
+</div>
 
 

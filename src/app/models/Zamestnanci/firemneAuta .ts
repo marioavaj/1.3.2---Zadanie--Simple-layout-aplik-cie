@@ -1,19 +1,16 @@
 import { Amortizacia } from "./amortizacia";
 
 export class firemneAuta  extends Amortizacia {
-    modelAuta: String;
 
-    zoznamAut = [
-        { nazovAuta: "fabia", stupenAmortizacie: null },
-        { nazovAuta: "felicia", stupenAmortizacie: null },
-        { nazovAuta: "octavia", stupenAmortizacie: null },
-        { nazovAuta: "scala", stupenAmortizacie: null },
-        { nazovAuta: "superb", stupenAmortizacie: null },
-        ];
+    override nazov: string;
 
-        override Amortizacia (){
+    constructor(modelAuta: string, evidencneCislo: number ){
+        super();
+        this.nazov = modelAuta;
+        this.evidencneCislo = evidencneCislo;
+    }
 
-
+          override vypocetAmortizacie(){
        };
-    
+
 }

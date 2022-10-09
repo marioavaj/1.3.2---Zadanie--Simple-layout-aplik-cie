@@ -2,14 +2,13 @@ import { Amortizacia } from "./amortizacia";
 
 
 export class Naradie extends Amortizacia {
-    nazovNaradia: String;
+    override nazov: string;
 
-    zoznamNaradia = [
-        { nazovNaradia: "Vrtacka", stupeAmortizacie: null },
-        { nazovNaradia: "zbijacka", stupeAmortizacie: null },
-        { nazovNaradia: "kladivo", stupeAmortizacie: null },
-        { nazovNaradia: "srobovacka", stupeAmortizacie: null },
-        ]
+    constructor(nazovNaradia: string, evidencneCislo: number){
+        super();
+    this.nazov = nazovNaradia;
+    this.evidencneCislo = evidencneCislo;
+    }
 
-        amortizacia(){};
+    override vypocetAmortizacie(){};
 }
