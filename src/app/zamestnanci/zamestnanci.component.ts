@@ -11,8 +11,18 @@ import { Zamestnanec } from '../models/Zamestnanci/zamestnanec';
     styleUrls: ['./zamestnanci.component.scss'],
 })
 export class ZamestnanciComponent implements OnInit {
+    clickButton = false;
     name: string;
-    pracovneProstriedky: Amortizacia[] = [];
+    pracovneProstriedky: Amortizacia[] = [
+        new Naradie('vrtacka', 121),
+        new Naradie('skrutkovac', 122),
+        new Naradie('kladivo', 123),
+        new Naradie('zbijacka', 124),
+        new firemneAuta('fabia', 223),
+        new firemneAuta('felicia', 222),
+        new firemneAuta('octavia', 221),
+        new firemneAuta('scala', 220),
+    ];
 
     zoznamZamestnancov: KartaZamestnanca[] = [
         new Zamestnanec('Duro', 'vrtacka', 'dialnica D1', 'fabia'),
@@ -21,25 +31,11 @@ export class ZamestnanciComponent implements OnInit {
         new Zamestnanec('Dano', 'vrtacka', 'dialnica D1', 'fabia'),
     ];
 
-    zoznamNaradia: Naradie[] = [
-        new Naradie('vrtacka', 121),
-        new Naradie('skrutkovac', 122),
-        new Naradie('kladivo', 123),
-        new Naradie('zbijacka', 124),
-    ];
-
     rozpracovaneProjekty: RozpracovaneProjetky[] = [
         new RozpracovaneProjetky('dialnica D1'),
         new RozpracovaneProjetky('rekonstrukcia skoly'),
         new RozpracovaneProjetky('chodnik'),
         new RozpracovaneProjetky('most'),
-    ];
-
-    firemneAuta: firemneAuta[] = [
-        new firemneAuta('fabia', 223),
-        new firemneAuta('felicia', 222),
-        new firemneAuta('octavia', 221),
-        new firemneAuta('scala', 220),
     ];
 
     constructor() {}
@@ -51,13 +47,7 @@ export class ZamestnanciComponent implements OnInit {
     }
 
     zoznamPracovnychProstriedkov(): Amortizacia[] {
-        this.zoznamNaradia.forEach(element => {
-            this.pracovneProstriedky.push(element);
-        });
-        this.firemneAuta.forEach(element => {
-       this.pracovneProstriedky.push(element);
-        });
-        console.log(this.pracovneProstriedky);
         return this.pracovneProstriedky;
     }
+
 }
