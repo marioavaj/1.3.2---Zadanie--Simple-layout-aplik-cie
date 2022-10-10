@@ -41,6 +41,7 @@ export class ZamestnanciComponent implements OnInit {
     constructor() {}
 
     ngOnInit(): void {}
+
     insertName(name: string) {
         const zamestnanec = new Zamestnanec(name);
         this.zoznamZamestnancov.push(zamestnanec);
@@ -49,5 +50,4 @@ export class ZamestnanciComponent implements OnInit {
     zoznamPracovnychProstriedkov(): Amortizacia[] {
         return this.pracovneProstriedky;
     }
-
 }
