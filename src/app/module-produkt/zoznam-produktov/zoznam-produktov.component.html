@@ -1,41 +1,46 @@
-
-<div class="space">
-
-</div>
+<div class="space"></div>
 <app-countdown></app-countdown>
 
 <div class="searchingWraper">
-    <app-filter [whereIsSearching]="productList" [onStock]="onStockCheckBox" (outputEvent)="onFilterDone($event)"></app-filter>
-    <app-filter-option [onStockCheckBox]="false" (checkBoXInput)="inputCheckBox($event)"></app-filter-option>
+    <app-filter
+        [whereIsSearching]="productList"
+        [onStock]="onStockCheckBox"
+        (outputEvent)="onFilterDone($event)"
+    ></app-filter>
+    <app-filter-option
+        [onStockCheckBox]="false"
+        (checkBoXInput)="inputCheckBox($event)"
+    ></app-filter-option>
 
-    <mat-checkbox (click)="isClicked()" style="margin: 5px 0 auto .2em; font-family: Verdana, Geneva, Tahoma, sans-serif">
-        <span *ngIf='sortByClicked'>
-            Sorted Z-A (click to A-Z sorting)
-         </span>
-         <span *ngIf='!sortByClicked'>
-             Sorted A-Z (click to Z-A sorting)
-          </span>
+    <mat-checkbox
+        (click)="isClicked()"
+        style="
+            margin: 5px 0 auto 0.2em;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        "
+    >
+        <span *ngIf="sortByClicked"> Sorted Z-A (click to A-Z sorting) </span>
+        <span *ngIf="!sortByClicked"> Sorted A-Z (click to Z-A sorting) </span>
     </mat-checkbox>
-    
 </div>
 
 <div class="lastRerview">
-    <div style="font-weight: 600;">Posledná recenzia</div>
-    <br>
-        {{lastReview}}
+    <div style="font-weight: 600">Posledná recenzia</div>
+    <br />
+    {{ lastReview }}
+</div>
+
+<div class="buttonWrapper">
+    <a mat-raised-button routerLink="/new-product-form">add new product</a>
+</div>
+
+<div class="productsWrapper">
+    <div class="productList">
+        <app-product
+            [data]="filteredProducts"
+            (reviewAdd)="lastReviewDisplayed($event, filteredProducts.name)"
+            *ngFor="let filteredProducts of filteredData"
+        ></app-product>
     </div>
-<div class="productsWrapper"> 
-    <div class="productList">  
-      <app-product [data]="filteredProducts" (reviewAdd)="lastReviewDisplayed($event, filteredProducts.name)" *ngFor="let filteredProducts of filteredData"></app-product>
-    </div>
-    <div>{{filteredData | sortByPipe: sortByClicked }}</div>
-    </div>
-
-    
-      
-   
-
-
-
-
-
+    <div>{{ filteredData | sortByPipe: sortByClicked }}</div>
+</div>

@@ -3,7 +3,6 @@
   flex-wrap: wrap;
 }
 
-
 .space{
   height:12vh;
 }
@@ -24,11 +23,23 @@
   margin-bottom: 2em;
 }
 
+.mat-raised-button{
+    margin: 1em 0 1em 9.5em;
+    background-color: transparent;
+    color: cadetblue;
+}
+
+.mat-raised-button:hover{
+    background-color: rgb(236, 236, 236);
+    text-decoration: none;
+
+}
+
 .productList{
   @include FlexWrap;
   justify-content: center;
   background-color: white;
- 
+
 }
 .productsWrapper{
   @include FlexWrap;
@@ -39,10 +50,8 @@
 ::ng-deep {
   .mat-checkbox-inner-container {
       border: 1px solid black;
-      background-color: rgb(238, 238, 238); 
+      background-color: rgb(238, 238, 238);
       height: 25px !important;
       width: 25px !important;
-     
-
     }
   }

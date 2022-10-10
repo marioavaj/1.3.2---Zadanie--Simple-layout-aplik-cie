@@ -20,6 +20,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ZamestnanciComponent } from './zamestnanci/zamestnanci.component';
 
+
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -45,6 +47,7 @@ import { ZamestnanciComponent } from './zamestnanci/zamestnanci.component';
         BrowserAnimationsModule,
         MatButtonModule,
         MatTooltipModule,
+       
     ],
     providers: [],
     bootstrap: [AppComponent],

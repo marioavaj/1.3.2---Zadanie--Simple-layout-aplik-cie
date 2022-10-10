@@ -1,0 +1,61 @@
+
+.form{
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    max-width: 700px;
+    border: 1px solid rgb(202, 202, 202);
+    background-color: rgb(151, 182, 253);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+margin-bottom: 15em;
+}
+
+::ng-deep .mat-form-field {
+    .mat-input-element {
+        color: rgb(0, 0, 0);
+    }
+    .mat-form-field-label {
+        color: rgb(0, 0, 0);
+    }
+    .mat-form-field-underline {
+        background-color: rgb(49, 49, 49);
+    }
+    .mat-form-field-ripple {
+        background-color: slategray;
+    }
+    .mat-form-field-required-marker {
+        color: rgb(0, 0, 0);
+    }
+}
+
+h3{
+    width: 100%;
+    margin-bottom: auto;
+    margin-left: auto;
+}
+.mat-raised-button{
+    margin-left: auto;
+    margin-right: auto;
+    width: 250px;
+    margin-bottom: 1em;
+    background-color: rgb(31, 31, 71);
+    text-decoration: none;
+    color: white;
+}
+
+.mat-raised-button:hover{
+    background-color: rgb(54, 54, 54);
+    color: white;
+}
+
+span{
+    margin-left: auto;
+    margin-right: auto;
+    font-size: large;
+    color: rgb(255, 255, 255);
+    
+
+}
