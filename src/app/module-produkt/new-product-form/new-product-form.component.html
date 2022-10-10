@@ -3,33 +3,37 @@
 
 
 
-<form class="form" (ngSubmit)="createNewProduct()">
+<form class="form" >
     <span>New product form</span>
     <mat-form-field appearance="fill">
         <mat-label>Product name</mat-label>
-        <input matInput placeholder="">
+        <input matInput [formControl]="productName">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Category</mat-label>
+        <input matInput [formControl]="category">
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Product price</mat-label>
-        <input matInput placeholder="">
+        <input matInput [formControl]="productPrice">
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Stock count</mat-label>
-        <input matInput placeholder="">
+        <input matInput [formControl]="stockCount">
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Descripion</mat-label>
-        <input matInput placeholder="">
+        <input matInput [formControl]="description">
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Sold total</mat-label>
-        <input matInput placeholder="">
+        <input matInput [formControl]="soldTotal">
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Sold last month</mat-label>
-        <input matInput placeholder="">
+        <input matInput [formControl]="soldLastMont">
       </mat-form-field>
 
-        <a mat-raised-button routerLink="/new-product-form">add new product</a>
+        <a mat-raised-button routerLink="/new-product-form" (click)="createNewProduct()">add new product</a>
 
       </form>
