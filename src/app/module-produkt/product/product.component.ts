@@ -28,25 +28,26 @@ DoCheck {
     x : number;
     y : number;
     public clickedItem : Product;
-   
+
 
     public date = new Date().toLocaleString(); // lokalny cas sformatovany
 
-    constructor(private createItem: ShopingCartServiceService, private newStockCount: ProductServiceService) {
-              
+    constructor(private createItem: ShopingCartServiceService, private newStockCount: ProductServiceService,
+        private deleteItem: ProductServiceService ) {
+
     }
 
     ngDoCheck(): void {
         this.x = this.productPosition ?. nativeElement.offsetLeft;
         this.y = this.productPosition ?. nativeElement.offsetTop;
-        
-           
-        
-        
+
+
+
+
     }
-    
+
     ngOnInit(): void {
-        
+
     }
 
     addReview(review : string) {
@@ -64,10 +65,15 @@ DoCheck {
     }
 
     addToCart() {
-        this.createItem.putData(this.data); 
-        this.data.stockCount--; 
+        this.createItem.putData(this.data);
+        this.data.stockCount--;
         console.log(this.data.stockCount);
         this.newStockCount.minusStockCount(this.data.id, this.data.stockCount);
+
+    }
+
+    deleteProduct(item:number){
+        this.deleteItem.deleteProduct(item);
 
     }
 }

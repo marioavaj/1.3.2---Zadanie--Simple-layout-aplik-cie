@@ -11,7 +11,26 @@ export class ProductServiceService {
     private toLocalStorage: any;
     newStockCount = new BehaviorSubject<any>(0);
     cache: any;
+    idCounter = 7;
     constructor() {}
+
+    createNewProductInService(newProductData) {
+        this.idCounter++;
+        let price = parseInt(newProductData.price);
+        const newProduct: any = {
+            id: this.idCounter,
+            name: newProductData.name.toString(),
+            category: newProductData.category.toString(),
+            price: parseInt(newProductData.price),
+            stockCount: parseInt(newProductData.stockCount),
+            sold: parseInt(newProductData.sold),
+            lastMonthSold: parseInt(newProductData.lastMonthSold),
+            description: newProductData.description.toString(),
+        };
+
+        console.log(newProduct);
+        ProductItems.productData.push(newProduct);
+    }
 
     getProductList(): Promise<any[]> {
         let fromLS = JSON.parse(localStorage.getItem('productData')!);
@@ -94,5 +113,12 @@ export class ProductServiceService {
         this.toLocalStorage = JSON.stringify(this.productData);
         localStorage.setItem('productData', this.toLocalStorage);
         this.newStockCount.next(this.productData);
+    }
+
+    deleteProduct(item: number) {
+        const findedIndex = this.productData.findIndex(
+            (array) => array.id === item
+        );
+        ProductItems.productData.splice(findedIndex, 1);
     }
 }

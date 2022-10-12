@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ProductServiceService } from 'src/app/Services/product-service.service';
 
 @Component({
     selector: 'app-new-product-form',
@@ -7,32 +8,30 @@ import { FormControl } from '@angular/forms';
     styleUrls: ['./new-product-form.component.scss'],
 })
 export class NewProductFormComponent implements OnInit {
-    productName = new FormControl('');
-    category = new FormControl('');
-    productPrice = new FormControl('');
-    stockCount = new FormControl('');
-    description = new FormControl('');
-    soldTotal = new FormControl('');
-    soldLastMont = new FormControl('');
-    counter = 7;
+    productFormGroup = new FormGroup({
+        name: new FormControl(''),
+        category: new FormControl(''),
+        price: new FormControl(''),
+        stockCount: new FormControl(''),
+        description: new FormControl(''),
+        sold: new FormControl(''),
+        lastMonthSold: new FormControl(''),
+         });
 
-    constructor() {}
+         vendors = new FormControl('');
+         reviews = new FormControl('');
+
+    constructor(private sendNewProduct: ProductServiceService) {}
 
     ngOnInit(): void {}
+
     createNewProduct() {
-        this.counter++;
-        const newproduct = {
-            id: this.counter,
-            name: this.productName.value,
-            category: this.category.value,
-            price: this.productPrice.value,
-            stockCount: this.stockCount.value,
-            sold: this.soldTotal.value,
-            lastMonthSold: this.soldLastMont.value,
-            description: this.description.value,
-            vendors: [],
-            reviews: [],
-        };
-        console.log(newproduct);
+        const newProductData = this.productFormGroup.getRawValue();
+        this.sendNewProduct.createNewProductInService(newProductData);
+        alert(
+            'Product with product name ' +
+                newProductData.name +
+                ' has been entered into the database'
+        );
     }
 }

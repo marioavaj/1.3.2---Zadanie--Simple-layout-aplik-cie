@@ -2,15 +2,8 @@
 .form{
     display: flex;
     flex-direction: column;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    justify-content: center;
     max-width: 700px;
-    border: 1px solid rgb(202, 202, 202);
-    background-color: rgb(151, 182, 253);
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-margin-bottom: 15em;
+    background-color: rgb(200, 200, 200);
 }
 
 ::ng-deep .mat-form-field {
@@ -21,10 +14,10 @@ margin-bottom: 15em;
         color: rgb(0, 0, 0);
     }
     .mat-form-field-underline {
-        background-color: rgb(49, 49, 49);
+        background-color: rgb(117, 0, 0);
     }
     .mat-form-field-ripple {
-        background-color: slategray;
+        background-color: rgb(123, 0, 0);
     }
     .mat-form-field-required-marker {
         color: rgb(0, 0, 0);
@@ -51,11 +44,4 @@ h3{
     color: white;
 }
 
-span{
-    margin-left: auto;
-    margin-right: auto;
-    font-size: large;
-    color: rgb(255, 255, 255);
-    
 
-}

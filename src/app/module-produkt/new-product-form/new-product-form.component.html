@@ -1,39 +1,69 @@
-
 <div class="space"></div>
+<mat-vertical-stepper [linear]="false">
+    <mat-step>
 
+        <form class="form" [formGroup]="productFormGroup">
 
+            <ng-template matStepLabel style="color: black">fill in info about product</ng-template>
 
+            <mat-form-field appearance="fill">
+                <mat-label>Product name</mat-label>
+                <input matInput formControlName="name" />
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Category</mat-label>
+                <input matInput formControlName="category" />
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Product price</mat-label>
+                <input matInput formControlName="price" />
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Stock count</mat-label>
+                <input matInput formControlName="stockCount" />
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Descripion</mat-label>
+                <input matInput formControlName="description" />
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Sold total</mat-label>
+                <input matInput formControlName="sold" />
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Sold last month</mat-label>
+                <input matInput formControlName="lastMonthSold" />
+            </mat-form-field>
+            <button mat-button matStepperNext>Next</button>
+        </form>
+    </mat-step>
+
+    <mat-step>
+        <ng-template matStepLabel>fill in the vendors of product</ng-template>
 <form class="form" >
-    <span>New product form</span>
     <mat-form-field appearance="fill">
-        <mat-label>Product name</mat-label>
-        <input matInput [formControl]="productName">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Category</mat-label>
-        <input matInput [formControl]="category">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Product price</mat-label>
-        <input matInput [formControl]="productPrice">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Stock count</mat-label>
-        <input matInput [formControl]="stockCount">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Descripion</mat-label>
-        <input matInput [formControl]="description">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Sold total</mat-label>
-        <input matInput [formControl]="soldTotal">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Sold last month</mat-label>
-        <input matInput [formControl]="soldLastMont">
-      </mat-form-field>
+        <mat-label></mat-label>
+        <input matInput [formControl]="vendors" />
+    </mat-form-field>
+    <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+</form>
+    </mat-step>
 
-        <a mat-raised-button routerLink="/new-product-form" (click)="createNewProduct()">add new product</a>
+    <mat-step>
+        <ng-template matStepLabel>fill in the product review</ng-template>
+<form class="form" >
+    <mat-form-field appearance="fill">
+        <mat-label>Reviews</mat-label>
+        <input matInput [formControl]="reviews" />
+    </mat-form-field>
+    <button mat-button matStepperPrevious>Back</button>
+    <a
+            mat-raised-button
+            routerLink="/new-product-form"
+            (click)="createNewProduct()"
+            >add new product</a>
+</form>
+    </mat-step>
 
-      </form>
+   </mat-vertical-stepper>

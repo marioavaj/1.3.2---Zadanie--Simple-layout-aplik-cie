@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { NewProductFormComponent } from './new-product-form/new-product-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
     declarations: [
@@ -42,6 +43,7 @@ import { MatInputModule } from '@angular/material/input';
         MatButtonModule,
         MatFormFieldModule,
         MatInputModule,
+        MatStepperModule
     ],
 
     exports: [

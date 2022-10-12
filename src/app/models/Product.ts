@@ -4,15 +4,13 @@ export interface Product {
     category: string;
     price?: number;
     stockCount: number;
-    sold: number,
-    lastMonthSold: number,
+    sold: number;
+    lastMonthSold: number;
     description?: string;
-    vendors: Vendor[];
-    reviews?: string[]
-
+    vendors?: Vendor[];
+    reviews?: string[];
 }
 export interface Vendor {
-
     name: string;
-    stockCount: number
+    stockCount: number;
 }

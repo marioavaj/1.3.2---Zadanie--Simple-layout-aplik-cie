@@ -10,7 +10,7 @@
     </a>
     </h2>
     <span class="category ">
-      {{ data.category }}     
+      {{ data.category }}
     </span>
   </div>
 
@@ -18,11 +18,11 @@
     <div class="redColumn"></div>
 
     <div class="PriceStockWrapper">
-    
+
       <div class="price">
       <span class="title" *ngIf="data.price">Price:</span>
         <div class="priceStockValue" *ngIf="data.price !=undefined">{{ data.price +"€"}}</div>
-      </div>      
+      </div>
       <div class="stock">
     <span class="title stock">Stock:</span>
      <ng-container>
@@ -31,7 +31,7 @@
       <div  class="alertColor" *ngIf="data.stockCount === 0">Nedostupný</div>
     </ng-container>
       </div>
-      
+
 </div>
 
     <span class="descriptionName" *ngIf="data.description">Description:</span>
@@ -55,12 +55,19 @@
         class="textarea"
          rows="3"
       ></textarea>
+      <div class = "submitDeleteButtonsWrapper">
       <input
         (click)="addReview(reviewFromInput)"
         class="submit"
         type="submit"
         value="Submit"
       />
+      <input class="delete"
+        (click)="deleteProduct(data.id)"
+        type="submit"
+        value="Delete"
+      />
+    </div>
     </form>
   </div>
   <div class="reviews"></div>
