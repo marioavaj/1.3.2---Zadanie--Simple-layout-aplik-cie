@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ProductServiceService } from 'src/app/Services/product-service.service';
 
 @Component({
@@ -18,12 +18,24 @@ export class NewProductFormComponent implements OnInit {
         lastMonthSold: new FormControl(''),
          });
 
-         vendors = new FormControl('');
+         vendorsGroup = new FormGroup({
+            vendor_1: new FormControl("")
+         });
+
+         vendorArray: FormArray;
+         vendorsControls: FormControl[];
+
+         vendorFieldAdd = [];
+
          reviews = new FormControl('');
 
     constructor(private sendNewProduct: ProductServiceService) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+    this.vendorsControls = []
+    this.vendorArray = new FormArray(this.vendorsControls);
+
+    }
 
     createNewProduct() {
         const newProductData = this.productFormGroup.getRawValue();
@@ -33,5 +45,17 @@ export class NewProductFormComponent implements OnInit {
                 newProductData.name +
                 ' has been entered into the database'
         );
+    }
+
+
+
+    anotherVendor(){
+
+
+    }
+
+    addFormArray(){
+        this.vendorsControls.push(new FormControl)
+
     }
 }

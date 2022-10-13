@@ -8,7 +8,7 @@ import { WelcomeComponent } from './WelcomePage/welcome/welcome.component';
 import { AboutMeComponent } from './aboutMe/about-me/about-me.component';
 import { SearchComponent } from './Search/search/search.component';
 import { HighlightDirective } from './Shared/directives/highligh.directive';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormArray } from '@angular/forms';
 import { ZivotopisComponent } from './zivotopis/zivotopis.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { ModuleProduktModule } from './module-produkt/module-produkt.module';
@@ -46,8 +46,8 @@ import { ZamestnanciComponent } from './zamestnanci/zamestnanci.component';
         MatMenuModule,
         BrowserAnimationsModule,
         MatButtonModule,
-        MatTooltipModule,
-       
+        MatTooltipModule
+
     ],
     providers: [],
     bootstrap: [AppComponent],

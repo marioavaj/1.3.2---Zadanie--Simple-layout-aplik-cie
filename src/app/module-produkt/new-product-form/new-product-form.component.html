@@ -1,10 +1,10 @@
 <div class="space"></div>
 <mat-vertical-stepper [linear]="false">
     <mat-step>
-
         <form class="form" [formGroup]="productFormGroup">
-
-            <ng-template matStepLabel style="color: black">fill in info about product</ng-template>
+            <ng-template matStepLabel style="color: black"
+                >fill in info about product</ng-template
+            >
 
             <mat-form-field appearance="fill">
                 <mat-label>Product name</mat-label>
@@ -40,30 +40,46 @@
 
     <mat-step>
         <ng-template matStepLabel>fill in the vendors of product</ng-template>
-<form class="form" >
-    <mat-form-field appearance="fill">
-        <mat-label></mat-label>
-        <input matInput [formControl]="vendors" />
-    </mat-form-field>
-    <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-</form>
+        <!--<form class="form" [formGroup]="vendorsGroup">
+            <div *ngFor="let item of vendorFieldAdd ">
+                <mat-form-field>
+                    <mat-label>Vendor</mat-label>
+                    <input matInput formControlName="vendor" />
+                </mat-form-field>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+            <button class="buttonPlus" (click) = "anotherVendor()">+</button>
+        </form>-->
+
+        <form  class="form" [formGroup]="vendorsGroup">
+            <div *ngFor="let item of vendorArray.controls; let i = index">
+                <mat-form-field>
+                    <mat-label>Vendor {{i+1}}</mat-label>
+                    <input matInput formControlName="{{i+1}}" />
+                </mat-form-field>
+                </div>
+            <button class="buttonPlus" (click)="addFormArray()">+</button>
+            <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+        </form>
+
     </mat-step>
 
     <mat-step>
         <ng-template matStepLabel>fill in the product review</ng-template>
-<form class="form" >
-    <mat-form-field appearance="fill">
-        <mat-label>Reviews</mat-label>
-        <input matInput [formControl]="reviews" />
-    </mat-form-field>
-    <button mat-button matStepperPrevious>Back</button>
-    <a
-            mat-raised-button
-            routerLink="/new-product-form"
-            (click)="createNewProduct()"
-            >add new product</a>
-</form>
+        <form class="form">
+            <mat-form-field appearance="fill">
+                <mat-label>Review</mat-label>
+                <input matInput [formControl]="reviews" />
+            </mat-form-field>
+            <button mat-button matStepperPrevious>Back</button>
+            <a
+                mat-raised-button
+                routerLink="/new-product-form"
+                (click)="createNewProduct()"
+                >add new product</a
+            >
+        </form>
     </mat-step>
-
-   </mat-vertical-stepper>
+</mat-vertical-stepper>
