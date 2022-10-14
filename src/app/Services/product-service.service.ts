@@ -14,9 +14,8 @@ export class ProductServiceService {
     idCounter = 7;
     constructor() {}
 
-    createNewProductInService(newProductData) {
+    createNewProductInService(newProductData, newVendors, newReview) {
         this.idCounter++;
-        let price = parseInt(newProductData.price);
         const newProduct: any = {
             id: this.idCounter,
             name: newProductData.name.toString(),
@@ -26,10 +25,12 @@ export class ProductServiceService {
             sold: parseInt(newProductData.sold),
             lastMonthSold: parseInt(newProductData.lastMonthSold),
             description: newProductData.description.toString(),
+            vendors: newVendors,
+            reviews: newReview,
         };
-
-        console.log(newProduct);
         ProductItems.productData.push(newProduct);
+        console.log(newProduct);
+        console.log(ProductItems.productData);
     }
 
     getProductList(): Promise<any[]> {
@@ -45,7 +46,7 @@ export class ProductServiceService {
                     this.productData = ProductItems.productData;
                     this.cache = this.productData;
                     resolve(this.productData);
-                }, 2000);
+                }, 10);
         });
     }
 

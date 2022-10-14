@@ -1,63 +1,52 @@
 import {
     Component,
-    DoCheck,
     ElementRef,
     EventEmitter,
     Input,
     OnInit,
     Output,
-    ViewChild
+    ViewChild,
 } from '@angular/core';
 import { ProductServiceService } from 'src/app/Services/product-service.service';
 import { ShopingCartServiceService } from 'src/app/Services/shoping-cart-service.service';
+import { ProductItems } from '../../models/ProductItems';
+import { Product } from '../../models/Product';
 
+@Component({
+    selector: 'app-product',
+    templateUrl: './product.component.html',
+    styleUrls: ['./product.component.scss'],
+})
+export class ProductComponent implements OnInit {
+    @Input() data: Product;
+    @Output() reviewAdd: EventEmitter<any> = new EventEmitter<any>();
 
-import {Product} from '../../models/Product';
+    @ViewChild('productPosition') productPosition: ElementRef<HTMLElement>;
 
-@Component({selector: 'app-product', templateUrl: './product.component.html', styleUrls: ['./product.component.scss']})
-export class ProductComponent
-implements
-OnInit,
-DoCheck {
-    @Input()data : Product;
-    @Output()reviewAdd : EventEmitter < any > = new EventEmitter<any>();
+    reviewFromInput: string;
 
-    @ViewChild('productPosition')productPosition : ElementRef < HTMLElement >;
+    x: number;
+    y: number;
+    public clickedItem: Product;
 
-    reviewFromInput : string;
-    x : number;
-    y : number;
-    public clickedItem : Product;
+    constructor(
+        private createItem: ShopingCartServiceService,
+        private newStockCount: ProductServiceService,
+        private deleteItem: ProductServiceService
+    ) {}
 
+    ngOnInit(): void {}
 
-    public date = new Date().toLocaleString(); // lokalny cas sformatovany
-
-    constructor(private createItem: ShopingCartServiceService, private newStockCount: ProductServiceService,
-        private deleteItem: ProductServiceService ) {
-
-    }
-
-    ngDoCheck(): void {
-        this.x = this.productPosition ?. nativeElement.offsetLeft;
-        this.y = this.productPosition ?. nativeElement.offsetTop;
-
-
-
-
-    }
-
-    ngOnInit(): void {
-
-    }
-
-    addReview(review : string) {
-        if (review ?. length > 0) {
-            this.date = new Date().toLocaleString();
-            if (this.data) { // kontrola ci premenna data existuje
-                if (!this.data.reviews) { // kontrola ci v data existuje objekt reviews
+    addReview(review: string) {
+        if (review?.length > 0) {
+            let date = new Date().toLocaleString();
+            if (this.data) {
+                // kontrola ci premenna data existuje
+                if (!this.data.reviews) {
+                    // kontrola ci v data existuje objekt reviews
                     this.data.reviews = []; // ak plati podmienka ze neexistuje, vytvori ho
                 }
-                this.data.reviews.push(this.date + " | " + review);
+                this.data.reviews.push(date + ' | ' + review);
                 this.reviewAdd.emit(review); // sprava pre parenta ze vlozil recenziu
                 this.reviewFromInput = '';
             }
@@ -69,12 +58,10 @@ DoCheck {
         this.data.stockCount--;
         console.log(this.data.stockCount);
         this.newStockCount.minusStockCount(this.data.id, this.data.stockCount);
-
     }
 
-    deleteProduct(item:number){
+    deleteProduct(item: number) {
         this.deleteItem.deleteProduct(item);
-
     }
 }
 
