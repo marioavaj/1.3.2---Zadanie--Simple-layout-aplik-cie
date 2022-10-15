@@ -15,6 +15,9 @@ export class ProductServiceService {
     constructor() {}
 
     createNewProductInService(newProductData, newVendors, newReview) {
+        if ((newReview = [])) {
+            newReview = undefined;
+        }
         this.idCounter++;
         const newProduct: any = {
             id: this.idCounter,
