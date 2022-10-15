@@ -59,12 +59,13 @@ export class NewProductFormComponent implements OnInit {
     }
 
     addFormArray() {
-        this.fullVendorFormat = [];
+
         this.vendorName.get('vendors').push(new FormControl());
         this.vendorName.get('countStock').push(new FormControl());
     }
 
 sendFormArray(){
+    this.fullVendorFormat = [];
         let vendorsRawValue = this.vendorName.get('vendors').getRawValue();
         this.vendorCountStock = this.vendorName.get('countStock').getRawValue();
 
@@ -74,10 +75,9 @@ sendFormArray(){
                 stockCount: parseInt(this.vendorCountStock[i]),
             };
             this.fullVendorFormat.push(oneVendor);
+            console.log(this.fullReviewFormat);
         }
-        //this.fullVendorFormat = this.fullVendorFormat.filter((item: any) => {
-        //    return item.name != null;
-       // });
-       console.log(this.fullReviewFormat)
+
+
     }
 }
