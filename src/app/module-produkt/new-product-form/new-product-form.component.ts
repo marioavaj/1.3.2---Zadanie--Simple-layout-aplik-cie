@@ -13,7 +13,7 @@ export class NewProductFormComponent implements OnInit {
     vendorCountStock;
 
     fullVendorFormat: Vendor[];
-    fullReviewFormat: string[];
+    fullReviewFormat?: any[];
     oneVendor;
     vendors: any;
     review: any;
@@ -28,7 +28,7 @@ export class NewProductFormComponent implements OnInit {
         lastMonthSold: new FormControl(''),
     });
 
-    reviews = new FormControl('');
+    reviews = new FormControl();
 
     constructor(private sendNewProduct: ProductServiceService) {}
 
@@ -43,8 +43,16 @@ export class NewProductFormComponent implements OnInit {
         this.fullReviewFormat = [];
         const newProductData = this.productFormGroup.getRawValue();
         this.review = this.reviews.getRawValue();
-        this.review = this.review.toString();
-        this.fullReviewFormat.push(this.review);
+        console.log(this.review);
+
+        if (this.review !== null) {
+            this.review = this.review.toString();
+            this.fullReviewFormat.push(this.review);
+            console.log(
+                'toto je v poli review ' + this.fullReviewFormat.length
+            );
+        }
+
         this.sendNewProduct.createNewProductInService(
             newProductData,
             this.fullVendorFormat,
@@ -59,13 +67,12 @@ export class NewProductFormComponent implements OnInit {
     }
 
     addFormArray() {
-
         this.vendorName.get('vendors').push(new FormControl());
         this.vendorName.get('countStock').push(new FormControl());
     }
 
-sendFormArray(){
-    this.fullVendorFormat = [];
+    sendFormArray() {
+        this.fullVendorFormat = [];
         let vendorsRawValue = this.vendorName.get('vendors').getRawValue();
         this.vendorCountStock = this.vendorName.get('countStock').getRawValue();
 
@@ -77,7 +84,5 @@ sendFormArray(){
             this.fullVendorFormat.push(oneVendor);
             console.log(this.fullReviewFormat);
         }
-
-
     }
 }

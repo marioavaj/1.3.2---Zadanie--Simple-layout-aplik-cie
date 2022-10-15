@@ -15,9 +15,7 @@ export class ProductServiceService {
     constructor() {}
 
     createNewProductInService(newProductData, newVendors, newReview) {
-        if ((newReview = [])) {
-            newReview = undefined;
-        }
+
         this.idCounter++;
         const newProduct: any = {
             id: this.idCounter,
@@ -29,7 +27,7 @@ export class ProductServiceService {
             lastMonthSold: parseInt(newProductData.lastMonthSold),
             description: newProductData.description.toString(),
             vendors: newVendors,
-            reviews: newReview,
+            reviews: newReview
         };
         ProductItems.productData.push(newProduct);
         console.log(newProduct);
