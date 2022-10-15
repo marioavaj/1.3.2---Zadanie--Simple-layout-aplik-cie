@@ -20,7 +20,7 @@ export class ProductServiceService {
             id: this.idCounter,
             name: newProductData.name.toString(),
             category: newProductData.category.toString(),
-            price: parseInt(newProductData.price),
+            price: parseFloat(newProductData.price),
             stockCount: parseInt(newProductData.stockCount),
             sold: parseInt(newProductData.sold),
             lastMonthSold: parseInt(newProductData.lastMonthSold),

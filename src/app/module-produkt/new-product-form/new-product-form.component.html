@@ -34,36 +34,46 @@
                 <mat-label>Sold last month</mat-label>
                 <input matInput formControlName="lastMonthSold" />
             </mat-form-field>
-            <button mat-button matStepperNext>Next</button>
+            <button mat-button matStepperNext>Next to vendors</button>
         </form>
     </mat-step>
 
     <mat-step>
         <ng-template matStepLabel>fill in the vendors of product</ng-template>
-        <!--<form class="form" [formGroup]="vendorsGroup">
-            <div *ngFor="let item of vendorFieldAdd ">
-                <mat-form-field>
-                    <mat-label>Vendor</mat-label>
-                    <input matInput formControlName="vendor" />
-                </mat-form-field>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
-            </div>
-            <button class="buttonPlus" (click) = "anotherVendor()">+</button>
-        </form>-->
-
-        <form  class="form" [formGroup]="vendorsGroup">
-            <div *ngFor="let item of vendorArray.controls; let i = index">
-                <mat-form-field>
-                    <mat-label>Vendor {{i+1}}</mat-label>
-                    <input matInput formControlName="{{i+1}}" />
-                </mat-form-field>
+        <form class="formVendors" [formGroup]="vendorName">
+            <div formArrayName="vendors">
+                <div
+                    *ngFor="
+                        let vendor of vendorName.get('vendors').controls;
+                        let i = index
+                    "
+                >
+                    <mat-form-field>
+                        <mat-label>Vendor {{ i + 1 }}</mat-label>
+                        <input matInput [formControlName]="i" />
+                    </mat-form-field>
                 </div>
-            <button class="buttonPlus" (click)="addFormArray()">+</button>
-            <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+            </div>
+            <div formArrayName="countStock">
+                <div
+                    *ngFor="
+                        let count of vendorName.get('countStock').controls;
+                        let i = index
+                    "
+                >
+                    <mat-form-field>
+                        <mat-label>count on Stock</mat-label>
+                        <input matInput [formControlName]="i" />
+                    </mat-form-field>
+                    <button class="buttonPlus" (click)="addFormArray()">
+                        +
+                    </button>
+                </div>
+            </div>
         </form>
-
+        <button class="buttonSubmit" (click)="sendFormArray()">Submit</button>
+        <button mat-button matStepperPrevious>Back to product info</button>
+        <button mat-button matStepperNext>Next to review</button>
     </mat-step>
 
     <mat-step>
