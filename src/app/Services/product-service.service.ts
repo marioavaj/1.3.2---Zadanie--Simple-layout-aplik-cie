@@ -41,7 +41,7 @@ export class ProductServiceService {
         let fromLS = JSON.parse(localStorage.getItem('productData')!);
         this.productData = fromLS;
 
-        return new Promise<Product[]>((resolve, rejecet) => {
+        return new Promise<Product[]>((resolve, reject) => {
             if (this.cache && this.cache == ProductItems.productData) {
                 this.productData = this.cache;
                 resolve(this.productData);

@@ -1,4 +1,4 @@
-import { Component, importProvidersFrom, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ProductServiceService } from 'src/app/Services/product-service.service';
 import { Vendor } from 'src/app/models/Product';
@@ -52,7 +52,6 @@ export class NewProductFormComponent implements OnInit {
                 'toto je v poli review ' + this.fullReviewFormat.length
             );
         }
-
         this.sendNewProduct.createNewProductInService(
             newProductData,
             this.fullVendorFormat,
