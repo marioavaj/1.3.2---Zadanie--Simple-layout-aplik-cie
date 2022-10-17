@@ -1,80 +1,97 @@
 <div #productPosition class="productWrapper">
-  <div   class="redRow"> </div>
+    <div class="redRow"></div>
 
-  <div class="productCategoryWrapper">
-    <h2 class="productName">
-     <a
-      [title]="data.name"
-      [routerLink]="['/zoznam-produktov', data.id]">
-      {{ data.name }}
-    </a>
-    </h2>
-    <span class="category ">
-      {{ data.category }}
-    </span>
-  </div>
+    <div class="productCategoryWrapper">
+        <h2 class="productName">
+            <a
+                [title]="data.name"
+                [routerLink]="['/zoznam-produktov', data.id]"
+            >
+                {{ data.name }}
+            </a>
+        </h2>
+        <span class="category">
+            {{ data.category }}
+        </span>
+    </div>
 
-  <div class="infoProductGrid">
-    <div class="redColumn"></div>
+    <div class="infoProductGrid">
+        <div class="redColumn"></div>
 
-    <div class="PriceStockWrapper">
+        <div class="PriceStockWrapper">
+            <div class="price">
+                <span class="title" *ngIf="data.price">Price:</span>
+                <div class="priceStockValue" *ngIf="data.price != undefined">
+                    {{ data.price + "€" }}
+                </div>
+            </div>
+            <div class="stock">
+                <span class="title stock">Stock:</span>
+                <ng-container>
+                    <div class="priceStockValue" *ngIf="data.stockCount !== 0">
+                        {{ data.stockCount }}
+                    </div>
+                    <div class="alertColor" *ngIf="data.stockCount === 0">
+                        Nedostupný
+                    </div>
+                </ng-container>
+            </div>
+        </div>
 
-      <div class="price">
-      <span class="title" *ngIf="data.price">Price:</span>
-        <div class="priceStockValue" *ngIf="data.price !=undefined">{{ data.price +"€"}}</div>
-      </div>
-      <div class="stock">
-    <span class="title stock">Stock:</span>
-     <ng-container>
-      <div class="priceStockValue"  *ngIf="data.stockCount !== 0">
-        {{ data.stockCount }}       </div>
-      <div  class="alertColor" *ngIf="data.stockCount === 0">Nedostupný</div>
+        <span class="descriptionName" *ngIf="data.description"
+            >Description:</span
+        >
+        <h3 class="descriptionName" *ngIf="!data.description"></h3>
+        <div class="description">
+            {{ data.description }}
+        </div>
+        <button
+            *ngIf="data.stockCount !== 0"
+            class="addToCart"
+            (click)="addToCart()"
+        >
+            Add to cart
+        </button>
+        <span class="vendorName">Vendors:</span>
+        <ng-container
+            class="vendorsFlex"
+            vendor
+            *ngFor="let vendor of data.vendors"
+        >
+            <div class="vendor" *ngIf="vendor.stockCount > 0">
+                {{ vendor.name }}
+            </div>
+        </ng-container>
+        <span class="descriptionName">Reviews</span>
+        <form class="review" action="">
+            <textarea
+                [(ngModel)]="reviewFromInput"
+                type="submit"
+                name="review"
+                class="textarea"
+                rows="3"
+            ></textarea>
+            <div class="submitDeleteButtonsWrapper">
+                <input
+                    (click)="addReview(reviewFromInput)"
+                    class="submit"
+                    type="submit"
+                    value="Submit"
+                />
+                <input
+                    class="delete"
+                    (click)="deleteProduct(data.id)"
+                    type="submit"
+                    value="Delete"
+                />
+            </div>
+        </form>
+    </div>
+    <div class="reviews"></div>
+    <ng-container>
+        <div class="reviewsList" *ngFor="let review of data.reviews">
+            {{ review }}
+        </div>
     </ng-container>
-      </div>
-
-</div>
-
-    <span class="descriptionName" *ngIf="data.description">Description:</span>
-    <h3 class="descriptionName" *ngIf="!data.description"></h3>
-    <div class="description">
-      {{ data.description }}
-    </div>
-    <button *ngIf="data.stockCount !== 0" class="addToCart" (click)="addToCart()">Add to cart</button>
-    <span class="vendorName">Vendors:</span>
-    <ng-container class="vendorsFlex" vendor *ngFor="let vendor of data.vendors">
-      <div class="vendor" *ngIf="vendor.stockCount > 0">
-        {{ vendor.name }}
-      </div>
-    </ng-container>
-    <span class="descriptionName">Reviews</span>
-    <form class="review" action="">
-      <textarea
-        [(ngModel)]="reviewFromInput"
-        type="submit"
-        name="review"
-        class="textarea"
-         rows="3"
-      ></textarea>
-      <div class = "submitDeleteButtonsWrapper">
-      <input
-        (click)="addReview(reviewFromInput)"
-        class="submit"
-        type="submit"
-        value="Submit"
-      />
-      <input class="delete"
-        (click)="deleteProduct(data.id)"
-        type="submit"
-        value="Delete"
-      />
-    </div>
-    </form>
-  </div>
-  <div class="reviews"></div>
-  <ng-container>
-    <div class="reviewsList" *ngFor="let review of data.reviews">
-      {{ review }}
-    </div>
-  </ng-container>
-  <div class="reviewsBottom"></div>
+    <div class="reviewsBottom"></div>
 </div>
