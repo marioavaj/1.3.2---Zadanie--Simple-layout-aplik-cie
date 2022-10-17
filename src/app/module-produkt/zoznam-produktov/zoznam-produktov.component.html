@@ -39,8 +39,7 @@
         <app-product
             [data]="filteredProducts"
             (reviewAdd)="lastReviewDisplayed($event, filteredProducts.name)"
-            *ngFor="let filteredProducts of filteredData"
+            *ngFor="let filteredProducts of filteredData | sortByPipe: sortByClicked"
         ></app-product>
     </div>
-    <div>{{ filteredData | sortByPipe: sortByClicked }}</div>
 </div>

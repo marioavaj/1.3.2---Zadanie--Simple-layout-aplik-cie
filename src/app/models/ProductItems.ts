@@ -4,7 +4,7 @@ export class ProductItems{
   static productData = [
     {
         id: 1,
-        name: 'Acer Nitro 5 Obsidian',
+        name: 'acer Nitro 5 Obsidian',
         category: 'Gaming',
         price: 849,
         stockCount: 18,
@@ -208,6 +208,6 @@ export class ProductItems{
         ],
         reviews: []
     },
-]; 
+];
 
 }
