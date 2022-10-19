@@ -9,6 +9,7 @@
             <mat-form-field appearance="fill">
                 <mat-label>Product name</mat-label>
                 <input matInput formControlName="name" />
+                <mat-error>This field is required</mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Category</mat-label>
@@ -16,24 +17,57 @@
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Product price</mat-label>
-                <input matInput formControlName="price" />
+                <input type="number" matInput formControlName="price" />
+                <mat-error
+                    *ngIf="productFormGroup.get('price')?.hasError('required')"
+                >
+                    This field is required</mat-error
+                >
+                <mat-error
+                    *ngIf="productFormGroup.get('price')?.hasError('min')"
+                >
+                    This is not valid value for price</mat-error
+                >
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Stock count</mat-label>
                 <input matInput formControlName="stockCount" />
+                <mat-error>This field is required</mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Descripion</mat-label>
                 <input matInput formControlName="description" />
             </mat-form-field>
+
             <mat-form-field appearance="fill">
                 <mat-label>Sold total</mat-label>
                 <input matInput formControlName="sold" />
+                <mat-error
+                    *ngIf="productFormGroup.get('sold')?.hasError('required')"
+                >
+                    This field is required</mat-error
+                >
+                <mat-error
+                    *ngIf="productFormGroup.errors?.['highValueThanSold']"
+                >
+                    This value must be lower than Sold total</mat-error>
             </mat-form-field>
+
             <mat-form-field appearance="fill">
                 <mat-label>Sold last month</mat-label>
                 <input matInput formControlName="lastMonthSold" />
+                <mat-error
+                    *ngIf="productFormGroup.get('lastMonthSold')?.hasError('required')"
+                >
+                    This field is required</mat-error
+                >
+                <mat-error
+                    *ngIf="productFormGroup.errors?.['highValueThanSold']"
+                >
+                    This value must be lower than Sold total</mat-error
+                >
             </mat-form-field>
+
             <button mat-button matStepperNext>Next to vendors</button>
         </form>
     </mat-step>
@@ -63,7 +97,11 @@
                 >
                     <mat-form-field>
                         <mat-label>count on Stock</mat-label>
-                        <input matInput [formControlName]="i"/>
+                        <input
+                            matInput
+                            [formControlName]="i"
+
+                        />
                     </mat-form-field>
                     <button class="buttonPlus" (click)="addFormArray()">
                         +
@@ -84,12 +122,9 @@
                 <input matInput [formControl]="reviews" />
             </mat-form-field>
             <button mat-button matStepperPrevious>Back</button>
-            <a
-                mat-raised-button
-                routerLink="/new-product-form"
-                (click)="createNewProduct()"
-                >add new product</a
-            >
         </form>
     </mat-step>
 </mat-vertical-stepper>
+<a mat-raised-button routerLink="/new-product-form" (click)="createNewProduct()"
+    >add new product</a
+>

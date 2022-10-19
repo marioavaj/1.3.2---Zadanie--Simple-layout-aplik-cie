@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductServiceService } from 'src/app/Services/product-service.service';
 import { Vendor } from 'src/app/models/Product';
+import { compareSoldLastMonthSold } from 'src/app/Shared/directives/compareFormFields';
 
 @Component({
     selector: 'app-new-product-form',
@@ -9,24 +10,25 @@ import { Vendor } from 'src/app/models/Product';
     styleUrls: ['./new-product-form.component.scss'],
 })
 export class NewProductFormComponent implements OnInit {
-    vendorName;
-    vendorCountStock;
-
+    vendorName: any;
     fullVendorFormat: Vendor[];
-    fullReviewFormat?: any[];
-    oneVendor;
-    vendors: any;
-    review: any;
+    fullReviewFormat?: string[];
 
-    productFormGroup = new FormGroup({
-        name: new FormControl(''),
-        category: new FormControl(''),
-        price: new FormControl(''),
-        stockCount: new FormControl(''),
-        description: new FormControl(''),
-        sold: new FormControl(''),
-        lastMonthSold: new FormControl(''),
-    });
+    productFormGroup= new FormGroup(
+        {
+            name: new FormControl('', Validators.required),
+            category: new FormControl(''),
+            price: new FormControl('', [
+                Validators.required,
+                Validators.min(0.0001),
+            ]),
+            stockCount: new FormControl('', Validators.required),
+            description: new FormControl(''),
+            sold: new FormControl('', Validators.required),
+            lastMonthSold: new FormControl('',[Validators.required,compareSoldLastMonthSold ]),
+        },
+          compareSoldLastMonthSold
+    );
 
     reviews = new FormControl();
 
@@ -34,35 +36,35 @@ export class NewProductFormComponent implements OnInit {
 
     ngOnInit(): void {
         this.vendorName = new FormGroup({
-            vendors: new FormArray([new FormControl()]),
-            countStock: new FormArray([new FormControl()]),
+            vendors: new FormArray([new FormControl('')]),
+            countStock: new FormArray([new FormControl('')]),
         });
     }
 
     createNewProduct() {
-        this.fullReviewFormat = [];
-        const newProductData = this.productFormGroup.getRawValue();
-        this.review = this.reviews.getRawValue();
-        console.log(this.review);
+        this.productFormGroup.markAllAsTouched();
+        this.productFormGroup.updateValueAndValidity();
+        if (this.productFormGroup.valid && this.vendorName.valid) {
+            this.fullReviewFormat = [];
+            const newProductData = this.productFormGroup.getRawValue();
+            let review = this.reviews.getRawValue();
 
-        if (this.review !== null) {
-            this.review = this.review.toString();
-            this.fullReviewFormat.push(this.review);
-            console.log(
-                'toto je v poli review ' + this.fullReviewFormat.length
+            if (review !== null) {
+                this.fullReviewFormat.push(review);
+            }
+
+            this.sendNewProduct.createNewProductInService(
+                newProductData,
+                this.fullVendorFormat,
+                this.fullReviewFormat
             );
-        }
-        this.sendNewProduct.createNewProductInService(
-            newProductData,
-            this.fullVendorFormat,
-            this.fullReviewFormat
-        );
 
-        alert(
-            'Product with product name ' +
-                newProductData.name +
-                ' has been inserted into the database'
-        );
+            alert(
+                'Product with product name ' +
+                    newProductData.name +
+                    ' has been inserted into the database'
+            );
+        } else alert('Form is invalid');
     }
 
     addFormArray() {
@@ -73,12 +75,12 @@ export class NewProductFormComponent implements OnInit {
     sendFormArray() {
         this.fullVendorFormat = [];
         let vendorsRawValue = this.vendorName.get('vendors').getRawValue();
-        this.vendorCountStock = this.vendorName.get('countStock').getRawValue();
+        let vendorCountStock = this.vendorName.get('countStock').getRawValue();
 
         for (let i = 0; i < vendorsRawValue.length; i++) {
             let oneVendor: Vendor = {
                 name: vendorsRawValue[i],
-                stockCount: parseInt(this.vendorCountStock[i]),
+                stockCount: parseInt(vendorCountStock[i]),
             };
             this.fullVendorFormat.push(oneVendor);
             console.log(this.fullReviewFormat);
