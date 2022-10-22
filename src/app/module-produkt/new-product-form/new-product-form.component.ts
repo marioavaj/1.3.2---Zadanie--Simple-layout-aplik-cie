@@ -14,7 +14,7 @@ export class NewProductFormComponent implements OnInit {
     fullVendorFormat: Vendor[];
     fullReviewFormat?: string[];
 
-    productFormGroup= new FormGroup(
+    productFormGroup = new FormGroup(
         {
             name: new FormControl('', Validators.required),
             category: new FormControl(''),
@@ -25,9 +25,9 @@ export class NewProductFormComponent implements OnInit {
             stockCount: new FormControl('', Validators.required),
             description: new FormControl(''),
             sold: new FormControl('', Validators.required),
-            lastMonthSold: new FormControl('',[Validators.required,compareSoldLastMonthSold ]),
+            lastMonthSold: new FormControl('', Validators.required),
         },
-          compareSoldLastMonthSold
+        compareSoldLastMonthSold
     );
 
     reviews = new FormControl();

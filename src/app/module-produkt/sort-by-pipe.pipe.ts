@@ -7,13 +7,13 @@ import { Product } from '../models/Product';
 export class SortByPipePipe implements PipeTransform {
 
 
-    transform(value: Product[], args: boolean): Product[] {
-        if (value) {
+                                             transform(value: Product[], args: boolean): Product[] {
+        if (value)      {
             return this.newValue(value, args);
         }
         return [];
     }
-    newValue(productList: Product[], args: boolean): Product[] {
+                  newValue(productList: Product[], args: boolean): Product[] {
 
         if (args === false) {
 
@@ -21,7 +21,7 @@ export class SortByPipePipe implements PipeTransform {
             return productList.sort(this.sortAZ);
         } else {
             function compare(a: Product, b: Product) {
-                if (a.name > b.name) {
+   if (a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase()) {
                     return -1;
                 }
                 if (a.name < b.name) {

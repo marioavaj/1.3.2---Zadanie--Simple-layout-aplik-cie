@@ -19,6 +19,9 @@ import { ShoppingCartBadgeComponent } from './module-produkt/shopping-cart-badge
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ZamestnanciComponent } from './zamestnanci/zamestnanci.component';
+import { StructuralComponent } from './structural/structural.component';
+import { ShowNewHead } from './Shared/directives/showNewHead.directives';
+import { Hidden } from './Shared/directives/hidden.directive';
 
 
 
@@ -34,6 +37,9 @@ import { ZamestnanciComponent } from './zamestnanci/zamestnanci.component';
         ZivotopisComponent,
         ShoppingCartBadgeComponent,
         ZamestnanciComponent,
+        StructuralComponent,
+        ShowNewHead,
+        Hidden
     ],
     imports: [
         RouterModule,

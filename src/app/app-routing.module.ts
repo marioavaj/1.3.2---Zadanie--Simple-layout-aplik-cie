@@ -6,6 +6,7 @@ import { WelcomeComponent } from './WelcomePage/welcome/welcome.component';
 import { ProductDetailComponent } from './module-produkt/product-detail/product-detail.component';
 import { ZivotopisComponent } from './zivotopis/zivotopis.component';
 import { ZamestnanciComponent } from './zamestnanci/zamestnanci.component';
+import { StructuralComponent } from './structural/structural.component';
 
 const routes: Routes = [
     { path: '', title: 'Ondrejka', component: WelcomeComponent },
@@ -42,6 +43,12 @@ const routes: Routes = [
         title: 'Zamestnanci',
         component: ZamestnanciComponent,
     },
+
+    {
+        path: 'structural',
+        title: 'Structural',
+        component: StructuralComponent,
+    }
 ];
 
 @NgModule({

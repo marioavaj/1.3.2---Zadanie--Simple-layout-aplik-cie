@@ -1,0 +1,35 @@
+<br />
+<div class="wrapper">
+    <div><h1>Head studio</h1></div>
+    <div *hidden="mask">
+        <img class="mask" src="/assets/Img/lego/mask.png" alt="" />
+    </div>
+
+    <div *showNewHead="newHead == back.value">
+        <img src="/assets/Img/lego/standard.jpg" alt="" />
+    </div>
+
+    <div *showNewHead="newHead == elvis.value">
+        <img src="/assets/Img/lego/elvis.jpg" alt="elvis" />
+    </div>
+    <div *showNewHead="newHead == harry.value">
+        <img src="/assets/Img/lego/harry.jpg" alt="harry" />
+    </div>
+    <div *showNewHead="newHead == hero.value">
+        <img src="/assets/Img/lego/hero.jpg" alt="hero" />
+    </div>
+    <div>
+        <button #harry (click)="head(harry.value)" value="harry">Harry</button>
+        <button #hero (click)="head(hero.value)" value="hero">Hero</button>
+        <button #elvis (click)="head(elvis.value)" value="elvis">Elvis</button>
+    </div>
+    <div>
+        <button id="back" #back (click)="head(back.value)" value="back">
+            my head
+        </button>
+        <button #hidden id="back" #back (click)="maskHidden()" value="mask">
+            <span *hidden="!mask">show mask</span>
+            <span *hidden="mask">hidden mask</span>
+        </button>
+    </div>
+</div>
