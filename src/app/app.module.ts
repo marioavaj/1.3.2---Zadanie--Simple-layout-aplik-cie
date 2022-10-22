@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Header/header/header.component';
-import { FooterComponent } from './Footer/footer/footer.component';
 import { WelcomeComponent } from './WelcomePage/welcome/welcome.component';
 import { AboutMeComponent } from './aboutMe/about-me/about-me.component';
 import { SearchComponent } from './Search/search/search.component';
@@ -22,8 +21,9 @@ import { ZamestnanciComponent } from './zamestnanci/zamestnanci.component';
 import { StructuralComponent } from './structural/structural.component';
 import { ShowNewHead } from './Shared/directives/showNewHead.directives';
 import { Hidden } from './Shared/directives/hidden.directive';
-
-
+import { FooterComponent } from './Footer/footer/footer.component';
+import { ModalWindowComponent } from './modal-window/modal-window.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
     declarations: [
@@ -39,7 +39,10 @@ import { Hidden } from './Shared/directives/hidden.directive';
         ZamestnanciComponent,
         StructuralComponent,
         ShowNewHead,
-        Hidden
+        Hidden,
+        ModalWindowComponent,
+
+
     ],
     imports: [
         RouterModule,
@@ -52,8 +55,8 @@ import { Hidden } from './Shared/directives/hidden.directive';
         MatMenuModule,
         BrowserAnimationsModule,
         MatButtonModule,
-        MatTooltipModule
-
+        MatTooltipModule,
+        MatDialogModule
     ],
     providers: [],
     bootstrap: [AppComponent],
