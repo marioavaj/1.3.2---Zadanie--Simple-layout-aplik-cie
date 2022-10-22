@@ -1,0 +1,33 @@
+img {
+    max-width: 300px;
+}
+
+button {
+    margin: 1em;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+div {
+    display: flex;
+    justify-content: center;
+}
+#back {
+    background-color: rgb(207, 0, 0);
+    border: none;
+    color: white;
+    width: 100px;
+}
+#back:hover {
+    background-color: rgb(174, 0, 0);
+}
+
+.mask {
+    width: 115px;
+    position: absolute;
+    top: 262px;
+}

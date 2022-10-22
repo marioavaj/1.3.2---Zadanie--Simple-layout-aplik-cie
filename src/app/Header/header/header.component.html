@@ -1,53 +1,54 @@
 <div class="headerWrapper">
+    <a routerLink=""
+        ><img src="assets/Img/logomarian-removebg-preview.jpg" alt=""
+    /></a>
 
-  <a routerLink=""
-    ><img src="assets/Img/logomarian-removebg-preview.jpg" alt=""
-  /></a>
-
-  <!--<div class="search">
+    <!--<div class="search">
     <app-search></app-search>
     </div>-->
 
-  <menu id="menuWrapper">
+    <menu id="menuWrapper">
+        <a routerLink="profil">Profil</a>
+        <a routerLink="referencie">Referencie</a>
+        <a routerLink="prihlaska">Prihláška</a>
+        <a routerLink="zoznam-produktov">Produkty</a>
+        <a routerLink="statistika">Štatistiky</a>
+        <a routerLink="zamestnanci">Zamestnanci</a>
+        <a routerLink="structural">Head studio</a>
+    </menu>
 
-    <a routerLink="profil">Profil</a>
-    <a routerLink="referencie"  >Referencie</a>
-    <a routerLink="prihlaska">Prihláška</a>
-    <a routerLink="zoznam-produktov">Produkty</a>
-    <a routerLink="statistika">Štatistiky</a>
-    <a routerLink="zamestnanci">Zamestnanci</a>
-  </menu>
+    <div class="cart">
+        <a routerLink="shopping-cart">
+            <i class="fa-solid fa-basket-shopping"></i>
+            <app-shopping-cart-badge
+                *ngIf="toolTipData && toolTipData.length > 0"
+            ></app-shopping-cart-badge>
+        </a>
+        <div class="tooltiptext" *ngIf="toolTipData && toolTipData.length > 0">
+            <div *ngFor="let item of toolTipData; index as i">
+                <div class="itemNameInTooltip">
+                    {{ i + 1 }}. {{ item.name }}
+                </div>
+            </div>
+        </div>
+        <div
+            class="tooltiptext"
+            *ngIf="!toolTipData || toolTipData.length == 0"
+        >
+            <div class="itemNameInTooltip">Shopping cart is empty</div>
+        </div>
 
-  <div class="cart">
-    <a routerLink="shopping-cart">
-      <i  class="fa-solid fa-basket-shopping"></i>
-     <app-shopping-cart-badge *ngIf="toolTipData && toolTipData.length>0" ></app-shopping-cart-badge>
-    </a>
-      <div class="tooltiptext" *ngIf="toolTipData && toolTipData.length>0">
-          <div *ngFor="let item of toolTipData;index as i">
-              <div class="itemNameInTooltip">{{i+1}}.  {{item.name}}</div>
-
-              </div>
-      </div>
-      <div class="tooltiptext" *ngIf="!toolTipData || toolTipData.length==0">
-        <div class="itemNameInTooltip">Shopping cart is empty</div>
-
-
+        <mat-menu #appMenu="matMenu" class="hamburgerMenuWrapper">
+            <button mat-menu-item routerLink="profil">Profil</button>
+            <button mat-menu-item routerLink="referencie">Referencie</button>
+            <button mat-menu-item routerLink="prihlaska">Prihláška</button>
+            <button mat-menu-item routerLink="zoznam-produktov">
+                Produkty
+            </button>
+            <button mat-menu-item routerLink="statistika">Štatistiky</button>
+        </mat-menu>
+        <button mat-button [matMenuTriggerFor]="appMenu" class="hamburgerMenu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
     </div>
-
-
-
-
-    <mat-menu #appMenu = "matMenu" class="hamburgerMenuWrapper">
-    <button mat-menu-item routerLink="profil">Profil</button>
-    <button mat-menu-item routerLink="referencie"  >Referencie</button>
-    <button mat-menu-item routerLink="prihlaska">Prihláška</button>
-    <button mat-menu-item routerLink="zoznam-produktov">Produkty</button>
-    <button mat-menu-item routerLink="statistika">Štatistiky</button>
-    </mat-menu>
-  <button mat-button [matMenuTriggerFor]="appMenu" class="hamburgerMenu"><i class="fa-solid fa-bars"></i></button>
-
-
 </div>
-
-
