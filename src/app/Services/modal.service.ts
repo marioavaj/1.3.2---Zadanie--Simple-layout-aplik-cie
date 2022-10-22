@@ -7,13 +7,17 @@ import { ModalWindowComponent } from '../modal-window/modal-window.component';
 })
 export class ModalService {
 
+    modalRef: any;
+
   constructor(
     public dialog: MatDialog,
 
     ) { }
 
+
+
     openDialog() {
-        this.dialog.open(ModalWindowComponent);
+        this.dialog.open(ModalWindowComponent).addPanelClass("modalLayout");
+
       }
 }
-
