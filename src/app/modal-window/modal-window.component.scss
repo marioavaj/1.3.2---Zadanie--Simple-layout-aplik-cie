@@ -1,29 +1,26 @@
-.modalLayout{
- width: 500px;
+.modalLayout {
+    width: 500px;
 }
 
-.mat-dialog-container{
-    background-color: aquamarine;
+.mat-dialog-container {
+    background-color: aquamarine !important;
 }
-h1{
+h1 {
     color: brown;
 }
 
-i{
-   font-size: 2.5em;
-   color: darkslategrey;
-
+i {
+    font-size: 2.5em;
+    color: darkslategrey;
 }
 
-i:hover{
+i:hover {
     cursor: pointer;
-   color: rgb(70, 113, 113);
-
+    color: rgb(70, 113, 113);
 }
 
-.mat-icon-button{
-    background-color: transparent;
+.mat-dialog-close {
+    background-color: rebeccapurple;
 
-    top: -120px;
+    position: absolute;
 }
-

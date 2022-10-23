@@ -1,23 +1,15 @@
 import { Injectable } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ModalWindowComponent } from '../modal-window/modal-window.component';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class ModalService {
-
-    modalRef: any;
-
-  constructor(
-    public dialog: MatDialog,
-
-    ) { }
-
-
+    constructor(public dialog: MatDialog) {}
 
     openDialog() {
-        this.dialog.open(ModalWindowComponent).addPanelClass("modalLayout");
-
-      }
+        const modal = this.dialog.open(ModalWindowComponent);
+        modal.disableClose = true;
+    }
 }

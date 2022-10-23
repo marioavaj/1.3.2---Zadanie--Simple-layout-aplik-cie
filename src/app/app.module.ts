@@ -23,7 +23,7 @@ import { ShowNewHead } from './Shared/directives/showNewHead.directives';
 import { Hidden } from './Shared/directives/hidden.directive';
 import { FooterComponent } from './Footer/footer/footer.component';
 import { ModalWindowComponent } from './modal-window/modal-window.component';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
     declarations: [
@@ -41,8 +41,6 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
         ShowNewHead,
         Hidden,
         ModalWindowComponent,
-
-
     ],
     imports: [
         RouterModule,
@@ -56,7 +54,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
         BrowserAnimationsModule,
         MatButtonModule,
         MatTooltipModule,
-        MatDialogModule
+        MatDialogModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
