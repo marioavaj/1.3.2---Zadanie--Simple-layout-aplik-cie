@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, UntypedFormGroup, Validators } from '@angular/forms';
 import { ProductServiceService } from 'src/app/Services/product-service.service';
 import { Vendor } from 'src/app/models/Product';
 import { compareSoldLastMonthSold } from 'src/app/Shared/directives/compareFormFields';
@@ -14,7 +14,7 @@ export class NewProductFormComponent implements OnInit {
     fullVendorFormat: Vendor[];
     fullReviewFormat?: string[];
 
-    productFormGroup = new FormGroup(
+    productFormGroup = new UntypedFormGroup(
         {
             name: new FormControl('', Validators.required),
             category: new FormControl(''),
@@ -27,7 +27,7 @@ export class NewProductFormComponent implements OnInit {
             sold: new FormControl('', Validators.required),
             lastMonthSold: new FormControl('', Validators.required),
         },
-        compareSoldLastMonthSold
+         compareSoldLastMonthSold
     );
 
     reviews = new FormControl();
@@ -40,6 +40,8 @@ export class NewProductFormComponent implements OnInit {
             countStock: new FormArray([new FormControl('')]),
         });
     }
+
+
 
     createNewProduct() {
         this.productFormGroup.markAllAsTouched();
