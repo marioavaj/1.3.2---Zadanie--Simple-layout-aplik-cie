@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, UntypedFormGroup, Validators } from '@angular/forms';
-import { ProductServiceService } from 'src/app/Services/product-service.service';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Vendor } from 'src/app/models/Product';
+import { ModalService } from 'src/app/Services/modal.service';
+import { ProductServiceService } from 'src/app/Services/product-service.service';
 import { compareSoldLastMonthSold } from 'src/app/Shared/directives/compareFormFields';
 
 @Component({
-    selector: 'app-new-product-form',
-    templateUrl: './new-product-form.component.html',
-    styleUrls: ['./new-product-form.component.scss'],
+    selector: 'app-modal-add-edit-product',
+    templateUrl: './modal-add-edit-product.component.html',
+    styleUrls: ['./modal-add-edit-product.component.scss'],
 })
-export class NewProductFormComponent implements OnInit {
+export class ModalAddEditProductComponent implements OnInit {
     vendorName: any;
     fullVendorFormat: Vendor[];
     fullReviewFormat?: string[];
 
-    productFormGroup = new UntypedFormGroup(
+    productFormGroup = new FormGroup(
         {
             name: new FormControl('', Validators.required),
             category: new FormControl(''),
@@ -27,12 +28,18 @@ export class NewProductFormComponent implements OnInit {
             sold: new FormControl('', Validators.required),
             lastMonthSold: new FormControl('', Validators.required),
         },
-         compareSoldLastMonthSold
+        {
+            validators: [compareSoldLastMonthSold],
+            updateOn: 'blur',
+        }
     );
 
     reviews = new FormControl();
 
-    constructor(private sendNewProduct: ProductServiceService) {}
+    constructor(
+        private sendNewProduct: ProductServiceService,
+        private dialog: ModalService
+    ) {}
 
     ngOnInit(): void {
         this.vendorName = new FormGroup({
@@ -41,7 +48,9 @@ export class NewProductFormComponent implements OnInit {
         });
     }
 
-
+    closeModal() {
+        this.dialog.closeModal();
+    }
 
     createNewProduct() {
         this.productFormGroup.markAllAsTouched();
@@ -67,6 +76,7 @@ export class NewProductFormComponent implements OnInit {
                     ' has been inserted into the database'
             );
         } else alert('Form is invalid');
+        this.closeModal();
     }
 
     addFormArray() {

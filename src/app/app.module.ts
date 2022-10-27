@@ -23,7 +23,8 @@ import { ShowNewHead } from './Shared/directives/showNewHead.directives';
 import { Hidden } from './Shared/directives/hidden.directive';
 import { FooterComponent } from './Footer/footer/footer.component';
 import { ModalWindowComponent } from './modal-window/modal-window.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { ModalAddEditProductComponent } from './modal-window/ModalAddEditProduct/modal-add-edit-product/modal-add-edit-product.component';
 
 @NgModule({
     declarations: [
@@ -41,6 +42,7 @@ import { MatDialogModule } from '@angular/material/dialog';
         ShowNewHead,
         Hidden,
         ModalWindowComponent,
+        ModalAddEditProductComponent,
     ],
     imports: [
         RouterModule,

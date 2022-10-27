@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalService } from 'src/app/Services/modal.service';
 import { Product } from '../../models/Product';
 import { ProductServiceService } from '../../Services/product-service.service';
 
@@ -14,7 +15,8 @@ export class ZoznamProduktovComponent implements OnInit {
     filteredData: Product[];
     onStockCheckBox: boolean;
 
-    constructor(private ProductServiceService: ProductServiceService) {}
+    constructor(private ProductServiceService: ProductServiceService,
+        private modal: ModalService) {}
 
     ngOnInit(): void {
         this.ProductServiceService.getProductList().then((products: any[]) => {
@@ -40,4 +42,9 @@ export class ZoznamProduktovComponent implements OnInit {
     isClicked() {
         this.sortByClicked = !this.sortByClicked;
     }
+
+    openModalNewProduct(){
+        this.modal.openNewProduct();
+    }
+
 }

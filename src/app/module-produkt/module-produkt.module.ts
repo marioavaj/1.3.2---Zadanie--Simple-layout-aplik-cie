@@ -15,7 +15,6 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ShoppingCartListComponent } from './shopping-cart-list/shopping-cart-list.component';
 import { MatButtonModule } from '@angular/material/button';
-import { NewProductFormComponent } from './new-product-form/new-product-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatStepperModule} from '@angular/material/stepper';
@@ -30,7 +29,7 @@ import {MatStepperModule} from '@angular/material/stepper';
         SortByPipePipe,
         CountdownComponent,
         ShoppingCartListComponent,
-        NewProductFormComponent,
+
     ],
     imports: [
         CommonModule,
@@ -56,6 +55,8 @@ import {MatStepperModule} from '@angular/material/stepper';
         CountdownComponent,
         MatBadgeModule,
         MatFormFieldModule,
+        MatStepperModule,
+        MatInputModule
     ],
 
     providers: [SortByPipePipe],

@@ -34,17 +34,19 @@ h3 {
     margin-bottom: auto;
     margin-left: auto;
 }
-.mat-raised-button {
-    margin-left: auto;
-    margin-right: auto;
-    width: 250px;
-    margin-bottom: 1em;
-    background-color: rgb(31, 31, 71);
-    text-decoration: none;
-    color: white;
+
+
+.highValueThanSold{
+color: red;
+font-size: 12px;
 }
 
-.mat-raised-button:hover {
-    background-color: rgb(54, 54, 54);
-    color: white;
+.buttonWrapper{
+
+    display: flex;
+    justify-content:flex-end;
+
+    .mat-raised-button{
+        margin-right: 1.2em;
+    }
 }
