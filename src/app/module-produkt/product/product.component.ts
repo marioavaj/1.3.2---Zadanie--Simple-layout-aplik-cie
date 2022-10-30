@@ -9,8 +9,10 @@ import {
 } from '@angular/core';
 import { ProductServiceService } from 'src/app/Services/product-service.service';
 import { ShopingCartServiceService } from 'src/app/Services/shoping-cart-service.service';
-import { ProductItems } from '../../models/ProductItems';
 import { Product } from '../../models/Product';
+import { ModalService } from 'src/app/Services/modal.service';
+import { ModalAddEditProductComponent } from 'src/app/modal-window/ModalAddEditProduct/modal-add-edit-product/modal-add-edit-product.component';
+import { MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-product',
@@ -25,14 +27,14 @@ export class ProductComponent implements OnInit {
 
     reviewFromInput: string;
 
-    x: number;
-    y: number;
     public clickedItem: Product;
 
     constructor(
         private createItem: ShopingCartServiceService,
         private newStockCount: ProductServiceService,
-        private deleteItem: ProductServiceService
+        private deleteItem: ProductServiceService,
+        private upgradeItem: ProductServiceService,
+        private dialog: ModalService
     ) {}
 
     ngOnInit(): void {}
@@ -56,12 +58,20 @@ export class ProductComponent implements OnInit {
     addToCart() {
         this.createItem.putData(this.data);
         this.data.stockCount--;
-        console.log(this.data.stockCount);
+
         this.newStockCount.minusStockCount(this.data.id, this.data.stockCount);
     }
 
     deleteProduct(item: number) {
         this.deleteItem.deleteProduct(item);
+    }
+
+    editProduct(product: any) {
+        const config = new MatDialogConfig();
+        config.disableClose = true;
+        config.data = product;
+
+        this.dialog.openDialog(ModalAddEditProductComponent, config);
     }
 }
 
