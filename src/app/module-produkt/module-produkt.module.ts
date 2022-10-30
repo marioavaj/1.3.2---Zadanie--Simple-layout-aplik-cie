@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatStepperModule} from '@angular/material/stepper';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
     declarations: [
@@ -42,7 +43,8 @@ import {MatStepperModule} from '@angular/material/stepper';
         MatButtonModule,
         MatFormFieldModule,
         MatInputModule,
-        MatStepperModule
+        MatStepperModule,
+        MatDialogModule
     ],
 
     exports: [
@@ -56,7 +58,8 @@ import {MatStepperModule} from '@angular/material/stepper';
         MatBadgeModule,
         MatFormFieldModule,
         MatStepperModule,
-        MatInputModule
+        MatInputModule,
+        MatDialogModule
     ],
 
     providers: [SortByPipePipe],

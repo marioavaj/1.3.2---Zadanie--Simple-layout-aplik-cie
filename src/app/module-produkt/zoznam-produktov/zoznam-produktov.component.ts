@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalAddEditProductComponent } from 'src/app/modal-window/ModalAddEditProduct/modal-add-edit-product/modal-add-edit-product.component';
 import { ModalService } from 'src/app/Services/modal.service';
 import { Product } from '../../models/Product';
 import { ProductServiceService } from '../../Services/product-service.service';
@@ -44,7 +45,8 @@ export class ZoznamProduktovComponent implements OnInit {
     }
 
     openModalNewProduct(){
-        this.modal.openNewProduct();
+        this.modal.openDialog(ModalAddEditProductComponent);
+
     }
 
 }

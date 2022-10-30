@@ -70,7 +70,6 @@ export class ProductComponent implements OnInit {
         const config = new MatDialogConfig();
         config.disableClose = true;
         config.data = product;
-
         this.dialog.openDialog(ModalAddEditProductComponent, config);
     }
 }

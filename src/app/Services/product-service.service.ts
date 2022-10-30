@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Product } from '../models/Product';
+import { Product, Vendor } from '../models/Product';
 import { ProductItems } from '../models/ProductItems';
 
 @Injectable({ providedIn: 'root' })
@@ -9,32 +9,54 @@ export class ProductServiceService {
     productById: Product[];
     sortedData: Product[];
     private toLocalStorage: any;
-    newStockCount = new BehaviorSubject<any>(0);
+    dataStream = new BehaviorSubject<any>(0);
     cache: any;
     idCounter = 7;
     constructor() {}
 
     createNewProductInService(
         newProductData: any,
-        newVendors: any,
-        newReview: any
+        newVendors: Vendor[],
+        newReview: any,
+        editMode: boolean,
+        upgradedProduct: any
     ) {
-        this.idCounter++;
-        const newProduct: any = {
-            id: this.idCounter,
-            name: newProductData.name.toString(),
-            category: newProductData.category.toString(),
-            price: parseFloat(newProductData.price),
-            stockCount: parseInt(newProductData.stockCount),
-            sold: parseInt(newProductData.sold),
-            lastMonthSold: parseInt(newProductData.lastMonthSold),
-            description: newProductData.description.toString(),
-            vendors: newVendors,
-            reviews: newReview,
-        };
-        ProductItems.productData.push(newProduct);
-        console.log(newProduct);
-        console.log(ProductItems.productData);
+        //create mode
+        if (!editMode) {
+            this.idCounter++;
+            const newProduct: any = {
+                id: this.idCounter,
+                name: newProductData.name.toString(),
+                category: newProductData.category.toString(),
+                price: parseFloat(newProductData.price),
+                stockCount: parseInt(newProductData.stockCount),
+                sold: parseInt(newProductData.sold),
+                lastMonthSold: parseInt(newProductData.lastMonthSold),
+                description: newProductData.description.toString(),
+                vendors: newVendors,
+                reviews: newReview,
+            };
+            ProductItems.productData.push(newProduct);
+        } else {
+            //Edit mode
+            ProductItems.productData.forEach((item) => {
+                if (+upgradedProduct.id === item.id) {
+                    item.name = newProductData.name.toString();
+                    item.category = newProductData.category.toString();
+                    item.price = parseFloat(newProductData.price);
+                    item.stockCount = parseInt(newProductData.stockCount);
+                    item.sold = parseInt(newProductData.sold);
+                    item.lastMonthSold = parseInt(newProductData.lastMonthSold);
+                    item.description = newProductData.description.toString();
+                    item.vendors = newVendors;
+                    item.reviews = newReview;
+                    console.log(newVendors);
+                }
+
+
+            });
+
+        }
     }
 
     getProductList(): Promise<any[]> {
@@ -63,7 +85,7 @@ export class ProductServiceService {
                         this.productById.push(element);
                     }
                 });
-                resolve(this.productData);
+                resolve(this.productById);
             }, 1000);
         });
     }
@@ -107,7 +129,7 @@ export class ProductServiceService {
         this.productData[indexOfObject].stockCount = newStockCount;
         this.toLocalStorage = JSON.stringify(this.productData);
         localStorage.setItem('productData', this.toLocalStorage);
-        this.newStockCount.next(this.productData);
+        this.dataStream.next(this.productData);
     }
 
     plusStockCount(id: number, newStockCount: number) {
@@ -117,7 +139,7 @@ export class ProductServiceService {
         this.productData[indexOfObject].stockCount = newStockCount;
         this.toLocalStorage = JSON.stringify(this.productData);
         localStorage.setItem('productData', this.toLocalStorage);
-        this.newStockCount.next(this.productData);
+        this.dataStream.next(this.productData);
     }
 
     deleteProduct(item: number) {
@@ -126,4 +148,6 @@ export class ProductServiceService {
         );
         ProductItems.productData.splice(findedIndex, 1);
     }
+
+
 }

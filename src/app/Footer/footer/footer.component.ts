@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalWindowComponent } from 'src/app/modal-window/modal-window.component';
 import { ModalService } from 'src/app/Services/modal.service';
 
 @Component({
@@ -12,6 +13,6 @@ export class FooterComponent implements OnInit {
     ngOnInit(): void {}
 
     openModal(): void {
-        this.modal.openDialog();
+        this.modal.openDialog(ModalWindowComponent);
     }
 }
