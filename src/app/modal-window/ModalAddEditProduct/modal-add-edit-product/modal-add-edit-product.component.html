@@ -116,12 +116,13 @@
                         <mat-label>count on Stock</mat-label>
                         <input type="number" matInput [formControlName]="i" (blur)="sendFormArray()"/>
                     </mat-form-field>
-                    <button class="buttonPlus" (click)="addFormArray()">
-                        +
-                    </button>
-                </div>
+                                    </div>
             </div>
+
         </form>
+        <button class="buttonPlus" (click)="addFormArray()">
+            +
+        </button>
         <button mat-button matStepperPrevious>Back to product info</button>
         <button mat-button matStepperNext>Next to review</button>
     </mat-step>
