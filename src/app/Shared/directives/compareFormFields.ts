@@ -5,8 +5,8 @@ import {
     ValidatorFn,
 } from '@angular/forms';
 
-export function comparSoldLastMonthSold(
-    form: FormGroup
+export function compareSoldLastMonthSold(
+    form: any
 ): { [key: string]: any } | null {
     let sold = parseInt(form.get('sold')?.value);
     let lastMonthSold = parseInt(form.get('lastMonthSold')?.value);
@@ -15,7 +15,7 @@ export function comparSoldLastMonthSold(
 }
 
 //verzia z angular.io
-export const compareSoldLastMonthSold: ValidatorFn = (
+export const comparSoldLastMonthSold: ValidatorFn = (
     control: AbstractControl
 ): ValidationErrors | null => {
     let sold = parseInt(control.get('sold')?.value);
@@ -24,13 +24,6 @@ export const compareSoldLastMonthSold: ValidatorFn = (
     return sold < lastMonthSold ? { highValueThanSold: true } : null;
 };
 
-/*export  function  compaSoldLastMonthSold(form: FormGroup): ValidatorFn {
-    const sold = form.controls['sold'].value;
-    const lastMonthSold = form.controls['lastMonthSold'].value;
-
-
-     return sold < lastMonthSold ? {mismatch: true} :  ;
-  }*/
 
 /*export function comparSoldLastMonthSold(g: FormGroup) {
     return g.get('sold')?.value < g.get('lastMonthSold')?.value

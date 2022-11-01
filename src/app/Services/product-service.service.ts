@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Product, Vendor } from '../models/Product';
 import { ProductItems } from '../models/ProductItems';
+import { ApiService } from './api.service';
 
 @Injectable({ providedIn: 'root' })
 export class ProductServiceService {
@@ -12,7 +13,9 @@ export class ProductServiceService {
     dataStream = new BehaviorSubject<any>(0);
     cache: any;
     idCounter = 7;
-    constructor() {}
+    constructor(
+        private api: ApiService
+    ) {}
 
     createNewProductInService(
         newProductData: any,
@@ -22,6 +25,7 @@ export class ProductServiceService {
         upgradedProduct: any
     ) {
         //create mode
+        console.log(editMode);
         if (!editMode) {
             this.idCounter++;
             const newProduct: any = {
@@ -51,7 +55,8 @@ export class ProductServiceService {
                     item.vendors = newVendors;
                     item.reviews = newReview;
                     console.log(newVendors);
-                }
+
+                                   }
 
 
             });
@@ -68,11 +73,15 @@ export class ProductServiceService {
                 this.productData = this.cache;
                 resolve(this.productData);
             } else
-                setTimeout(() => {
-                    this.productData = ProductItems.productData;
-                    this.cache = this.productData;
-                    resolve(this.productData);
-                }, 10);
+
+            this.api.get().toPromise().then((products)=>{
+
+                this.productData = products;
+                console.log(this.productData);
+
+            });
+
+
         });
     }
 

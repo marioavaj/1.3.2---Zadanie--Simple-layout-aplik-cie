@@ -25,6 +25,7 @@ import { FooterComponent } from './Footer/footer/footer.component';
 import { ModalWindowComponent } from './modal-window/modal-window.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ModalAddEditProductComponent } from './modal-window/ModalAddEditProduct/modal-add-edit-product/modal-add-edit-product.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -57,6 +58,7 @@ import { ModalAddEditProductComponent } from './modal-window/ModalAddEditProduct
         MatButtonModule,
         MatTooltipModule,
         MatDialogModule,
+        HttpClientModule
     ],
     providers: [],
     bootstrap: [AppComponent],

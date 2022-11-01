@@ -3,6 +3,7 @@ import { ModalAddEditProductComponent } from 'src/app/modal-window/ModalAddEditP
 import { ModalService } from 'src/app/Services/modal.service';
 import { Product } from '../../models/Product';
 import { ProductServiceService } from '../../Services/product-service.service';
+import { ApiService } from 'src/app/Services/api.service';
 
 @Component({
     selector: 'app-zoznam-produktov',
@@ -20,6 +21,8 @@ export class ZoznamProduktovComponent implements OnInit {
         private modal: ModalService) {}
 
     ngOnInit(): void {
+
+
         this.ProductServiceService.getProductList().then((products: any[]) => {
             this.productList = products;
         });

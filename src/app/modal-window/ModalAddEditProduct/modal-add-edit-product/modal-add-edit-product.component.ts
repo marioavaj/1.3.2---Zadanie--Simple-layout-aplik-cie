@@ -15,7 +15,7 @@ export class ModalAddEditProductComponent implements OnInit {
     fullVendorFormat: Vendor[];
     fullReviewFormat?: string[];
     upgradedProduct?: Product;
-    editMode: boolean = false;
+    editMode: boolean;
 
     productFormGroup = new FormGroup(
         {
@@ -30,10 +30,7 @@ export class ModalAddEditProductComponent implements OnInit {
                 Validators.min(0),
             ]),
             description: new FormControl(''),
-            sold: new FormControl('', [
-                Validators.required,
-                Validators.min(0),
-            ]),
+            sold: new FormControl('', [Validators.required, Validators.min(0)]),
             lastMonthSold: new FormControl('', [
                 Validators.required,
                 Validators.min(0),
@@ -63,17 +60,16 @@ export class ModalAddEditProductComponent implements OnInit {
 
         if (this.upgradedProduct) {
             this.editMode = true;
-            if(this.upgradedProduct.vendors?.length==0){
+            if (this.upgradedProduct.vendors?.length == 0) {
                 this.vendorName = new FormGroup({
                     vendors: new FormArray([new FormControl('')]),
                     countStock: new FormArray([new FormControl('')]),
                 });
-
-            }else
-            this.vendorName = new FormGroup({
-                vendors: new FormArray([]),
-                countStock: new FormArray([]),
-            });
+            } else
+                this.vendorName = new FormGroup({
+                    vendors: new FormArray([]),
+                    countStock: new FormArray([]),
+                });
             this.productFormGroup
                 .get('name')
                 ?.setValue(this.upgradedProduct.name);
@@ -99,10 +95,6 @@ export class ModalAddEditProductComponent implements OnInit {
                 this.upgradedProduct.vendors &&
                 this.upgradedProduct.vendors.length
             ) {
-                console.log(
-                    this.upgradedProduct.vendors,
-                    this.upgradedProduct.vendors.length
-                );
                 this.upgradedProduct.vendors.forEach((element) => {
                     this.vendorName
                         .get('vendors')
@@ -112,10 +104,16 @@ export class ModalAddEditProductComponent implements OnInit {
                         .push(new FormControl(element.stockCount));
                 });
             }
-        }
+        } else this.editMode = false;
     }
 
     closeModal() {
+
+        this.dialogRef.close();
+    }
+
+    cancelModal(){
+        alert('Operation has been canceled');
         this.dialogRef.close();
     }
 
@@ -130,7 +128,7 @@ export class ModalAddEditProductComponent implements OnInit {
             if (review !== null) {
                 this.fullReviewFormat.push(review);
             }
-
+            this.sendFormArray();
             this.dataFromService.createNewProductInService(
                 newProductData,
                 this.fullVendorFormat,
@@ -166,7 +164,7 @@ export class ModalAddEditProductComponent implements OnInit {
         this.fullVendorFormat = [];
         let vendorsRawValue = this.vendorName.get('vendors').getRawValue();
         let vendorCountStock = this.vendorName.get('countStock').getRawValue();
-        console.log(this.fullVendorFormat)
+        console.log(this.fullVendorFormat);
 
         for (let i = 0; i < vendorsRawValue.length; i++) {
             let oneVendor: Vendor = {
@@ -174,7 +172,6 @@ export class ModalAddEditProductComponent implements OnInit {
                 stockCount: parseInt(vendorCountStock[i]),
             };
             this.fullVendorFormat.push(oneVendor);
-
         }
     }
 }
