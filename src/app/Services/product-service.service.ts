@@ -12,7 +12,7 @@ export class ProductServiceService {
     private toLocalStorage: any;
     dataStream = new BehaviorSubject<any>(0);
     cache: any;
-    idCounter = 7;
+    idCounter = 99999;
     constructor(private api: ApiService) {}
 
     createNewProductInService(
@@ -27,17 +27,28 @@ export class ProductServiceService {
             this.idCounter++;
             const newProduct: any = {
                 id: this.idCounter,
+                uuid: this.idCounter+100,
                 name: newProductData.name.toString(),
+                description: newProductData.description.toString(),
                 category: newProductData.category.toString(),
                 price: parseFloat(newProductData.price),
                 stockCount: parseInt(newProductData.stockCount),
-                sold: parseInt(newProductData.sold),
-                lastMonthSold: parseInt(newProductData.lastMonthSold),
-                description: newProductData.description.toString(),
+                sellCountOverall: parseInt(newProductData.sold),
+                sellCountLastMonth: parseInt(newProductData.lastMonthSold),
+                editPermission: false,
+                reviews:["test"],
                 vendors: newVendors,
-                reviews: newReview,
+                //vendors: newVendors,
+                // reviews: newReview,
             };
-            ProductItems.productData.push(newProduct);
+
+            console.log(newProduct);
+
+            this.api.post(newProduct).subscribe((product) => {
+                this.productData.push(product);
+            });
+
+            //ProductItems.productData.push(newProduct);
         } else {
             //Edit mode
             ProductItems.productData.forEach((item) => {
@@ -62,7 +73,7 @@ export class ProductServiceService {
         this.productData = fromLS;
 
         return new Promise<any[]>((resolve, reject) => {
-            if (this.cache) {
+            if (this.cache && this.cache.length == this.productData.length) {
                 this.productData = this.cache;
                 resolve(this.productData);
             } else
@@ -83,7 +94,7 @@ export class ProductServiceService {
                                 stockCount: apiData.stockCount,
                                 sold: apiData.sellCountOverall,
                                 lastMonthSold: apiData.sellCountLastMonth,
-                                description: apiData.Description,
+                                description: apiData.description,
                             };
                         });
 

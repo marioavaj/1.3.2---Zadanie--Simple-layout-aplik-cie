@@ -25,4 +25,12 @@ export class ApiService {
         //"https://product-api.tomondre.com/api/v1/lessons/product/GetProducts"
         return this.http.get(endpoint, this.jsonHttpOptions);
     }
+
+    post(data): Observable<any> {
+         return this.http.post('https://angularkurz.itcooking.eu/api/v1/lessons/product/CreateProduct', data, this.jsonHttpOptions);
+    }
+
+    put(endpoint, id: any, data): Observable<any>{
+return this.http.put(endpoint, data, this.jsonHttpOptions)
+    }
 }
