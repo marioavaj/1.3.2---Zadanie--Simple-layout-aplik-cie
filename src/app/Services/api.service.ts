@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
 export class ApiService {
     private get jsonHttpOptions() {
         let headers = new HttpHeaders();
-        headers = headers.set("Access-Control-Allow-Origin", "*");
-        headers = headers.set("X-Requested-With", "XMLHttpRequest");
-        headers = headers.set("Content-Type", "aplication/json")
+        headers = headers.set('Access-Control-Allow-Origin', '*');
+        headers = headers.set('X-Requested-With', 'XMLHttpRequest');
+        headers = headers.set('Content-Type', 'aplication/json');
 
         return {
             headers: headers,
@@ -22,6 +22,7 @@ export class ApiService {
     get(): Observable<any> {
         const endpoint =
             'https://angularkurz.itcooking.eu/api/v1/lessons/product/GetProducts';
+        //"https://product-api.tomondre.com/api/v1/lessons/product/GetProducts"
         return this.http.get(endpoint, this.jsonHttpOptions);
     }
 }

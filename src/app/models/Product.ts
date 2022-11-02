@@ -14,3 +14,4 @@ export interface Vendor {
     name: string;
     stockCount: number;
 }
+

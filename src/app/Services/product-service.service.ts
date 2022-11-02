@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, take } from 'rxjs';
 import { Product, Vendor } from '../models/Product';
 import { ProductItems } from '../models/ProductItems';
 import { ApiService } from './api.service';
 
 @Injectable({ providedIn: 'root' })
 export class ProductServiceService {
-    productData: Product[];
+    productData: any;
     productById: Product[];
     sortedData: Product[];
     private toLocalStorage: any;
     dataStream = new BehaviorSubject<any>(0);
     cache: any;
     idCounter = 7;
-    constructor(
-        private api: ApiService
-    ) {}
+    constructor(private api: ApiService) {}
 
     createNewProductInService(
         newProductData: any,
@@ -25,7 +23,6 @@ export class ProductServiceService {
         upgradedProduct: any
     ) {
         //create mode
-        console.log(editMode);
         if (!editMode) {
             this.idCounter++;
             const newProduct: any = {
@@ -55,12 +52,8 @@ export class ProductServiceService {
                     item.vendors = newVendors;
                     item.reviews = newReview;
                     console.log(newVendors);
-
-                                   }
-
-
+                }
             });
-
         }
     }
 
@@ -68,20 +61,36 @@ export class ProductServiceService {
         let fromLS = JSON.parse(localStorage.getItem('productData')!);
         this.productData = fromLS;
 
-        return new Promise<Product[]>((resolve, reject) => {
-            if (this.cache && this.cache == ProductItems.productData) {
+        return new Promise<any[]>((resolve, reject) => {
+            if (this.cache) {
                 this.productData = this.cache;
                 resolve(this.productData);
             } else
+                this.api
+                    .get()
+                    .pipe(take(1))
+                    .subscribe((products) => {
+                        //pite(take(1)) - vykona subacribe 1x, netreba unsubscibe (toPromise() je depricated)
+                        this.productData = products;
+                        console.log(this.productData);
 
-            this.api.get().toPromise().then((products)=>{
+                        this.productData = this.productData.map((apiData) => {
+                            return {
+                                id: apiData.id,
+                                name: apiData.name,
+                                category: apiData.category,
+                                price: apiData.price,
+                                stockCount: apiData.stockCount,
+                                sold: apiData.sellCountOverall,
+                                lastMonthSold: apiData.sellCountLastMonth,
+                                description: apiData.Description,
+                            };
+                        });
 
-                this.productData = products;
-                console.log(this.productData);
-
-            });
-
-
+                        this.cache = this.productData; //naplni cache
+                        console.log(this.productData);
+                        resolve(this.productData);
+                    });
         });
     }
 
@@ -158,5 +167,14 @@ export class ProductServiceService {
         ProductItems.productData.splice(findedIndex, 1);
     }
 
-
+    updateKeysfromApi(apiData: any): void {
+        const id = apiData.id;
+        const name = apiData.name;
+        const category = apiData.category;
+        const price = apiData.price;
+        const stockCount = apiData.stockCount;
+        const sold = apiData.SellCountOverall;
+        const lastMonthSold = apiData.SellCountLastMonth;
+        const description = apiData.Description;
+    }
 }
