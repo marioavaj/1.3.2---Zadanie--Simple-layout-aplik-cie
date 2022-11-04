@@ -8,7 +8,7 @@ import { ProductServiceService } from '../../Services/product-service.service';
     styleUrls: ['./product-detail.component.scss'],
 })
 export class ProductDetailComponent implements OnInit {
-    product;
+    data?;
 
     constructor(
         private route: ActivatedRoute,
@@ -21,7 +21,7 @@ export class ProductDetailComponent implements OnInit {
         const productIdFromRoute = Number(routeParams.get('productId'));
 
         this.productData.getProductList().then((products: any[]) => {
-            this.product = products.find((p) => p.id === productIdFromRoute);
+            this.data = products.find((p) => p.id === productIdFromRoute);
         });
     }
 }

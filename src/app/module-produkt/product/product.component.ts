@@ -20,7 +20,7 @@ import { MatDialogConfig } from '@angular/material/dialog';
     styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
-    @Input() data: Product;
+    @Input() data: any;
     @Output() reviewAdd: EventEmitter<any> = new EventEmitter<any>();
 
     @ViewChild('productPosition') productPosition: ElementRef<HTMLElement>;
@@ -33,7 +33,6 @@ export class ProductComponent implements OnInit {
         private createItem: ShopingCartServiceService,
         private newStockCount: ProductServiceService,
         private deleteItem: ProductServiceService,
-        private upgradeItem: ProductServiceService,
         private dialog: ModalService
     ) {}
 

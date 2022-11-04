@@ -10,8 +10,29 @@ export interface Product {
     vendors?: Vendor[];
     reviews?: string[];
 }
+
 export interface Vendor {
     name: string;
     stockCount: number;
 }
 
+export interface VendorsInApi {
+    id: number;
+    uuid: string;
+    name: string;
+    stockCount: number;
+}
+
+export interface newProductToApi {
+    id: number;
+    uuid: string;
+    name: string;
+    price: number;
+    category: string;
+    description: string;
+    stockCount: number;
+    sellCountOverall: number;
+    sellCountLastMonth: number;
+    vendors: VendorsInApi[];
+    reviews: string[];
+}

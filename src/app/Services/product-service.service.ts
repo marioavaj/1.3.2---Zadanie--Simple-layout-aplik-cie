@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, take } from 'rxjs';
-import { Product, Vendor } from '../models/Product';
-import { ProductItems } from '../models/ProductItems';
+import {
+    newProductToApi,
+    Product,
+    Vendor,
+    VendorsInApi,
+} from '../models/Product';
 import { ApiService } from './api.service';
 
 @Injectable({ providedIn: 'root' })
@@ -9,71 +13,86 @@ export class ProductServiceService {
     productData: any;
     productById: Product[];
     sortedData: Product[];
-    private toLocalStorage: any;
     dataStream = new BehaviorSubject<any>(0);
     cache: any;
     idCounter = 99999;
+    vendorToApi: VendorsInApi[] = [];
+
     constructor(private api: ApiService) {}
 
     createNewProductInService(
         newProductData: any,
         newVendors: Vendor[],
-        newReview: any,
+        newReview: string[],
         editMode: boolean,
         upgradedProduct: any
     ) {
+        newVendors.forEach((item) => {
+            this.vendorToApi.push({
+                id: this.idCounter + 101,
+                uuid: (this.idCounter + 1000).toString(),
+                name: item.name,
+                stockCount: item.stockCount,
+            });
+        });
+
+        console.log(this.vendorToApi);
+
         //create mode
         if (!editMode) {
             this.idCounter++;
-            const newProduct: any = {
+            const newProduct: newProductToApi = {
                 id: this.idCounter,
-                uuid: this.idCounter+100,
-                name: newProductData.name.toString(),
-                description: newProductData.description.toString(),
-                category: newProductData.category.toString(),
+                uuid: (this.idCounter + 100).toString(),
+                name: newProductData.name,
                 price: parseFloat(newProductData.price),
+                category: newProductData.category,
+                description: newProductData.description,
                 stockCount: parseInt(newProductData.stockCount),
                 sellCountOverall: parseInt(newProductData.sold),
                 sellCountLastMonth: parseInt(newProductData.lastMonthSold),
-                editPermission: false,
-                reviews:["test"],
-                vendors: newVendors,
-                //vendors: newVendors,
-                // reviews: newReview,
+                vendors: this.vendorToApi,
+                reviews: newReview,
             };
 
-            console.log(newProduct);
-
-            this.api.post(newProduct).subscribe((product) => {
-                this.productData.push(product);
-            });
-
-            //ProductItems.productData.push(newProduct);
+            this.api
+                .post(newProduct)
+                .pipe(take(1))
+                .subscribe(() => {
+                    location.reload();
+                });
         } else {
             //Edit mode
-            ProductItems.productData.forEach((item) => {
+            let productToApi = {};
+            this.productData.forEach((item) => {
                 if (+upgradedProduct.id === item.id) {
-                    item.name = newProductData.name.toString();
-                    item.category = newProductData.category.toString();
-                    item.price = parseFloat(newProductData.price);
-                    item.stockCount = parseInt(newProductData.stockCount);
-                    item.sold = parseInt(newProductData.sold);
-                    item.lastMonthSold = parseInt(newProductData.lastMonthSold);
-                    item.description = newProductData.description.toString();
-                    item.vendors = newVendors;
-                    item.reviews = newReview;
-                    console.log(newVendors);
+                    productToApi = {
+                        name: newProductData.name.toString(),
+                        category: newProductData.category.toString(),
+                        price: parseFloat(newProductData.price),
+                        stockCount: parseInt(newProductData.stockCount),
+                        sellCountOverall: parseInt(newProductData.sold),
+                        sellCountLastMonth: parseInt(
+                            newProductData.lastMonthSold
+                        ),
+                        description: newProductData.description.toString(),
+                        vendors: newVendors,
+                        reviews: newReview,
+                    };
                 }
             });
+            this.api
+                .put(upgradedProduct.id, productToApi)
+                .pipe(take(1))
+                .subscribe(() => {
+                    location.reload();
+                });
         }
     }
 
     getProductList(): Promise<any[]> {
-        let fromLS = JSON.parse(localStorage.getItem('productData')!);
-        this.productData = fromLS;
-
         return new Promise<any[]>((resolve, reject) => {
-            if (this.cache && this.cache.length == this.productData.length) {
+            if (this.cache) {
                 this.productData = this.cache;
                 resolve(this.productData);
             } else
@@ -81,10 +100,9 @@ export class ProductServiceService {
                     .get()
                     .pipe(take(1))
                     .subscribe((products) => {
-                        //pite(take(1)) - vykona subacribe 1x, netreba unsubscibe (toPromise() je depricated)
+                        //pipe(take(1)) - vykona subs cribe 1x, netreba unsubscibe (toPromise() je depricated)
                         this.productData = products;
-                        console.log(this.productData);
-
+                        //namapuje data z api do formatu pre zobrazenie
                         this.productData = this.productData.map((apiData) => {
                             return {
                                 id: apiData.id,
@@ -95,28 +113,19 @@ export class ProductServiceService {
                                 sold: apiData.sellCountOverall,
                                 lastMonthSold: apiData.sellCountLastMonth,
                                 description: apiData.description,
+                                Vendors: apiData.vendors
                             };
                         });
 
-                        this.cache = this.productData; //naplni cache
-                        console.log(this.productData);
                         resolve(this.productData);
                     });
+
+            this.cache = this.productData; //naplni cache
         });
     }
 
     getProductById(id: number): Promise<any[]> {
-        return new Promise<Product[]>((resolve, rejecet) => {
-            setTimeout(() => {
-                this.productData = ProductItems.productData;
-                this.productData.forEach((element) => {
-                    if (id === element.id) {
-                        this.productById.push(element);
-                    }
-                });
-                resolve(this.productById);
-            }, 1000);
-        });
+        return new Promise<Product[]>((resolve, rejecet) => {});
     }
 
     getBestseller(): Product[] {
@@ -156,8 +165,7 @@ export class ProductServiceService {
             return object.id === idProduct;
         });
         this.productData[indexOfObject].stockCount = newStockCount;
-        this.toLocalStorage = JSON.stringify(this.productData);
-        localStorage.setItem('productData', this.toLocalStorage);
+
         this.dataStream.next(this.productData);
     }
 
@@ -166,26 +174,18 @@ export class ProductServiceService {
             return object.id === id;
         });
         this.productData[indexOfObject].stockCount = newStockCount;
-        this.toLocalStorage = JSON.stringify(this.productData);
-        localStorage.setItem('productData', this.toLocalStorage);
+
         this.dataStream.next(this.productData);
     }
 
-    deleteProduct(item: number) {
+    deleteProduct(item: any) {
         const findedIndex = this.productData.findIndex(
             (array) => array.id === item
         );
-        ProductItems.productData.splice(findedIndex, 1);
-    }
+        console.log(item);
 
-    updateKeysfromApi(apiData: any): void {
-        const id = apiData.id;
-        const name = apiData.name;
-        const category = apiData.category;
-        const price = apiData.price;
-        const stockCount = apiData.stockCount;
-        const sold = apiData.SellCountOverall;
-        const lastMonthSold = apiData.SellCountLastMonth;
-        const description = apiData.Description;
+        this.api.delete(item).pipe(take(1)).subscribe();
+
+        //ProductItems.productData.splice(findedIndex, 1);
     }
 }

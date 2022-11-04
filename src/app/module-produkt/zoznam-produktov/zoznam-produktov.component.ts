@@ -3,7 +3,6 @@ import { ModalAddEditProductComponent } from 'src/app/modal-window/ModalAddEditP
 import { ModalService } from 'src/app/Services/modal.service';
 import { Product } from '../../models/Product';
 import { ProductServiceService } from '../../Services/product-service.service';
-import { ApiService } from 'src/app/Services/api.service';
 
 @Component({
     selector: 'app-zoznam-produktov',
@@ -11,24 +10,22 @@ import { ApiService } from 'src/app/Services/api.service';
     styleUrls: ['./zoznam-produktov.component.scss'],
 })
 export class ZoznamProduktovComponent implements OnInit {
+    static ngOnInit() {
+        throw new Error('Method not implemented.');
+    }
     productList: any[];
     sortByClicked: boolean;
     lastReview: string;
     filteredData: Product[];
     onStockCheckBox: boolean;
 
-    constructor(private ProductServiceService: ProductServiceService,
-        private modal: ModalService) {}
+    constructor(
+        private ProductServiceService: ProductServiceService,
+        private modal: ModalService
+    ) {}
 
     ngOnInit(): void {
-
-
-        this.ProductServiceService.getProductList().then((products: any[]) => {
-            this.productList = products;
-        });
-
-        this.filteredData = this.productList;
-        this.sortByClicked = false;
+        this.displayProduct();
     }
 
     lastReviewDisplayed(review: any, name: string): void {
@@ -47,9 +44,15 @@ export class ZoznamProduktovComponent implements OnInit {
         this.sortByClicked = !this.sortByClicked;
     }
 
-    openModalNewProduct(){
+    openModalNewProduct() {
         this.modal.openDialog(ModalAddEditProductComponent);
-
     }
 
+    displayProduct() {
+        this.ProductServiceService.getProductList().then((products: any[]) => {
+            this.productList = products;
+        });
+        this.filteredData = this.productList;
+        this.sortByClicked = false;
+    }
 }

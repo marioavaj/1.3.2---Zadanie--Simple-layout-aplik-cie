@@ -1,147 +1,214 @@
-
-
 <div class="space"></div>
 
 <h1>Štatistika predaja</h1>
 
 <div class="mat-elevation-z8">
-  <div class="nameOfTable">
-  <button mat-raised-button (click)="clearTable()">Clear table</button>
-  <button mat-raised-button (click)="addData()">Add data</button>
-  <button mat-raised-button (click)="bestsellers()">Bestsellers</button>
-  <mat-checkbox (click)="onChange()" style="margin: auto 0 auto .2em;">0-1000 €</mat-checkbox>
-  </div>
+    <div class="nameOfTable">
+        <button mat-raised-button (click)="clearTable()">Clear table</button>
+        <button mat-raised-button (click)="addData()">Add data</button>
+        <button mat-raised-button (click)="bestsellers()">Bestsellers</button>
+        <mat-checkbox (click)="onChange()" style="margin: auto 0 auto 0.2em"
+            >0-1000 €</mat-checkbox
+        >
+    </div>
 
-  <table mat-table [dataSource]="dataSource" matSort>
+    <table mat-table [dataSource]="dataSource1" matSort>
+        <!-- ID Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+        </ng-container>
 
-    <!-- ID Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let row"> {{row.name}} </td>
-    </ng-container>
+        <!-- Progress Column -->
+        <ng-container matColumnDef="price">
+            <th
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header
+                class="tableHeader"
+            >
+                Price
+            </th>
+            <td mat-cell *matCellDef="let row">{{ row.price }} €</td>
+        </ng-container>
 
-    <!-- Progress Column -->
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader"> Price </th>
-      <td mat-cell *matCellDef="let row"> {{row.price}} € </td>
-    </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="stockCount">
+            <th
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header
+                class="tableHeader"
+            >
+                Stock
+            </th>
+            <td mat-cell *matCellDef="let row">{{ row.stockCount }} Pc.</td>
+        </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="stockCount">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader"> Stock </th>
-      <td mat-cell *matCellDef="let row"> {{row.stockCount}} Pc. </td>
-    </ng-container>
+        <!-- Fruit Column -->
+        <ng-container matColumnDef="sold">
+            <th
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header
+                class="tableHeader"
+            >
+                Sold
+            </th>
+            <td mat-cell *matCellDef="let row">{{ row.sold }} Pc.</td>
+        </ng-container>
 
-    <!-- Fruit Column -->
-    <ng-container matColumnDef="sold">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader"> Sold </th>
-      <td mat-cell *matCellDef="let row"> {{row.sold}} Pc. </td>
-    </ng-container>
+        <ng-container matColumnDef="lastMonthSold">
+            <th
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header
+                class="tableHeader"
+            >
+                Last Month Sold
+            </th>
+            <td mat-cell *matCellDef="let row">{{ row.lastMonthSold }} Pc.</td>
+        </ng-container>
 
-    <ng-container matColumnDef="lastMonthSold">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader"> Last Month Sold </th>
-      <td mat-cell *matCellDef="let row"> {{row.lastMonthSold}} Pc.</td>
-    </ng-container>
+        <ng-container matColumnDef="obrat">
+            <th
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header
+                class="tableHeader"
+            >
+                Obrat
+            </th>
+            <td mat-cell *matCellDef="let row">{{ row.sold * row.price }} €</td>
+        </ng-container>
 
-    <ng-container matColumnDef="obrat" >
-    <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader"> Obrat </th>
-    <td mat-cell *matCellDef="let row"> {{(row.sold)*(row.price)}} € </td>
-  </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    
-  </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <mat-paginator
+        #paginator1
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        aria-label="users"
+    ></mat-paginator>
 </div>
-<br>
+<br />
 
-
+<!-- DRUHA TABULKA -------------------------------------------------   -->
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="emptyStockItem"  matSort>
+    <table mat-table [dataSource]="dataSource2" matSort #matsort2="matSort">
+        <!-- ID Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+        </ng-container>
 
-    
+        <!-- Progress Column -->
+        <ng-container matColumnDef="price">
+            <th
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header
+                class="tableHeader"
+            >
+                Price
+            </th>
+            <td mat-cell *matCellDef="let row">{{ row.price }} €</td>
+        </ng-container>
 
-    <!-- ID Column -->
-      <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let row"> {{row.name}} </td>
-    </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="stockCount">
+            <th
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header
+                class="tableHeader"
+            >
+                Stock
+            </th>
+            <td mat-cell *matCellDef="let row">{{ row.stockCount }} Pc.</td>
+        </ng-container>
 
-    <!-- Progress Column -->
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader"> Price </th>
-      <td mat-cell *matCellDef="let row"> {{row.price}} € </td>
-    </ng-container>
+        <!-- Fruit Column -->
+        <ng-container matColumnDef="sold">
+            <th
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header
+                class="tableHeader"
+            >
+                Sold
+            </th>
+            <td mat-cell *matCellDef="let row">{{ row.sold }} Pc.</td>
+        </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="stockCount">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader"> Stock </th>
-      <td mat-cell *matCellDef="let row"> {{row.stockCount}} Pc. </td>
-    </ng-container>
+        <ng-container matColumnDef="lastMonthSold">
+            <th
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header
+                class="tableHeader"
+            >
+                Last Month Sold
+            </th>
+            <td mat-cell *matCellDef="let row">{{ row.lastMonthSold }} Pc.</td>
+        </ng-container>
 
-    <!-- Fruit Column -->
-    <ng-container matColumnDef="sold">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader"> Sold </th>
-      <td mat-cell *matCellDef="let row"> {{row.sold}} Pc. </td>
-    </ng-container>
+        <ng-container matColumnDef="obrat">
+            <th
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header
+                class="tableHeader"
+            >
+                Obrat
+            </th>
+            <td mat-cell *matCellDef="let row">{{ row.sold * row.price }} €</td>
+        </ng-container>
 
-    <ng-container matColumnDef="lastMonthSold">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader"> Last Month Sold </th>
-      <td mat-cell *matCellDef="let row"> {{row.lastMonthSold}} Pc.</td>
-    </ng-container>
-
-    <ng-container matColumnDef="obrat" >
-    <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader"> Obrat </th>
-    <td mat-cell *matCellDef="let row"> {{(row.sold)*(row.price)}} € </td>
-  </ng-container>
-
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-    
-    
-  </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <mat-paginator
+        #paginator2
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        aria-label="Select page of users"
+    ></mat-paginator>
 </div>
+
+<!-- DRUHA TABULKA KONIEC -------------------------------------------------   -->
 
 <div class="cards">
+    <mat-card class="example-card">
+        <mat-card-title-group>
+            <mat-card-title>Celkový obrat za posledný mesiac</mat-card-title>
+            <mat-card-subtitle>{{ lastMonthSoldSum }} € </mat-card-subtitle>
+        </mat-card-title-group>
+        <mat-card-content> </mat-card-content>
+    </mat-card>
 
-<mat-card class="example-card">
-  <mat-card-title-group>
-    <mat-card-title>Celkový obrat za posledný mesiac</mat-card-title>
-    <mat-card-subtitle>{{lastMonthSoldSum}} € </mat-card-subtitle>
-  </mat-card-title-group>
-  <mat-card-content>
-   </mat-card-content>
-</mat-card>
+    <mat-card class="example-card">
+        <mat-card-title-group>
+            <mat-card-title>Celkový obrat za celé obdobie</mat-card-title>
+            <mat-card-subtitle>{{ soldSum }} € </mat-card-subtitle>
+        </mat-card-title-group>
+        <mat-card-content> </mat-card-content>
+    </mat-card>
 
-<mat-card class="example-card">
-  <mat-card-title-group>
-    <mat-card-title>Celkový obrat za celé obdobie</mat-card-title>
-    <mat-card-subtitle>{{soldSum}} € </mat-card-subtitle>
-  </mat-card-title-group>
-  <mat-card-content>
-   </mat-card-content>
-</mat-card>
+    <mat-card class="example-card">
+        <mat-card-title-group>
+            <mat-card-title
+                >Priemerná cena predávaných produktov</mat-card-title
+            >
+            <mat-card-subtitle>{{ avgItemSum }} € </mat-card-subtitle>
+        </mat-card-title-group>
+        <mat-card-content> </mat-card-content>
+    </mat-card>
 
-<mat-card class="example-card">
-  <mat-card-title-group>
-    <mat-card-title>Priemerná cena predávaných produktov</mat-card-title>
-    <mat-card-subtitle>{{avgItemSum}} € </mat-card-subtitle>
-  </mat-card-title-group>
-  <mat-card-content>
-   </mat-card-content>
-</mat-card>
-
-<mat-card class="example-card">
-  <mat-card-title-group>
-    <mat-card-title>Najpredávanejší produkt</mat-card-title>
-    <mat-card-subtitle>{{maxSoldItemName}} </mat-card-subtitle>
-  </mat-card-title-group>
-  <mat-card-content>
-   </mat-card-content>
-</mat-card>
-
+    <mat-card class="example-card">
+        <mat-card-title-group>
+            <mat-card-title>Najpredávanejší produkt</mat-card-title>
+            <mat-card-subtitle>{{ maxSoldItemName }} </mat-card-subtitle>
+        </mat-card-title-group>
+        <mat-card-content> </mat-card-content>
+    </mat-card>
 </div>
