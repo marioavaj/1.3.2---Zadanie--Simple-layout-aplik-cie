@@ -8,4 +8,23 @@
                         <a routerLink="/zoznam-produktov">...Späť na zoznam produktov</a>
                         <h2>Detail produktu</h2>
                     </div>
+                    <div class="editDeteleWrapper">
+                        <input
+                            (click)="editProduct(data)"
+                            class="submit"
+                            type="submit"
+                            value="edit"
+                        />
+
+                        <input
+                            class="delete"
+                            (click)="deleteProduct(data)"
+                            type="submit"
+                            value="delete"
+                        />
+                    </div>
+
                     <app-product [data] = "data" ></app-product>
+
+
+

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, take } from 'rxjs';
 import {
     newProductToApi,
@@ -14,11 +15,11 @@ export class ProductServiceService {
     productById: Product[];
     sortedData: Product[];
     dataStream = new BehaviorSubject<any>(0);
-    cache: any;
-    idCounter = 99999;
-    vendorToApi: VendorsInApi[] = [];
+    cache: Product[];
+    vendorToApi: VendorsInApi[];
+    productDataObservable = new BehaviorSubject<Product[]>([]); //aktualzacia udajov po zmene na API(PUT,DELETE,POST)
 
-    constructor(private api: ApiService) {}
+    constructor(private api: ApiService, private router: Router) {}
 
     createNewProductInService(
         newProductData: any,
@@ -27,23 +28,19 @@ export class ProductServiceService {
         editMode: boolean,
         upgradedProduct: any
     ) {
+        this.vendorToApi = [];
         newVendors.forEach((item) => {
             this.vendorToApi.push({
-                id: this.idCounter + 101,
-                uuid: (this.idCounter + 1000).toString(),
+                uuid: this.generateUuid(),
                 name: item.name,
                 stockCount: item.stockCount,
             });
         });
 
-        console.log(this.vendorToApi);
-
         //create mode
         if (!editMode) {
-            this.idCounter++;
             const newProduct: newProductToApi = {
-                id: this.idCounter,
-                uuid: (this.idCounter + 100).toString(),
+                uuid: this.generateUuid(),
                 name: newProductData.name,
                 price: parseFloat(newProductData.price),
                 category: newProductData.category,
@@ -55,18 +52,35 @@ export class ProductServiceService {
                 reviews: newReview,
             };
 
+            console.log(newProduct);
+
             this.api
                 .post(newProduct)
-                .pipe(take(1))
-                .subscribe(() => {
-                    location.reload();
+                .toPromise()
+                .then((productFromApi) => {
+                    //thn vrati respons s vlozenim produktom.
+                    alert(
+                        'New product with name ' +
+                            newProductData.name +
+                            ' has been created'
+                    );
+                    this.productData.push(productFromApi); //doplni do zoznamu produktov po vlozeni do databazy
+                })
+                .catch(() => {
+                    alert(
+                        'Something wrong ' +
+                            newProductData.name +
+                            ' has not been created. Try later. '
+                    );
                 });
         } else {
             //Edit mode
+
             let productToApi = {};
-            this.productData.forEach((item) => {
+            this.productData.forEach((item: Product) => {
                 if (+upgradedProduct.id === item.id) {
                     productToApi = {
+                        uuid: this.generateUuid(),
                         name: newProductData.name.toString(),
                         category: newProductData.category.toString(),
                         price: parseFloat(newProductData.price),
@@ -76,23 +90,67 @@ export class ProductServiceService {
                             newProductData.lastMonthSold
                         ),
                         description: newProductData.description.toString(),
-                        vendors: newVendors,
+                        vendors: this.vendorToApi,
                         reviews: newReview,
                     };
                 }
             });
+
             this.api
                 .put(upgradedProduct.id, productToApi)
-                .pipe(take(1))
-                .subscribe(() => {
+                .toPromise()
+                .then((productFromApi) => {
+                    let index;
+                    index = this.productData.findIndex((item) => {
+                        if (productFromApi!.id == item!.id) {
+                            item[index] = productFromApi;
+                        }
+                    });
+
+                    alert(
+                        'Product with product name ' +
+                            newProductData.name +
+                            ' has been updated'
+                    );
                     location.reload();
+
+                    // upgrade produktu v produkt data
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+
+
+        }
+    }
+
+    deleteProduct(data: Product) {
+        if (
+            confirm('Do you really want to delete product ' + data.name + ' ?')
+        ) {
+            this.api
+                .delete(data.id)
+                .toPromise()
+                .then((dataFromApi) => {
+                    const index = this.productData.findIndex((item) => {
+                        if (dataFromApi.id == item!.id) {
+                            this.productData.splice(index, 1);
+
+                            alert('Product' + data.name + ' has been deleted');
+                        }
+                    });
+                })
+                .catch((err) => {
+                    console.log(err);
+                    // delete produktu z productdata
                 });
         }
+        this.router.navigate(['/zoznam-produktov']);
     }
 
     getProductList(): Promise<any[]> {
         return new Promise<any[]>((resolve, reject) => {
-            if (this.cache) {
+            if (this.cache && this.cache.length == this.productData.length) {
                 this.productData = this.cache;
                 resolve(this.productData);
             } else
@@ -113,7 +171,8 @@ export class ProductServiceService {
                                 sold: apiData.sellCountOverall,
                                 lastMonthSold: apiData.sellCountLastMonth,
                                 description: apiData.description,
-                                Vendors: apiData.vendors
+                                Vendors: apiData.vendors,
+                                editPermission: apiData.editPermission,
                             };
                         });
 
@@ -121,11 +180,21 @@ export class ProductServiceService {
                     });
 
             this.cache = this.productData; //naplni cache
+            this.productDataObservable.next(this.productData); //observable
         });
     }
 
     getProductById(id: number): Promise<any[]> {
-        return new Promise<Product[]>((resolve, rejecet) => {});
+        return new Promise<Product[]>((resolve, rejecet) => {
+            this.api
+                .getById(id)
+                .pipe(take(1))
+                .subscribe((productByIdFromApi) => {
+                    this.productById = productByIdFromApi;
+
+                    resolve(this.productById);
+                });
+        });
     }
 
     getBestseller(): Product[] {
@@ -178,14 +247,14 @@ export class ProductServiceService {
         this.dataStream.next(this.productData);
     }
 
-    deleteProduct(item: any) {
-        const findedIndex = this.productData.findIndex(
-            (array) => array.id === item
+    generateUuid(): string {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
+            /[xy]/g,
+            function (c) {
+                var r = (Math.random() * 16) | 0,
+                    v = c == 'x' ? r : (r & 0x3) | 0x8;
+                return v.toString(16);
+            }
         );
-        console.log(item);
-
-        this.api.delete(item).pipe(take(1)).subscribe();
-
-        //ProductItems.productData.splice(findedIndex, 1);
     }
 }

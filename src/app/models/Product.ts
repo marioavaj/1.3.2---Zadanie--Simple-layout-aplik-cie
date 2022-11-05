@@ -9,6 +9,7 @@ export interface Product {
     description?: string;
     vendors?: Vendor[];
     reviews?: string[];
+    editPermission: boolean
 }
 
 export interface Vendor {
@@ -17,14 +18,14 @@ export interface Vendor {
 }
 
 export interface VendorsInApi {
-    id: number;
+
     uuid: string;
     name: string;
     stockCount: number;
 }
 
 export interface newProductToApi {
-    id: number;
+
     uuid: string;
     name: string;
     price: number;

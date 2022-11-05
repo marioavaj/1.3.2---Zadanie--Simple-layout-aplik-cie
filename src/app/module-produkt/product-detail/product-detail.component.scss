@@ -1,7 +1,7 @@
 
 .content{
     height: 75vh;
-    
+
   }
 
   a{
@@ -11,11 +11,11 @@
     border-radius: 0 1000px 1000px 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-decoration: wavy;
-      
+
       }
-  
+
   a:hover{
-    background-color: rgb(26, 108, 26);    
+    background-color: rgb(26, 108, 26);
   }
 
   .detail{
@@ -28,7 +28,7 @@
     border-radius: 5px;
     border-color: brown;
   }
-  
+
   h2{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: darkgrey;
@@ -36,10 +36,21 @@
 
   }
 
+  .editDeteleWrapper > input{
+    margin-left: 1em;
+    background-color: transparent;
+    border: 1px solid gray;
+}
+
+.editDeteleWrapper > input:hover{
+    background-color: rgb(187, 187, 187);
+
+}
+
   @media only screen and (max-width: 640px) {
     .detail{
       background-color: bisque;
       width: 85%;
-      margin: 2em;   
+      margin: 2em;
   }
 }

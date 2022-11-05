@@ -14,7 +14,7 @@ export class ModalAddEditProductComponent implements OnInit {
     vendorName: any;
     fullVendorFormat: Vendor[];
     fullReviewFormat?: string[];
-    upgradedProduct?: Product;
+    upgradedProduct?: any;
     editMode: boolean;
 
     productFormGroup = new FormGroup(
@@ -25,10 +25,7 @@ export class ModalAddEditProductComponent implements OnInit {
                 Validators.required,
                 Validators.min(0.0001),
             ]),
-            stockCount: new FormControl('', [
-                Validators.required,
-                Validators.min(0),
-            ]),
+            stockCount: new FormControl('', []),
             description: new FormControl(''),
             sold: new FormControl('', [Validators.required, Validators.min(0)]),
             lastMonthSold: new FormControl('', [
@@ -54,16 +51,22 @@ export class ModalAddEditProductComponent implements OnInit {
 
     ngOnInit(): void {
         this.vendorName = new FormGroup({
-            vendors: new FormArray([new FormControl('')]),
-            countStock: new FormArray([new FormControl('')]),
+            vendors: new FormArray([new FormControl('', Validators.required)]),
+            countStock: new FormArray([
+                new FormControl('', Validators.required),
+            ]),
         });
 
         if (this.upgradedProduct) {
             this.editMode = true;
             if (this.upgradedProduct.vendors?.length == 0) {
                 this.vendorName = new FormGroup({
-                    vendors: new FormArray([new FormControl('')]),
-                    countStock: new FormArray([new FormControl('')]),
+                    vendors: new FormArray([
+                        new FormControl('', Validators.required),
+                    ]),
+                    countStock: new FormArray([
+                        new FormControl('', Validators.required),
+                    ]),
                 });
             } else
                 this.vendorName = new FormGroup({
@@ -87,10 +90,14 @@ export class ModalAddEditProductComponent implements OnInit {
                 ?.setValue(this.upgradedProduct.description!.toLocaleString());
             this.productFormGroup
                 .get('sold')
-                ?.setValue(this.upgradedProduct.sold.toLocaleString());
+                ?.setValue(
+                    this.upgradedProduct.sellCountOverall.toLocaleString()
+                );
             this.productFormGroup
                 .get('lastMonthSold')
-                ?.setValue(this.upgradedProduct.lastMonthSold.toLocaleString());
+                ?.setValue(
+                    this.upgradedProduct.sellCountLastMonth.toLocaleString()
+                );
             if (
                 this.upgradedProduct.vendors &&
                 this.upgradedProduct.vendors.length
@@ -98,21 +105,27 @@ export class ModalAddEditProductComponent implements OnInit {
                 this.upgradedProduct.vendors.forEach((element) => {
                     this.vendorName
                         .get('vendors')
-                        .push(new FormControl(element.name));
+                        .push(
+                            new FormControl(element.name, Validators.required)
+                        );
                     this.vendorName
                         .get('countStock')
-                        .push(new FormControl(element.stockCount));
+                        .push(
+                            new FormControl(
+                                element.stockCount,
+                                Validators.required
+                            )
+                        );
                 });
             }
         } else this.editMode = false;
     }
 
     closeModal() {
-
         this.dialogRef.close();
     }
 
-    cancelModal(){
+    cancelModal() {
         alert('Operation has been canceled');
         this.dialogRef.close();
     }
@@ -120,6 +133,9 @@ export class ModalAddEditProductComponent implements OnInit {
     createNewProduct() {
         this.productFormGroup.markAllAsTouched();
         this.productFormGroup.updateValueAndValidity();
+        this.vendorName.markAllAsTouched();
+        this.vendorName.updateValueAndValidity();
+
         if (this.productFormGroup.valid && this.vendorName.valid) {
             this.fullReviewFormat = [];
             const newProductData = this.productFormGroup.getRawValue();
@@ -128,7 +144,9 @@ export class ModalAddEditProductComponent implements OnInit {
             if (review !== null) {
                 this.fullReviewFormat.push(review);
             }
+
             this.sendFormArray();
+
             this.dataFromService.createNewProductInService(
                 newProductData,
                 this.fullVendorFormat,
@@ -137,40 +155,30 @@ export class ModalAddEditProductComponent implements OnInit {
                 this.upgradedProduct
             );
 
-            if (!this.editMode) {
-                alert(
-                    'Product with product name ' +
-                        newProductData.name +
-                        ' has been inserted into the database'
-                );
-            } else {
-                alert(
-                    'Product with product name ' +
-                        newProductData.name +
-                        ' HAS BEEN UPDATED'
-                );
-            }
-
             this.closeModal();
         } else alert('Form is invalid');
     }
 
     addFormArray() {
-        this.vendorName.get('vendors').push(new FormControl());
-        this.vendorName.get('countStock').push(new FormControl());
+        this.vendorName
+            .get('vendors')
+            .push(new FormControl('', Validators.required));
+        this.vendorName
+            .get('countStock')
+            .push(new FormControl('', Validators.required));
     }
 
     sendFormArray() {
         this.fullVendorFormat = [];
         let vendorsRawValue = this.vendorName.get('vendors').getRawValue();
         let vendorCountStock = this.vendorName.get('countStock').getRawValue();
-        console.log(this.fullVendorFormat);
 
         for (let i = 0; i < vendorsRawValue.length; i++) {
             let oneVendor: Vendor = {
                 name: vendorsRawValue[i],
                 stockCount: parseInt(vendorCountStock[i]),
             };
+
             this.fullVendorFormat.push(oneVendor);
         }
     }

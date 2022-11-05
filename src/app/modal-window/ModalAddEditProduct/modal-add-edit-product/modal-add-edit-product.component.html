@@ -32,7 +32,9 @@
                 <mat-label>Stock count</mat-label>
                 <input type="number" matInput formControlName="stockCount" />
                 <mat-error
-                    *ngIf="productFormGroup.get('stockCount')?.hasError('required')"
+                    *ngIf="
+                        productFormGroup.get('stockCount')?.hasError('required')
+                    "
                 >
                     This field is required</mat-error
                 >
@@ -67,12 +69,18 @@
                 <mat-label>Sold last month</mat-label>
                 <input type="number" matInput formControlName="lastMonthSold" />
                 <mat-error
-                    *ngIf="productFormGroup.get('lastMonthSold')?.hasError('required')"
+                    *ngIf="
+                        productFormGroup
+                            .get('lastMonthSold')
+                            ?.hasError('required')
+                    "
                 >
                     This field is required</mat-error
                 >
                 <mat-error
-                    *ngIf="productFormGroup.get('lastMonthSold')?.hasError('min')"
+                    *ngIf="
+                        productFormGroup.get('lastMonthSold')?.hasError('min')
+                    "
                 >
                     This is not valid value for Sold last month</mat-error
                 >
@@ -91,6 +99,7 @@
 
     <mat-step>
         <ng-template matStepLabel>fill in the vendors of product</ng-template>
+
         <form class="formVendors" [formGroup]="vendorName">
             <div formArrayName="vendors">
                 <div
@@ -102,6 +111,13 @@
                     <mat-form-field>
                         <mat-label>Vendor {{ i + 1 }}</mat-label>
                         <input matInput [formControlName]="i" />
+                        <mat-error
+                            *ngIf="
+                                vendorName.get('vendors')?.hasError('required')
+                            "
+                        >
+                            This field is required</mat-error
+                        >
                     </mat-form-field>
                 </div>
             </div>
@@ -112,17 +128,29 @@
                         let i = index
                     "
                 >
-                    <mat-form-field >
+                    <mat-form-field>
                         <mat-label>count on Stock</mat-label>
-                        <input type="number" matInput [formControlName]="i" (blur)="sendFormArray()"/>
+                        <input
+                            type="number"
+                            matInput
+                            [formControlName]="i"
+                            (blur)="sendFormArray()"
+                        />
+                        <mat-error
+                            *ngIf="
+                                vendorName
+                                    .get('countStock')
+                                    ?.hasError('required')
+                            "
+                        >
+                            This field is required</mat-error
+                        >
                     </mat-form-field>
-                                    </div>
+                </div>
             </div>
-
         </form>
-        <button class="buttonPlus" (click)="addFormArray()">
-            +
-        </button>
+
+        <button class="buttonPlus" (click)="addFormArray()">+</button>
         <button mat-button matStepperPrevious>Back to product info</button>
         <button mat-button matStepperNext>Next to review</button>
     </mat-step>

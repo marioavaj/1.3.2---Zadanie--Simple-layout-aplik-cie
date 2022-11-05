@@ -7,12 +7,10 @@ import {
     Output,
     ViewChild,
 } from '@angular/core';
+
 import { ProductServiceService } from 'src/app/Services/product-service.service';
 import { ShopingCartServiceService } from 'src/app/Services/shoping-cart-service.service';
 import { Product } from '../../models/Product';
-import { ModalService } from 'src/app/Services/modal.service';
-import { ModalAddEditProductComponent } from 'src/app/modal-window/ModalAddEditProduct/modal-add-edit-product/modal-add-edit-product.component';
-import { MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-product',
@@ -31,9 +29,7 @@ export class ProductComponent implements OnInit {
 
     constructor(
         private createItem: ShopingCartServiceService,
-        private newStockCount: ProductServiceService,
-        private deleteItem: ProductServiceService,
-        private dialog: ModalService
+        private newStockCount: ProductServiceService
     ) {}
 
     ngOnInit(): void {}
@@ -59,17 +55,6 @@ export class ProductComponent implements OnInit {
         this.data.stockCount--;
 
         this.newStockCount.minusStockCount(this.data.id, this.data.stockCount);
-    }
-
-    deleteProduct(item: number) {
-        this.deleteItem.deleteProduct(item);
-    }
-
-    editProduct(product: any) {
-        const config = new MatDialogConfig();
-        config.disableClose = true;
-        config.data = product;
-        this.dialog.openDialog(ModalAddEditProductComponent, config);
     }
 }
 

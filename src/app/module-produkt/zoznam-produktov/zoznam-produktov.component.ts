@@ -10,6 +10,7 @@ import { ProductServiceService } from '../../Services/product-service.service';
     styleUrls: ['./zoznam-produktov.component.scss'],
 })
 export class ZoznamProduktovComponent implements OnInit {
+    static productData: any;
     static ngOnInit() {
         throw new Error('Method not implemented.');
     }
