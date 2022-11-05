@@ -133,7 +133,7 @@ export class ProductServiceService {
                 .toPromise()
                 .then((dataFromApi?) => {
                     const index = this.productData.findIndex((item) => {
-                        if (dataFromApi.id == item.id) {
+                        if (dataFromApi?.id == item.id) {
                             this.productData.splice(index, 1);
 
                             alert('Product' + data.name + ' has been deleted');
