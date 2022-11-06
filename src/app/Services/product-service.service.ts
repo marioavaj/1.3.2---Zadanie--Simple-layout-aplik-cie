@@ -15,7 +15,6 @@ export class ProductServiceService {
     productById: Product[];
     sortedData: Product[];
     dataStream = new BehaviorSubject<any>(0);
-    cache: Product[];
     vendorToApi: VendorsInApi[];
     productDataObservable = new BehaviorSubject<Product[]>([]); //aktualzacia udajov po zmene na API(PUT,DELETE,POST)
 
@@ -52,13 +51,11 @@ export class ProductServiceService {
                 reviews: newReview,
             };
 
-            console.log(newProduct);
-
             this.api
                 .post(newProduct)
                 .toPromise()
                 .then((productFromApi) => {
-                    //thn vrati respons s vlozenim produktom.
+                    //then vrati response s vlozenim produktom.
                     alert(
                         'New product with name ' +
                             newProductData.name +
@@ -95,15 +92,16 @@ export class ProductServiceService {
                     };
                 }
             });
-
+            // upgrade produktu v produkt data
             this.api
                 .put(upgradedProduct.id, productToApi)
                 .toPromise()
                 .then((productFromApi) => {
                     let index;
                     index = this.productData.findIndex((item) => {
-                        if (productFromApi!.id == item!.id) {
+                        if (productFromApi.id == item!.id) {
                             item[index] = productFromApi;
+                            this.productDataObservable.next(productFromApi);
                         }
                     });
 
@@ -112,75 +110,65 @@ export class ProductServiceService {
                             newProductData.name +
                             ' has been updated'
                     );
-                    location.reload();
-
-                    // upgrade produktu v produkt data
                 })
                 .catch((err) => {
                     console.log(err);
                 });
-
-
         }
     }
 
     deleteProduct(data: Product) {
-        if (
-            confirm('Do you really want to delete product ' + data.name + ' ?')
-        ) {
+        let text = 'Do you really want to delete product ' + data.name + ' ?';
+        if (confirm(text) == true) {
+            text = 'You pressed OK!';
             this.api
                 .delete(data.id)
                 .toPromise()
-                .then((dataFromApi?) => {
+                .then((data?) => {
+                    const dataFromApi = data;
                     const index = this.productData.findIndex((item) => {
                         if (dataFromApi?.id == item.id) {
-                            this.productData.splice(index, 1);
-
-                            alert('Product' + data.name + ' has been deleted');
+                            this.sortedData.splice(index, 1);
                         }
                     });
+                    alert('Product' + data.name + ' has been deleted');
                 })
                 .catch((err) => {
                     console.log(err);
                     // delete produktu z productdata
                 });
+            this.router.navigate(['/zoznam-produktov']);
+        } else {
+            text = 'You canceled!';
         }
-        this.router.navigate(['/zoznam-produktov']);
     }
 
     getProductList(): Promise<any[]> {
         return new Promise<any[]>((resolve, reject) => {
-            if (this.cache && this.cache.length == this.productData.length) {
-                this.productData = this.cache;
-                resolve(this.productData);
-            } else
-                this.api
-                    .get()
-                    .pipe(take(1))
-                    .subscribe((products) => {
-                        //pipe(take(1)) - vykona subs cribe 1x, netreba unsubscibe (toPromise() je depricated)
-                        this.productData = products;
-                        //namapuje data z api do formatu pre zobrazenie
-                        this.productData = this.productData.map((apiData) => {
-                            return {
-                                id: apiData.id,
-                                name: apiData.name,
-                                category: apiData.category,
-                                price: apiData.price,
-                                stockCount: apiData.stockCount,
-                                sold: apiData.sellCountOverall,
-                                lastMonthSold: apiData.sellCountLastMonth,
-                                description: apiData.description,
-                                Vendors: apiData.vendors,
-                                editPermission: apiData.editPermission,
-                            };
-                        });
-
-                        resolve(this.productData);
+            this.api
+                .get()
+                .toPromise()
+                .then((products) => {
+                    //pipe(take(1)) - vykona subscribe 1x, netreba unsubscibe (toPromise() je depricated)
+                    this.productData = products;
+                    //namapuje data z api do formatu pre zobrazenie
+                    this.productData = this.productData.map((apiData) => {
+                        return {
+                            id: apiData.id,
+                            name: apiData.name,
+                            category: apiData.category,
+                            price: apiData.price,
+                            stockCount: apiData.stockCount,
+                            sold: apiData.sellCountOverall,
+                            lastMonthSold: apiData.sellCountLastMonth,
+                            description: apiData.description,
+                            Vendors: apiData.vendors,
+                            editPermission: apiData.editPermission,
+                        };
                     });
 
-            this.cache = this.productData; //naplni cache
-            this.productDataObservable.next(this.productData); //observable
+                    resolve(this.productData);
+                });
         });
     }
 
