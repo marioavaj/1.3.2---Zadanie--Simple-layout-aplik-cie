@@ -18,7 +18,6 @@ export class ModalAddEditProductComponent implements OnInit {
     editMode: boolean;
     reviewsGroup: any;
 
-
     productFormGroup = new FormGroup(
         {
             name: new FormControl('', Validators.required),
@@ -162,10 +161,6 @@ export class ModalAddEditProductComponent implements OnInit {
         if (this.productFormGroup.valid && this.vendorName.valid) {
             const newProductData = this.productFormGroup.getRawValue();
 
-            /*if (review !== null) {
-                this.fullReviewFormat.push(review);
-            }*/
-
             this.sendFormArrayVendors();
             this.sendFormArrayReviews();
 
@@ -198,11 +193,14 @@ export class ModalAddEditProductComponent implements OnInit {
         this.fullReviewFormat = [];
         let date = new Date().toLocaleString();
         let reviewRawValue = this.reviewsGroup.get('reviews').getRawValue();
-
+        console.log(reviewRawValue);
         for (let i = 0; i < reviewRawValue.length; i++) {
             let oneReview: string = reviewRawValue[i];
-            this.fullReviewFormat.push(date + ' | ' + oneReview);
-            console.log(this.fullReviewFormat);
+            if (reviewRawValue != '') {
+                if (!oneReview.includes('|') && reviewRawValue != '') {
+                    this.fullReviewFormat.push(date + ' | ' + oneReview);
+                } else this.fullReviewFormat.push(oneReview);
+            }
         }
     }
 

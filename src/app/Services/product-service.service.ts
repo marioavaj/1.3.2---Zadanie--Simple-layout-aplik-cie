@@ -36,8 +36,6 @@ export class ProductServiceService {
             });
         });
 
-        console.log(newProductData);
-
         //create mode
         if (!editMode) {
             const newProduct: newProductToApi = {
@@ -94,7 +92,6 @@ export class ProductServiceService {
                 }
             });
 
-            //vlozi data  do api
             this.api
                 .put(upgradedProduct.id, productToApi)
                 .toPromise()
@@ -103,7 +100,6 @@ export class ProductServiceService {
                     index = this.productData.findIndex((item) => {
                         if (productFromApi.id == item!.id) {
                             item[index] = productFromApi;
-
                             this.productDataObservable.next(productFromApi);
                         }
                     });
@@ -121,26 +117,24 @@ export class ProductServiceService {
     }
 
     deleteProduct(data: Product) {
-        let text = 'Do you really want to delete product ' + data.name + ' ?';
+        let nameToComfirm = data.name;
+        let text =
+            'Do you really want to delete product ' + nameToComfirm + ' ?';
         if (confirm(text) == true) {
-            text = 'You pressed OK!';
+
             this.api
                 .delete(data.id)
                 .toPromise()
-                .then((data?) => {
-                    const dataFromApi = data;
-                    const index = this.productData.findIndex((item) => {
-                        if (dataFromApi?.id == item.id) {
-                            this.sortedData.splice(index, 1);
-                        }
-                    });
-                    alert('Product' + data.name + ' has been deleted');
+                .then((e) => {
+                    console.log(e);//vrati null
+                    alert('Product ' + nameToComfirm + ' has been deleted');
                 })
                 .catch((err) => {
                     console.log(err);
-                    // delete produktu z productdata
+                })
+                .finally(() => {
+                    this.router.navigate(['/zoznam-produktov']);
                 });
-            this.router.navigate(['/zoznam-produktov']);
         } else {
             text = 'You canceled!';
         }
