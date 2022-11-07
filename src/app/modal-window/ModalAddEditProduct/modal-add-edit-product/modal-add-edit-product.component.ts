@@ -18,6 +18,7 @@ export class ModalAddEditProductComponent implements OnInit {
     editMode: boolean;
     reviewsGroup: any;
 
+
     productFormGroup = new FormGroup(
         {
             name: new FormControl('', Validators.required),
@@ -43,7 +44,7 @@ export class ModalAddEditProductComponent implements OnInit {
     constructor(
         private dataFromService: ProductServiceService,
         private dialogRef: MatDialogRef<ModalAddEditProductComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: Product
+        @Inject(MAT_DIALOG_DATA) public data: Product //namapuje data z produktu do dialogoveho okna
     ) {
         this.upgradedProduct = data;
     }

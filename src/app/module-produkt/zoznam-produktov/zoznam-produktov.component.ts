@@ -26,12 +26,6 @@ export class ZoznamProduktovComponent implements OnInit {
 
       this.displayProducts();
 
-
-    }
-
-    lastReviewDisplayed(review: any, name: string): void {
-        let date = new Date().toLocaleString();
-        this.lastReview = date + ' na produkt ' + name + ': ' + review;
     }
 
     onFilterDone(item: Product[]) {

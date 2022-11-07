@@ -2,7 +2,8 @@
 @import "./variables";
 
 .productWrapper {
-    max-width: 400px;
+    max-width: 360px;
+    min-width: 360px;
     margin: 1em 1em 1em 1em;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: rgb(242, 242, 242);
@@ -29,6 +30,7 @@
 .productCategoryWrapper {
     @include flexSpaceBetween;
     border: $borderStyleComplet;
+    height: 100px;
 }
 
 .productName {
@@ -73,8 +75,10 @@
 
 .description {
     margin: 1.5em;
+    height: 150px;
     text-align: justify;
     font-size: 0.8em;
+    overflow: hidden;
 }
 
 .vendorName {

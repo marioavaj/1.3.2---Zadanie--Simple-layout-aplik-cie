@@ -168,7 +168,7 @@
                 >
                     <mat-form-field>
                         <mat-label>review {{ i + 1 }}</mat-label>
-                        <input matInput [formControlName]="i" (blur)="sendFormArrayReviews()"/>
+                        <input type="text" matInput [formControlName]="i" (blur)="sendFormArrayReviews()"/>
 
                     </mat-form-field>
                 </div>

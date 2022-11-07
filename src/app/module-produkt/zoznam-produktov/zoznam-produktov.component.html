@@ -24,12 +24,6 @@
     </mat-checkbox>
 </div>
 
-<div class="lastRerview">
-    <div style="font-weight: 600">Posledná recenzia</div>
-    <br />
-    {{ lastReview }}
-</div>
-
 <div class="buttonWrapper">
     <a mat-raised-button (click)="openModalNewProduct()">add new product</a>
 </div>
@@ -38,7 +32,7 @@
     <div class="productList">
         <app-product
             [data]="filteredProducts"
-            (reviewAdd)="lastReviewDisplayed($event, filteredProducts.name)"
+
             *ngFor="let filteredProducts of filteredData | sortByPipe: sortByClicked"
         ></app-product>
     </div>

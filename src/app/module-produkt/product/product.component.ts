@@ -1,12 +1,4 @@
-import {
-    Component,
-    ElementRef,
-    EventEmitter,
-    Input,
-    OnInit,
-    Output,
-    ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 
 import { ProductServiceService } from 'src/app/Services/product-service.service';
 import { ShopingCartServiceService } from 'src/app/Services/shoping-cart-service.service';
@@ -36,15 +28,3 @@ export class ProductComponent implements OnInit {
         this.productService.minusStockCount(this.data.id, this.data.stockCount);
     }
 }
-
-/*@HostListener('window:scroll', ['$event'])
-    getPosition($event) {
-        console.log(this.productPosition.nativeElement.offsetTop)
-        //this.x = this.productPosition?.nativeElement.offsetLeft;
-        //this.y = this.productPosition?.nativeElement.offsetTop;
-
-        const position = this.productPosition?.nativeElement.getBoundingClientRect()
-        this.x = position.x.toFixed(0);
-        this.y = position.y.toFixed(0);
-
-    }*/
