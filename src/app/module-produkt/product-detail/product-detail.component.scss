@@ -4,19 +4,13 @@
 
   }
 
-  a{
-    background-color: forestgreen;
-    padding: 0.2em;
-    color: white;
-    border-radius: 0 1000px 1000px 0;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    text-decoration: wavy;
+ .productName{
+font-size: 2em;
+color: black !important;
 
       }
 
-  a:hover{
-    background-color: rgb(26, 108, 26);
-  }
+
 
   .detail{
     background-color: bisque;

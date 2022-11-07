@@ -134,7 +134,7 @@
                             type="number"
                             matInput
                             [formControlName]="i"
-                            (blur)="sendFormArray()"
+                            (blur)="sendFormArrayVendors()"
                         />
                         <mat-error
                             *ngIf="
@@ -150,21 +150,35 @@
             </div>
         </form>
 
-        <button class="buttonPlus" (click)="addFormArray()">+</button>
+        <button class="buttonPlus" (click)="addFormArrayVendors()">+</button>
         <button mat-button matStepperPrevious>Back to product info</button>
         <button mat-button matStepperNext>Next to review</button>
     </mat-step>
 
     <mat-step>
         <ng-template matStepLabel>fill in the product review</ng-template>
-        <form class="form">
-            <mat-form-field appearance="fill">
-                <mat-label>Review</mat-label>
-                <input matInput [formControl]="reviews" />
-            </mat-form-field>
-            <button mat-button matStepperPrevious>Back</button>
+
+        <form class="formVendors" [formGroup]="reviewsGroup">
+            <div formArrayName="reviews">
+                <div
+                    *ngFor="
+                        let review of reviewsGroup.get('reviews').controls;
+                        let i = index
+                    "
+                >
+                    <mat-form-field>
+                        <mat-label>review {{ i + 1 }}</mat-label>
+                        <input matInput [formControlName]="i" (blur)="sendFormArrayReviews()"/>
+
+                    </mat-form-field>
+                </div>
+            </div>
+
         </form>
+        <button class="buttonPlus" (click)="addFormArrayReviews()">+</button>
+
     </mat-step>
+
 </mat-vertical-stepper>
 <div class="buttonWrapper">
     <a mat-raised-button color="primary" (click)="createNewProduct()">Save</a>

@@ -36,6 +36,8 @@ export class ProductServiceService {
             });
         });
 
+        console.log(newProductData);
+
         //create mode
         if (!editMode) {
             const newProduct: newProductToApi = {
@@ -72,7 +74,6 @@ export class ProductServiceService {
                 });
         } else {
             //Edit mode
-
             let productToApi = {};
             this.productData.forEach((item: Product) => {
                 if (+upgradedProduct.id === item.id) {
@@ -92,7 +93,8 @@ export class ProductServiceService {
                     };
                 }
             });
-            // upgrade produktu v produkt data
+
+            //vlozi data  do api
             this.api
                 .put(upgradedProduct.id, productToApi)
                 .toPromise()
@@ -101,6 +103,7 @@ export class ProductServiceService {
                     index = this.productData.findIndex((item) => {
                         if (productFromApi.id == item!.id) {
                             item[index] = productFromApi;
+
                             this.productDataObservable.next(productFromApi);
                         }
                     });
@@ -143,13 +146,25 @@ export class ProductServiceService {
         }
     }
 
+    addReviews(data: Product) {
+        this.api
+            .put(data.id, data)
+            .toPromise()
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
     getProductList(): Promise<any[]> {
         return new Promise<any[]>((resolve, reject) => {
             this.api
                 .get()
                 .toPromise()
                 .then((products) => {
-                    //pipe(take(1)) - vykona subscribe 1x, netreba unsubscibe (toPromise() je depricated)
+                    //pipe(take(1)).subscibe() - to iste ako toPromise().then vykona pipe(take(1)) subscribe 1x, netreba unsubscibe (toPromise() je depricated)
                     this.productData = products;
                     //namapuje data z api do formatu pre zobrazenie
                     this.productData = this.productData.map((apiData) => {
@@ -179,7 +194,6 @@ export class ProductServiceService {
                 .pipe(take(1))
                 .subscribe((productByIdFromApi) => {
                     this.productById = productByIdFromApi;
-
                     resolve(this.productById);
                 });
         });
@@ -222,7 +236,6 @@ export class ProductServiceService {
             return object.id === idProduct;
         });
         this.productData[indexOfObject].stockCount = newStockCount;
-
         this.dataStream.next(this.productData);
     }
 
@@ -231,7 +244,6 @@ export class ProductServiceService {
             return object.id === id;
         });
         this.productData[indexOfObject].stockCount = newStockCount;
-
         this.dataStream.next(this.productData);
     }
 

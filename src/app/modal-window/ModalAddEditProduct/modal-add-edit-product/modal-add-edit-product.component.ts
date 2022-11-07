@@ -13,9 +13,10 @@ import { compareSoldLastMonthSold } from 'src/app/Shared/directives/compareFormF
 export class ModalAddEditProductComponent implements OnInit {
     vendorName: any;
     fullVendorFormat: Vendor[];
-    fullReviewFormat?: string[];
+    fullReviewFormat: any;
     upgradedProduct?: any;
     editMode: boolean;
+    reviewsGroup: any;
 
     productFormGroup = new FormGroup(
         {
@@ -39,8 +40,6 @@ export class ModalAddEditProductComponent implements OnInit {
         }
     );
 
-    reviews = new FormControl();
-
     constructor(
         private dataFromService: ProductServiceService,
         private dialogRef: MatDialogRef<ModalAddEditProductComponent>,
@@ -55,6 +54,10 @@ export class ModalAddEditProductComponent implements OnInit {
             countStock: new FormArray([
                 new FormControl('', Validators.required),
             ]),
+        });
+
+        this.reviewsGroup = new FormGroup({
+            reviews: new FormArray([new FormControl('')]),
         });
 
         if (this.upgradedProduct) {
@@ -73,6 +76,16 @@ export class ModalAddEditProductComponent implements OnInit {
                     vendors: new FormArray([]),
                     countStock: new FormArray([]),
                 });
+
+            if (this.upgradedProduct.reviews?.length == 0) {
+                this.reviewsGroup = new FormGroup({
+                    reviews: new FormArray([new FormControl('')]),
+                });
+            } else
+                this.reviewsGroup = new FormGroup({
+                    reviews: new FormArray([]),
+                });
+
             this.productFormGroup
                 .get('name')
                 ?.setValue(this.upgradedProduct.name);
@@ -102,6 +115,7 @@ export class ModalAddEditProductComponent implements OnInit {
                 this.upgradedProduct.vendors &&
                 this.upgradedProduct.vendors.length
             ) {
+                //naplni data vendorov do modalneho okna
                 this.upgradedProduct.vendors.forEach((element) => {
                     this.vendorName
                         .get('vendors')
@@ -117,6 +131,14 @@ export class ModalAddEditProductComponent implements OnInit {
                             )
                         );
                 });
+                //naplni data reviews do modalneho okna
+                if (this.upgradedProduct.reviews) {
+                    this.upgradedProduct.reviews.forEach((element) => {
+                        this.reviewsGroup
+                            .get('reviews')
+                            .push(new FormControl(element));
+                    });
+                }
             }
         } else this.editMode = false;
     }
@@ -137,15 +159,14 @@ export class ModalAddEditProductComponent implements OnInit {
         this.vendorName.updateValueAndValidity();
 
         if (this.productFormGroup.valid && this.vendorName.valid) {
-            this.fullReviewFormat = [];
             const newProductData = this.productFormGroup.getRawValue();
-            let review = this.reviews.getRawValue();
 
-            if (review !== null) {
+            /*if (review !== null) {
                 this.fullReviewFormat.push(review);
-            }
+            }*/
 
-            this.sendFormArray();
+            this.sendFormArrayVendors();
+            this.sendFormArrayReviews();
 
             this.dataFromService.createNewProductInService(
                 newProductData,
@@ -159,7 +180,7 @@ export class ModalAddEditProductComponent implements OnInit {
         } else alert('Form is invalid');
     }
 
-    addFormArray() {
+    addFormArrayVendors() {
         this.vendorName
             .get('vendors')
             .push(new FormControl('', Validators.required));
@@ -168,7 +189,23 @@ export class ModalAddEditProductComponent implements OnInit {
             .push(new FormControl('', Validators.required));
     }
 
-    sendFormArray() {
+    addFormArrayReviews() {
+        this.reviewsGroup.get('reviews').push(new FormControl(''));
+    }
+
+    sendFormArrayReviews() {
+        this.fullReviewFormat = [];
+        let date = new Date().toLocaleString();
+        let reviewRawValue = this.reviewsGroup.get('reviews').getRawValue();
+
+        for (let i = 0; i < reviewRawValue.length; i++) {
+            let oneReview: string = reviewRawValue[i];
+            this.fullReviewFormat.push(date + ' | ' + oneReview);
+            console.log(this.fullReviewFormat);
+        }
+    }
+
+    sendFormArrayVendors() {
         this.fullVendorFormat = [];
         let vendorsRawValue = this.vendorName.get('vendors').getRawValue();
         let vendorCountStock = this.vendorName.get('countStock').getRawValue();
@@ -178,7 +215,6 @@ export class ModalAddEditProductComponent implements OnInit {
                 name: vendorsRawValue[i],
                 stockCount: parseInt(vendorCountStock[i]),
             };
-
             this.fullVendorFormat.push(oneVendor);
         }
     }

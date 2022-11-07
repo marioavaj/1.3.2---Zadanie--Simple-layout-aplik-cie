@@ -1,7 +1,5 @@
-@import './mixins';
-@import './variables';
-
-
+@import "./mixins";
+@import "./variables";
 
 .productWrapper {
     max-width: 400px;
@@ -9,119 +7,106 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: rgb(242, 242, 242);
     border-radius: 10px;
-  }
+}
 
-  .vendorsFlex{
+.vendorsFlex {
     @include verticalCenter;
-  }
+}
 
-  .redRow {
+.redRow {
     display: flex;
     justify-content: right;
     color: white;
     height: 50px;
-    width:  100%;
+    width: 100%;
     background-color: brown;
     border-radius: 10px 10px 0 0;
-  }
-  .PriceStockWrapper{
+}
+.PriceStockWrapper {
     @include flexSpaceBetween;
     padding: 1em;
-
-  }
-  .productCategoryWrapper {
+}
+.productCategoryWrapper {
     @include flexSpaceBetween;
     border: $borderStyleComplet;
-  }
+}
 
-  .productName {
-    margin: .2em;
-      }
+.productName {
+    margin: 0.2em;
+}
 
-
-
-  .redColumn {
+.redColumn {
     background-color: brown;
     width: 50px !important;
+}
 
-  }
-
-  .price {
+.price {
     display: flex;
-  }
+}
 
-  .title{
+.title {
     display: block;
     @extend %FontSizeMargin;
     font-weight: $FontWeightTitle;
     @include verticalCenter;
+}
 
-  }
-
-  .stock>span{
+.stock > span {
     @extend %FontSizeMargin;
+}
 
-  }
-
-  .stock{
+.stock {
     display: flex;
-  }
+}
 
-  .priceStockValue{
+.priceStockValue {
     font-size: 1.5em;
     @include verticalCenter;
+}
 
+.descriptionName {
+    display: block;
+    @extend %FontSizeMargin;
+    font-weight: $FontWeightTitle;
+    @include verticalCenter;
+}
 
-    }
-
-  .descriptionName{
-   display: block;
-   @extend %FontSizeMargin;
-   font-weight: $FontWeightTitle;
-   @include verticalCenter;
-
-
-  }
-
-  .description {
+.description {
     margin: 1.5em;
     text-align: justify;
     font-size: 0.8em;
-  }
+}
 
-  .vendorName {
+.vendorName {
     display: block;
     @extend %FontSizeMargin;
-   font-weight: $FontWeightTitle;
-   @include verticalCenter;
+    font-weight: $FontWeightTitle;
+    @include verticalCenter;
     margin-right: 1em;
     padding-bottom: 0.5em;
     border-bottom: $borderStyleComplet;
-  }
+}
 
-  .vendor {
+.vendor {
     display: inline-block;
-   margin: 1em 0 1em 1em;
+    margin: 1em 0 1em 1em;
+}
 
-  }
+.reviewName {
+    margin-left: 0.6em;
+}
 
-  .reviewName {
-
-    margin-left: .6em;
-  }
-
-  .review {
-
+.review {
     margin-left: 1em;
     margin-right: 1em;
-    }
+}
 
-    .textarea{
-      width: 100%;
-    }
+.textarea {
+    width: 100%;
+}
 
-  .submit {
-    margin-top: .5em;
+.submit {
+    margin-top: 0.5em;
     margin-bottom: 1em;
     top: -3em;
     height: 30px;
@@ -130,47 +115,43 @@
     border-radius: 5px;
     font-weight: $FontWeightTitle;
     cursor: pointer;
-  }
+}
 
-  .submit:hover {
+.submit:hover {
     background-color: rgb(77, 154, 0);
-  }
+}
 
-  .infoProductGrid {
+.infoProductGrid {
     border-left: $borderStyleComplet;
     border-right: $borderStyleComplet;
-
-  }
-  .reviews{
+}
+.reviews {
     text-align: center;
-    height: 27px;
+    height: 30px;
     color: bisque;
     background-color: brown;
-  }
+}
 
-  .reviewsList{
+.reviewsList {
     padding: 1em;
     height: 100%;
     background-color: rgb(242, 242, 242);
     border-top: $borderStyleComplet;
-    }
+}
 
-  .reviewsBottom{
+.reviewsBottom {
+    height: 30px;
+    background-color: brown;
 
-    height: 27px;
 
-    background-color:brown;
+}
 
-    border-radius: 0 0 10px 10px;
-  }
-
-  h1{
+h1 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin-left: 1em;
-  }
+}
 
-
-  .category {
+.category {
     background-color: rgb(102, 102, 102);
     color: white;
     padding: 0.5em;
@@ -180,86 +161,105 @@
     font-weight: $FontWeightTitle;
     @include verticalCenter;
     background-color: changeProductColor($borderColor);
-  }
+}
 
-  .alertColor {
+.alertColor {
     display: inline-block;
-    font-size: .8em;
+    font-size: 0.8em;
     text-align: center;
     background-color: rgb(255, 0, 0);
     padding: 2px;
     border-radius: 5px;
     color: white;
     @include verticalCenter;
+}
 
-  }
-
-    .priceName {
+.priceName {
     margin-left: 1em;
     font-size: 1.25em;
-  }
+}
 
-  .descriptionName {
+.descriptionName {
     margin-right: 1em;
     margin-left: 1em;
     padding-bottom: 0.5em;
-    border-bottom:$borderStyleComplet;
-  }
+    border-bottom: $borderStyleComplet;
+}
 
-  .vendor {
-      position: relative;
-      font-weight: $FontWeightTitle;
-      text-align: center;
-      background-color: rgb(255, 162, 0);
-      color: white;
-      padding: 0.5em;
-      border-radius: 5px 5px 5px 5px;
-      font-size: 0.8em;
-    }
+.vendor {
+    position: relative;
+    font-weight: $FontWeightTitle;
+    text-align: center;
+    background-color: rgb(255, 162, 0);
+    color: white;
+    padding: 0.5em;
+    border-radius: 5px 5px 5px 5px;
+    font-size: 0.8em;
+}
 
-    .addToCart{
-      background-color: rgb(0, 255, 64);
-      border: none;
-      float: right;
-      margin-right: 1em;
-      border-radius: 5px;
-      height: 30px;
-    }
+.addToCart {
+    margin-top: .2em;
+    background-color: rgb(255, 255, 0);
+    border: none;
+}
 
-    .delete{
-        margin-top: .5em;
-        margin-bottom: 1em;
-        top: -3em;
-        height: 30px;
-        background-color: rgb(255, 255, 255);
-        border: 1px solid black;
-        border-radius: 5px;
-        font-weight: $FontWeightTitle;
-        cursor: pointer;
-      }
+.addToCart {
 
-      .delete:hover {
-        background-color: rgb(236, 236, 236);
-      }
+    box-shadow: inset 0px 1px 0px 0px #fff6af;
+    background: linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+    background-color: #ffec64;
+    border-radius: 6px;
+    border: 1px solid #ffaa22;
+    cursor: pointer;
+    color: #333333;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 15px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #ffee66;
+    float: right;
 
+    margin-right: 1em;
+    border-radius: 5px;
 
+}
+.addToCart:hover {
+    background: linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+    background-color: #ffab23;
+}
+.addToCart:active {
+    position: relative;
+    top: 1px;
+}
 
+.delete {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    top: -3em;
+    height: 30px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    border-radius: 5px;
+    font-weight: $FontWeightTitle;
+    cursor: pointer;
+}
 
+.delete:hover {
+    background-color: rgb(236, 236, 236);
+}
 
-    .submitDeleteButtonsWrapper{
-        width: 100%;
-        @include flexSpaceBetween;
+.submitDeleteButtonsWrapper {
+    width: 100%;
+    @include flexSpaceBetween;
+}
 
-    }
-
-  @media only screen and (max-width: 425px) {
+@media only screen and (max-width: 425px) {
     .price {
-      display: block;
-
-  }
-  .priceStockValue{
-    font-size: 1em;
-    @include verticalCenter;
-      }
-  }
-
+        display: block;
+    }
+    .priceStockValue {
+        font-size: 1em;
+        @include verticalCenter;
+    }
+}

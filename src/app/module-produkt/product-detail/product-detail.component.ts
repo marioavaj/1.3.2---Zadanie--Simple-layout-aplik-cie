@@ -1,9 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    ViewChild,
+} from '@angular/core';
 import { MatDialogConfig } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ModalAddEditProductComponent } from 'src/app/modal-window/ModalAddEditProduct/modal-add-edit-product/modal-add-edit-product.component';
 import { Product } from 'src/app/models/Product';
 import { ModalService } from 'src/app/Services/modal.service';
+import { ShopingCartServiceService } from 'src/app/Services/shoping-cart-service.service';
 import { ProductServiceService } from '../../Services/product-service.service';
 
 @Component({
@@ -12,31 +21,40 @@ import { ProductServiceService } from '../../Services/product-service.service';
     styleUrls: ['./product-detail.component.scss'],
 })
 export class ProductDetailComponent implements OnInit {
-    data: any;
     productIdFromRoute: number;
+    reviewFromInput: string;
+
+    @Input() data: any;
+    @Output() reviewAdd: EventEmitter<any> = new EventEmitter<any>();
+
+    @ViewChild('productPosition') productPosition: ElementRef<HTMLElement>;
 
     constructor(
         private route: ActivatedRoute,
-        private productData: ProductServiceService,
-
-        private deleteItem: ProductServiceService,
-        private dialog: ModalService
+        private productService: ProductServiceService,
+        private dialog: ModalService,
+        private createItem: ShopingCartServiceService
     ) {}
 
     ngOnInit(): void {
         const routeParams = this.route.snapshot.paramMap;
         const productIdFromRoute = Number(routeParams.get('productId'));
-        this.productData.getProductList();
+        this.productService.getProductList();
 
-        this.productData.getProductById(productIdFromRoute).then((product) => {
-            this.data = product;
+        this.productService.productDataObservable.subscribe((newValue) => {
+            this.data = newValue; //AKTUALIZUJE DATA V DETAILY PRODUKTU PO UPDATE UDAJOV
         });
+
+        this.productService
+            .getProductById(productIdFromRoute)
+            .then((product) => {
+                this.data = product;
+            });
     }
 
     deleteProduct(data: Product) {
         if (data.editPermission) {
-            this.deleteItem.deleteProduct(data);
-
+            this.productService.deleteProduct(data);
         } else alert('You have not permission to delete this product');
     }
 
@@ -49,5 +67,29 @@ export class ProductDetailComponent implements OnInit {
         } else alert('You have not permission to edit this product');
     }
 
+    addToCart() {
+        this.createItem.putData(this.data);
+        this.data.stockCount--;
+        this.productService.minusStockCount(this.data.id, this.data.stockCount);
+    }
 
+    addReview(review: string) {
+        if (review?.length > 0) {
+            let date = new Date().toLocaleString();
+            if (this.data) {
+                // kontrola ci premenna data existuje
+                if (!this.data.reviews) {
+                    // kontrola ci v data existuje objekt reviews
+                    this.data.reviews = []; // ak plati podmienka ze neexistuje, vytvori ho
+                }
+                this.data.reviews.push(date + ' | ' + review).toLocaleString();
+                console.log(this.data.reviews);
+
+                this.productService.addReviews(this.data);
+
+                this.reviewAdd.emit(review); // sprava pre parenta ze vlozil recenziu
+                this.reviewFromInput = '';
+            }
+        }
+    }
 }

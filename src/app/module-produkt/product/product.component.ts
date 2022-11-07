@@ -19,42 +19,21 @@ import { Product } from '../../models/Product';
 })
 export class ProductComponent implements OnInit {
     @Input() data: any;
-    @Output() reviewAdd: EventEmitter<any> = new EventEmitter<any>();
-
     @ViewChild('productPosition') productPosition: ElementRef<HTMLElement>;
-
-    reviewFromInput: string;
 
     public clickedItem: Product;
 
     constructor(
         private createItem: ShopingCartServiceService,
-        private newStockCount: ProductServiceService
+        private productService: ProductServiceService
     ) {}
 
     ngOnInit(): void {}
 
-    addReview(review: string) {
-        if (review?.length > 0) {
-            let date = new Date().toLocaleString();
-            if (this.data) {
-                // kontrola ci premenna data existuje
-                if (!this.data.reviews) {
-                    // kontrola ci v data existuje objekt reviews
-                    this.data.reviews = []; // ak plati podmienka ze neexistuje, vytvori ho
-                }
-                this.data.reviews.push(date + ' | ' + review);
-                this.reviewAdd.emit(review); // sprava pre parenta ze vlozil recenziu
-                this.reviewFromInput = '';
-            }
-        }
-    }
-
     addToCart() {
         this.createItem.putData(this.data);
         this.data.stockCount--;
-
-        this.newStockCount.minusStockCount(this.data.id, this.data.stockCount);
+        this.productService.minusStockCount(this.data.id, this.data.stockCount);
     }
 }
 

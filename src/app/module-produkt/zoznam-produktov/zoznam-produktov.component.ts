@@ -10,23 +10,23 @@ import { ProductServiceService } from '../../Services/product-service.service';
     styleUrls: ['./zoznam-produktov.component.scss'],
 })
 export class ZoznamProduktovComponent implements OnInit {
-    static productData: any;
-    static ngOnInit() {
-        throw new Error('Method not implemented.');
-    }
-    productList: any[];
+     productData: any;
+     productList: any[];
     sortByClicked: boolean;
     lastReview: string;
     filteredData: Product[];
     onStockCheckBox: boolean;
 
     constructor(
-        private ProductServiceService: ProductServiceService,
+        private productService: ProductServiceService,
         private modal: ModalService
     ) {}
 
     ngOnInit(): void {
-        this.displayProduct();
+
+      this.displayProducts();
+
+
     }
 
     lastReviewDisplayed(review: any, name: string): void {
@@ -49,8 +49,8 @@ export class ZoznamProduktovComponent implements OnInit {
         this.modal.openDialog(ModalAddEditProductComponent);
     }
 
-    displayProduct() {
-        this.ProductServiceService.getProductList().then((products: any[]) => {
+    displayProducts() {
+        this.productService.getProductList().then((products: any[]) => {
             this.productList = products;
         });
         this.filteredData = this.productList;
