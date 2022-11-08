@@ -59,6 +59,13 @@ export class ApiService {
             .pipe(catchError(this.handleError));
     }
 
+    putReview(data: any): Observable<any> {
+        const endpoint =
+            'https://angularkurz.itcooking.eu/api/v1/lessons/product/CreateReview/';
+        return this.http
+            .put(endpoint, data)
+            .pipe(catchError(this.handleError));
+    }
 
 
 
