@@ -19,6 +19,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatStepperModule} from '@angular/material/stepper';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AdminComponent } from './admin/admin.component';
+import { FilterOptionMyProductComponent } from './filter-option-my-product/filter-option-my-product.component';
 
 @NgModule({
     declarations: [
@@ -30,6 +32,8 @@ import { MatDialogModule } from '@angular/material/dialog';
         SortByPipePipe,
         CountdownComponent,
         ShoppingCartListComponent,
+        AdminComponent,
+        FilterOptionMyProductComponent,
 
     ],
     imports: [
@@ -59,7 +63,8 @@ import { MatDialogModule } from '@angular/material/dialog';
         MatFormFieldModule,
         MatStepperModule,
         MatInputModule,
-        MatDialogModule
+        MatDialogModule,
+        FilterOptionMyProductComponent
     ],
 
     providers: [SortByPipePipe],

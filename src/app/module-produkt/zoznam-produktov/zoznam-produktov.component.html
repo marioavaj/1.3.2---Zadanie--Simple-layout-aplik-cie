@@ -5,12 +5,20 @@
     <app-filter
         [whereIsSearching]="productList"
         [onStock]="onStockCheckBox"
+        [myProductsFilter] = "myProducts"
         (outputEvent)="onFilterDone($event)"
     ></app-filter>
-    <app-filter-option
+
+    <app-filter-option #onStock
         [onStockCheckBox]="false"
         (checkBoXInput)="inputCheckBox($event)"
     ></app-filter-option>
+
+    <app-filter-option-my-product #myProductsFilter
+        [myProductsFilter]="false"
+        (myProductsFilterOutput)="myProductsCheckBox($event)"
+    >
+    </app-filter-option-my-product>
 
     <mat-checkbox
         (click)="isClicked()"
@@ -25,15 +33,18 @@
 </div>
 
 <div class="buttonWrapper">
-    <a mat-raised-button (click)="openModalNewProduct()">add new product</a>
+    <a *ngIf="isLogged" mat-raised-button (click)="openModalNewProduct()"
+        >add new product</a
+    >
 </div>
 
 <div class="productsWrapper">
     <div class="productList">
         <app-product
             [data]="filteredProducts"
-
-            *ngFor="let filteredProducts of filteredData | sortByPipe: sortByClicked"
+            *ngFor="
+                let filteredProducts of filteredData | sortByPipe: sortByClicked
+            "
         ></app-product>
     </div>
 </div>

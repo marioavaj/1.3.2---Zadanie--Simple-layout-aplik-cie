@@ -62,8 +62,8 @@ export class AuthenticationService {
 
     isLogged(isLogged: boolean) {
         this.authenticationStream.next(isLogged);
-    }
 
+    }
     connectToApi(loginData, stayByClicked: boolean) {
         this.authentication(loginData)
             .pipe(take(1))

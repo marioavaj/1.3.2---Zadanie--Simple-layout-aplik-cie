@@ -41,7 +41,7 @@ export class ApiService {
 
     get(): Observable<any> {
         const endpoint =
-            'https://angularkurz.itcooking.eu/api/v1/auth/lessons/product/GetProducts';
+            'https://angularkurz.itcooking.eu/api/v1/lessons/product/GetProducts';
 
         //'https://angularkurz.itcooking.eu/api/v1/lessons/product/GetProducts';
         //"https://product-api.tomondre.com/api/v1/lessons/product/GetProducts"
@@ -52,7 +52,7 @@ export class ApiService {
 
     getById(id: number): Observable<any> {
         const endpoint =
-            'https://angularkurz.itcooking.eu/api/v1/auth/lessons/product/GetProductById/';
+            'https://angularkurz.itcooking.eu/api/v1/lessons/product/GetProductById/';
         //"https://product-api.tomondre.com/api/v1/lessons/product/GetProducts"
         return this.http
             .get(endpoint + id, this.jsonHttpOptions)
@@ -77,10 +77,12 @@ export class ApiService {
             .pipe(catchError(this.handleError));
     }
 
-    putReview(data: any): Observable<any> {
+    putReview( data: any): Observable<any> {
+        console.log(data)
         const endpoint =
             'https://angularkurz.itcooking.eu/api/v1/lessons/product/CreateReview/';
-        return this.http.put(endpoint, data).pipe(catchError(this.handleError));
+        return this.http.post(endpoint, data).pipe(catchError(this.handleError));
+
     }
 
     delete(id: number): Observable<any> {

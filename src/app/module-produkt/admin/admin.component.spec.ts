@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FilterOptionComponent } from './filter-option.component';
+import { AdminComponent } from './admin.component';
 
-describe('FilterOptionComponent', () => {
-  let component: FilterOptionComponent;
-  let fixture: ComponentFixture<FilterOptionComponent>;
+describe('AdminComponent', () => {
+  let component: AdminComponent;
+  let fixture: ComponentFixture<AdminComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FilterOptionComponent ]
+      declarations: [ AdminComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FilterOptionComponent);
+    fixture = TestBed.createComponent(AdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

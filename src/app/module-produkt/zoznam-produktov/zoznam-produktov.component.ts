@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalAddEditProductComponent } from 'src/app/modal-window/ModalAddEditProduct/modal-add-edit-product/modal-add-edit-product.component';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { ModalService } from 'src/app/Services/modal.service';
 import { Product } from '../../models/Product';
 import { ProductServiceService } from '../../Services/product-service.service';
@@ -16,16 +17,22 @@ export class ZoznamProduktovComponent implements OnInit {
     lastReview: string;
     filteredData: Product[];
     onStockCheckBox: boolean;
+    myProducts:boolean
+    isLogged:boolean;
 
     constructor(
         private productService: ProductServiceService,
-        private modal: ModalService
+        private modal: ModalService,
+        private isLoggedService: AuthenticationService,
+
     ) {}
 
     ngOnInit(): void {
 
       this.displayProducts();
-
+      this.isLoggedService.authenticationStream.subscribe((value) => {
+        this.isLogged = value;
+    });
     }
 
     onFilterDone(item: Product[]) {
@@ -33,6 +40,10 @@ export class ZoznamProduktovComponent implements OnInit {
     }
     inputCheckBox(onStock: boolean): void {
         this.onStockCheckBox = onStock;
+    }
+
+    myProductsCheckBox(myProducts: boolean){
+        this.myProducts = myProducts;
     }
 
     isClicked() {
@@ -50,4 +61,6 @@ export class ZoznamProduktovComponent implements OnInit {
         this.filteredData = this.productList;
         this.sortByClicked = false;
     }
+
+
 }

@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
         private tooltipDataFromService: ShopingCartServiceService,
         private modal: ModalService,
         private isLoggedService: AuthenticationService,
-        private userStream: UserService
+
     ) {}
 
     ngOnInit(): void {

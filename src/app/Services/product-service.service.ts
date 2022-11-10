@@ -1,3 +1,4 @@
+import { DataRowOutlet } from '@angular/cdk/table';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, take } from 'rxjs';
@@ -141,8 +142,14 @@ export class ProductServiceService {
     }
 
     addReviews(data: Product) {
+     let message = data.reviews?.slice(-1).toLocaleString();
+     console.log(message);
+       const reviewToApi={
+            "productId": data.id,
+            "message": message
+        }
         this.api
-            .put(data.id, data)
+            .putReview(reviewToApi)
             .toPromise()
             .then((data) => {
                 console.log(data);

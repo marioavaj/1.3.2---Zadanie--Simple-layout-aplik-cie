@@ -11,6 +11,7 @@ import { MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { ModalAddEditProductComponent } from 'src/app/modal-window/ModalAddEditProduct/modal-add-edit-product/modal-add-edit-product.component';
 import { Product } from 'src/app/models/Product';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { ModalService } from 'src/app/Services/modal.service';
 import { ShopingCartServiceService } from 'src/app/Services/shoping-cart-service.service';
 import { ProductServiceService } from '../../Services/product-service.service';
@@ -28,12 +29,15 @@ export class ProductDetailComponent implements OnInit {
     @Output() reviewAdd: EventEmitter<any> = new EventEmitter<any>();
 
     @ViewChild('productPosition') productPosition: ElementRef<HTMLElement>;
+    isLogged: any;
 
     constructor(
         private route: ActivatedRoute,
         private productService: ProductServiceService,
         private dialog: ModalService,
-        private createItem: ShopingCartServiceService
+        private createItem: ShopingCartServiceService,
+        private isLoggedService: AuthenticationService,
+
     ) {}
 
     ngOnInit(): void {
@@ -49,6 +53,10 @@ export class ProductDetailComponent implements OnInit {
             .getProductById(productIdFromRoute)
             .then((product) => {
                 this.data = product;
+            });
+
+            this.isLoggedService.authenticationStream.subscribe((value) => {
+                this.isLogged = value;
             });
     }
 

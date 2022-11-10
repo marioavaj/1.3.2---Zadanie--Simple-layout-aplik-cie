@@ -1,28 +1,28 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'app-filter-option',
-  templateUrl: './filter-option.component.html',
-  styleUrls: ['./filter-option.component.scss']
+    selector: 'app-filter-option',
+    templateUrl: './filter-option.component.html',
+    styleUrls: ['./filter-option.component.scss'],
 })
 export class FilterOptionComponent implements OnInit {
 
-  @Input() onStockCheckBox:boolean;
-  @Output() checkBoXInput: EventEmitter<any> = new EventEmitter<any>();
-
-  constructor(private fb: FormBuilder) { }
-
-  ngOnInit(): void {
-
-  }
+    @Input() onStockCheckBox: boolean;
+    @Output() checkBoXInput: EventEmitter<any> = new EventEmitter<any>();
 
 
 
-  onChange():void{
-    this.onStockCheckBox = !this.onStockCheckBox;
-    this.checkBoXInput.emit(this.onStockCheckBox);
 
-  }
+    constructor() {}
+
+    ngOnInit(): void {}
+
+    onChange(): void {
+        this.onStockCheckBox = !this.onStockCheckBox;
+        this.checkBoXInput.emit(this.onStockCheckBox);
+
+    }
+
+
 
 }

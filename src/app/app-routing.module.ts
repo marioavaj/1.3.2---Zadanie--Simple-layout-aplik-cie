@@ -7,6 +7,7 @@ import { ProductDetailComponent } from './module-produkt/product-detail/product-
 import { ZivotopisComponent } from './zivotopis/zivotopis.component';
 import { ZamestnanciComponent } from './zamestnanci/zamestnanci.component';
 import { StructuralComponent } from './structural/structural.component';
+import { AdminComponent } from './module-produkt/admin/admin.component';
 
 const routes: Routes = [
     { path: '', title: 'Ondrejka', component: WelcomeComponent },
@@ -48,7 +49,15 @@ const routes: Routes = [
         path: 'structural',
         title: 'Structural',
         component: StructuralComponent,
+    },
+
+    {
+        path: 'admin',
+        title: 'Admin',
+        component: AdminComponent,
     }
+
+
 ];
 
 @NgModule({

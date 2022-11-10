@@ -10,29 +10,34 @@ import {
     AfterViewInit,
     AfterViewChecked,
     OnDestroy,
-    EventEmitter
+    EventEmitter,
 } from '@angular/core';
-import {Product} from '../../models/Product';
+import { Product } from '../../models/Product';
 
-@Component({selector: 'app-filter', templateUrl: './filter.component.html',
- styleUrls: ['./filter.component.scss']})
+@Component({
+    selector: 'app-filter',
+    templateUrl: './filter.component.html',
+    styleUrls: ['./filter.component.scss'],
+})
 export class FilterComponent
-implements
-OnInit,
-OnChanges,
-DoCheck,
-AfterContentInit,
-AfterContentChecked,
-AfterViewInit,
-AfterViewChecked,
-OnDestroy {
-    @Input()onStock : boolean = false;
+    implements
+        OnInit,
+        OnChanges,
+        DoCheck,
+        AfterContentInit,
+        AfterContentChecked,
+        AfterViewInit,
+        AfterViewChecked,
+        OnDestroy
+{
+    @Input('onStock') onStock: boolean = false;
+    @Input('myProductsFilter') myProductsFilter: boolean;
 
-    @Input('whereIsSearching')data : Product[];
-    @Output()outputEvent : EventEmitter < any > = new EventEmitter<any>();
+    @Input('whereIsSearching') data: Product[];
+    @Output() outputEvent: EventEmitter<any> = new EventEmitter<any>();
 
-    @Input()whatIsSearched : string;
-    resultSet : Product[];
+    @Input() whatIsSearched: string;
+    resultSet: Product[];
 
     // zavola sa pred hocijakym life-hookom, ak ma komponent zavislosti, nacitaj ich do konstruktoru
     constructor() {}
@@ -41,10 +46,14 @@ OnDestroy {
     // AK NEMA KOMPONENTA ZIADNE INPUT TAK SA NEZAVOLA!!!!!!!!!!!!!!!!!!!!!!!
     // ZAVOLA SA NAD KAZDOU ZMENOU V KOMPONENTOCH, KTORE SU AKTUALNE VYKRESLENE V DOM
     ngOnChanges(): void {
-        if (this.onStock === undefined) {
+        if (!this.onStock) {
             this.onStock = false;
         }
+        if (!this.myProductsFilter) {
+            this.myProductsFilter = false;
+        }
         this.filter(this.whatIsSearched);
+        console.log(this.data);
     }
 
     // spusti sa po ngOnChanges, spusta sa iba raz!!!!!!!! este nie je nacitany html!!!!! Spracovanie pociatocnych dat, externe sluzby, asynchronne, idealne miesto pre inicializovanie dat z DB
@@ -68,22 +77,37 @@ OnDestroy {
     // Spusta sa 1x tesne predtym ako sa chysta angular zlikvidovat komponenntu alebo direktivu, treba riesit unsubscribe from observables, from DOM events, stop interval timers, unregister all callback. Posledna sanca ako poupratovat po komponente. Ak napr.komponent spusta externy servis, ktory sa pri zruseni komponentu tiez musi zrusit.
     ngOnDestroy() {}
 
-    selectItem(item : string): void {
+    selectItem(item: string): void {
         this.whatIsSearched = item;
         this.resultSet = [];
     }
 
-    filter(whatIsSearched : string): void {
+    filter(whatIsSearched: string): void {
         let result: Product[] = [];
-        if ((this.data && whatIsSearched ?. length >= 2 || (this.data && this.onStock === true))) {
+        if (
+            (this.data && whatIsSearched?.length >= 2) ||
+            (this.data && this.onStock === true) ||
+            (this.data && this.myProductsFilter === true)
+        ) {
             this.data.forEach((item) => {
-                if (item.name.toLocaleLowerCase().includes(whatIsSearched.toLocaleLowerCase()) && this.onStock === false && item.stockCount >= 0) {
+                if (
+                    item.name
+                        .toLocaleLowerCase()
+                        .includes(whatIsSearched.toLocaleLowerCase()) &&
+                    this.onStock === false &&
+                    item.stockCount >= 0 && item.editPermission == true
+                ) {
+
                     result.push(item);
                     this.outputEvent.emit(result);
-                } else if (item.name.toLocaleLowerCase().includes(whatIsSearched.toLocaleLowerCase()) && this.onStock === true && item.stockCount > 0) 
-                    result.push(item);
-                
+                } else if (
+                    item.name
+                        .toLocaleLowerCase()
+                        .includes(whatIsSearched.toLocaleLowerCase()) &&
+                    this.onStock === true &&
+                    item.stockCount > 0 && item.editPermission == true)
 
+                    result.push(item);
 
                 this.outputEvent.emit(result);
             });
@@ -95,7 +119,5 @@ OnDestroy {
         }
 
         this.outputEvent.emit(result);
-
-
     }
 }

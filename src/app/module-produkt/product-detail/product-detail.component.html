@@ -8,7 +8,7 @@
     <a routerLink="/zoznam-produktov">...Späť na zoznam produktov</a>
     <h2>Detail produktu</h2>
 </div>
-<div class="editDeteleWrapper">
+<div *ngIf="isLogged" class="editDeteleWrapper">
     <input
         (click)="editProduct(data)"
         class="submit"

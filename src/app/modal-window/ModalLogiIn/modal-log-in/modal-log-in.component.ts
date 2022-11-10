@@ -24,7 +24,10 @@ export class ModalLogInComponent implements OnInit {
         private authentication: AuthenticationService
     ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+
+
+    }
 
     stayLoggedIn() {
         this.stayByClicked = !this.stayByClicked;
