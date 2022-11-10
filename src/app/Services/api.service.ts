@@ -52,7 +52,7 @@ export class ApiService {
 
     getById(id: number): Observable<any> {
         const endpoint =
-            'https://angularkurz.itcooking.eu/api/v1/lessons/product/GetProductById/';
+            'https://angularkurz.itcooking.eu/api/v1/auth/lessons/product/GetProductById/';
         //"https://product-api.tomondre.com/api/v1/lessons/product/GetProducts"
         return this.http
             .get(endpoint + id, this.jsonHttpOptions)
@@ -61,7 +61,7 @@ export class ApiService {
 
     post(data: any): Observable<any> {
         const endpoint =
-            'https://angularkurz.itcooking.eu/api/v1/lessons/product/CreateProduct';
+            'https://angularkurz.itcooking.eu/api/v1/auth/lessons/product/CreateProduct';
 
         return this.http
             .post(endpoint, data, this.jsonHttpOptions)
@@ -70,7 +70,7 @@ export class ApiService {
 
     put(id: number, data: any): Observable<any> {
         const endpoint =
-            'https://angularkurz.itcooking.eu/api/v1/lessons/product/UpdateProduct/';
+            'https://angularkurz.itcooking.eu/api/v1/auth/lessons/product/UpdateProduct/';
 
         return this.http
             .put(endpoint + id, data)
@@ -85,7 +85,7 @@ export class ApiService {
 
     delete(id: number): Observable<any> {
         const endpoint =
-            'https://angularkurz.itcooking.eu/api/v1/lessons/product/RemoveProduct/';
+            'https://angularkurz.itcooking.eu/api/v1/auth/lessons/product/RemoveProduct/';
 
         return this.http
             .delete(endpoint + id, this.jsonHttpOptions)
