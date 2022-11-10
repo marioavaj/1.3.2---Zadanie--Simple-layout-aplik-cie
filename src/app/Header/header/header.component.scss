@@ -4,10 +4,27 @@ img {
 }
 
 .cart {
-    margin: auto 2em auto 0;
+    display: inline-block;
+    margin: auto 1em auto 0;
     font-size: 2em;
     position: relative;
+
+}
+
+.login{
     display: inline-block;
+    margin: auto 1.5em auto 0;
+    font-size: 2em;
+    position: relative;
+}
+
+.login:hover{
+    cursor: pointer;
+}
+
+.cartWrapper{
+    display: flex;
+    flex-direction: row;
 }
 
 .cart .tooltiptext {
@@ -35,6 +52,10 @@ img {
     opacity: 1;
 }
 
+.name{
+    font-size: 13px;
+
+}
 .itemNameInTooltip {
     font-size: small !important;
     color: black;

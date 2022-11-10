@@ -30,11 +30,12 @@ import { StatistikaRoutingModule } from './statistika-routing.module';
         MatCheckboxModule,
         MatRadioModule,
         StatistikaRoutingModule
-       
+
     ],
     exports: [
       StatistikaComponent,
-      RouterModule
+      RouterModule,
+      MatCheckboxModule
   ]
 })
 export class ModuleStatistikaModule {}

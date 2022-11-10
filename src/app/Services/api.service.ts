@@ -5,27 +5,45 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class ApiService {
+    tokenFromLS: string | null;
+
     private get jsonHttpOptions() {
         let headers = new HttpHeaders();
         headers = headers.set('Access-Control-Allow-Origin', '*');
         headers = headers.set('X-Requested-With', 'XMLHttpRequest');
-        headers = headers.set('Content-Type', 'aplication/json');
+        headers = headers.set('Content-Type', 'application/json');
+
+        if (AuthenticationService.token != undefined) {
+            headers = headers.set(
+                'Authorization',
+                'Basic ' + AuthenticationService.token
+            );
+        } else if (this.tokenFromLS) {
+            headers = headers.set('Authorization', 'Basic ' + this.tokenFromLS);
+        }
 
         return {
             headers: headers,
         };
     }
 
-    constructor(private http: HttpClient) {}
+    constructor(
+        private http: HttpClient,
+    ) {
+        this.tokenFromLS = localStorage.getItem('Dk4kdoSkf5*gjd');//nacita token z LS
+    }
 
     get(): Observable<any> {
         const endpoint =
-            'https://angularkurz.itcooking.eu/api/v1/lessons/product/GetProducts';
+            'https://angularkurz.itcooking.eu/api/v1/auth/lessons/product/GetProducts';
+
+        //'https://angularkurz.itcooking.eu/api/v1/lessons/product/GetProducts';
         //"https://product-api.tomondre.com/api/v1/lessons/product/GetProducts"
         return this.http
             .get(endpoint, this.jsonHttpOptions)
@@ -46,7 +64,7 @@ export class ApiService {
             'https://angularkurz.itcooking.eu/api/v1/lessons/product/CreateProduct';
 
         return this.http
-            .post(endpoint, data)
+            .post(endpoint, data, this.jsonHttpOptions)
             .pipe(catchError(this.handleError));
     }
 
@@ -62,13 +80,8 @@ export class ApiService {
     putReview(data: any): Observable<any> {
         const endpoint =
             'https://angularkurz.itcooking.eu/api/v1/lessons/product/CreateReview/';
-        return this.http
-            .put(endpoint, data)
-            .pipe(catchError(this.handleError));
+        return this.http.put(endpoint, data).pipe(catchError(this.handleError));
     }
-
-
-
 
     delete(id: number): Observable<any> {
         const endpoint =
@@ -84,8 +97,8 @@ export class ApiService {
             console.log('An error occured: ', error.error.message);
         } else {
             alert(
-                `Backeend returned code ${error.status},  ` +
-                    `body was:  ${error.error.title}`
+                `Error  code ${error.status}`
+
             );
         }
         return throwError(error);
