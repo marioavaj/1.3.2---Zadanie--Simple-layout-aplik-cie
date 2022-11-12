@@ -26,12 +26,8 @@
                 </div>
             </div>
 
-            <div *ngIf="data.editPermission ===true && user.user.firstName  !=undefined">{{manager}}</div>
-
+            <div *ngIf="data.editPermission === true">{{ manager }}</div>
         </div>
-
-
-
 
         <button
             *ngIf="data.stockCount !== 0"

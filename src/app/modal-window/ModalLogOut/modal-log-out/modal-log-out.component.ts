@@ -8,15 +8,17 @@ import { AuthenticationService } from 'src/app/Services/authentication.service';
     styleUrls: ['./modal-log-out.component.scss'],
 })
 export class ModalLogOutComponent implements OnInit {
-    constructor(private dialogRef: MatDialogRef<ModalLogOutComponent>,
-        private authenticationService: AuthenticationService) {}
+    constructor(
+        private dialogRef: MatDialogRef<ModalLogOutComponent>,
+        private authenticationService: AuthenticationService
+    ) {}
 
     ngOnInit(): void {}
 
     logOut() {
-        localStorage.removeItem('Dk4kdoSkf5*gjd');//vymaze kluc s tokenom
-        this.authenticationService.isLogged(false);//ymeni ikonku v header na prihlasit
-        this.dialogRef.close();//zavrie okno
-
+        localStorage.removeItem('Dk4kdoSkf5*gjd'); //vymaze kluc s tokenom
+        localStorage.removeItem('Dk4kdoSkf5*g5464jd');
+        this.authenticationService.isLogged(false); //zmeni ikonku v header na prihlasit
+        this.dialogRef.close(); //zavrie okno
     }
 }

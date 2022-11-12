@@ -27,6 +27,7 @@ export class AuthenticationService {
     isLogIn: boolean;
     stayByClicked: any;
     user = new User();
+    userName: string | null;
 
     private get jsonHttpOptions() {
         let headers = new HttpHeaders();
@@ -63,11 +64,12 @@ export class AuthenticationService {
     }
 
     isLogged(isLogged: boolean) {
-
         this.authenticationStream.next(isLogged);
     }
 
-
+    userNamefromLS(userName:string | null){
+        this.authenticationStream.next(userName);
+    }
 
     connectToApi(loginData, stayByClicked: boolean) {
         this.authentication(loginData)
@@ -78,8 +80,10 @@ export class AuthenticationService {
 
                 this.isLogIn = true; // v headu sluzi na zmenu ikony prihlasit/odhlasit
                 this.isLogged(this.isLogIn);
-
                 this.user = loginResponse; //ziska resposeData prav uzivatela
+                this.userName = this.user.firstName + ' ' + this.user.lastName;
+                this.userNamefromLS(this.userName);
+
                 this.whoIs.next(this.user);
 
                 // ulozi token do LocalStorage po zakliknuti checkboxu pre trvale prihlasenie alebo odhlasenie
@@ -88,8 +92,10 @@ export class AuthenticationService {
                         'Dk4kdoSkf5*gjd',
                         AuthenticationService.token
                     );
+                    localStorage.setItem('Dk4kdoSkf5*g5464jd', this.userName);
                 } else {
                     localStorage.removeItem('Dk4kdoSkf5*gjd');
+                    localStorage.removeItem('Dk4kdoSkf5*g5464jd');
                 }
             });
     }

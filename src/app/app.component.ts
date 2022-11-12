@@ -21,6 +21,12 @@ constructor(private isLogged: AuthenticationService){}
         this.isLogged.isLogged(true);
      }
 
+     if(localStorage.getItem('Dk4kdoSkf5*g5464jd') && localStorage.getItem('Dk4kdoSkf5*g5464jd') !=undefined){
+         let userName = (localStorage.getItem('Dk4kdoSkf5*g5464jd'));
+         console.log((localStorage.getItem('Dk4kdoSkf5*g5464jd')));
+        this.isLogged.userNamefromLS(userName);
+     }
+
   }
   title = 'Metis-Ondrejka';
   rootPage:any = WelcomeComponent;
