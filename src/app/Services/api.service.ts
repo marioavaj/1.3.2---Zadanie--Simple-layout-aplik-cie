@@ -19,49 +19,63 @@ export class ApiService {
         headers = headers.set('X-Requested-With', 'XMLHttpRequest');
         headers = headers.set('Content-Type', 'application/json');
 
-        if (AuthenticationService.token != undefined) {
-            headers = headers.set(
-                'Authorization',
-                'Basic ' + AuthenticationService.token
-            );
+
+        if (this.token) {
+
+                      headers = headers.set('Authorization', 'Basic bS5vbmRyZWprYTpqbjNlOUJhTQ==');
+
         } else if (this.tokenFromLS) {
-            headers = headers.set('Authorization', 'Basic ' + this.tokenFromLS);
+           headers = headers.set('Authorization', 'Basic bS5vbmRyZWprYTpqbjNlOUJhTQ==');
         }
 
         return {
             headers: headers,
-        };
+        }
     }
 
-    constructor(
-        private http: HttpClient,
-    ) {
-        this.tokenFromLS = localStorage.getItem('Dk4kdoSkf5*gjd');//nacita token z LS
+    constructor(private http: HttpClient,
+        private token: AuthenticationService) {
+        this.tokenFromLS = localStorage.getItem('Dk4kdoSkf5*gjd'); //nacita token z LS
+
     }
 
     get(): Observable<any> {
-        const endpoint =
-            'https://angularkurz.itcooking.eu/api/v1/lessons/product/GetProducts';
-
-        //'https://angularkurz.itcooking.eu/api/v1/lessons/product/GetProducts';
-        //"https://product-api.tomondre.com/api/v1/lessons/product/GetProducts"
-        return this.http
-            .get(endpoint, this.jsonHttpOptions)
-            .pipe(catchError(this.handleError));
+        if (!AuthenticationService.token) {
+            const endpoint =
+                'https://angularkurz.itcooking.eu/api/v1/lessons/product/GetProducts';
+            return this.http
+                .get(endpoint, this.jsonHttpOptions)
+                .pipe(catchError(this.handleError));
+        } else {
+            const endpoint =
+                'https://angularkurz.itcooking.eu/api/v1/auth/lessons/product/GetProducts';
+            return this.http
+                .get(endpoint, this.jsonHttpOptions)
+                .pipe(catchError(this.handleError));
+        }
     }
 
     getById(id: number): Observable<any> {
-        const endpoint =
-            'https://angularkurz.itcooking.eu/api/v1/lessons/product/GetProductById/';
-        //"https://product-api.tomondre.com/api/v1/lessons/product/GetProducts"
-        return this.http
-            .get(endpoint + id, this.jsonHttpOptions)
-            .pipe(catchError(this.handleError));
+
+        if (!AuthenticationService.token) {
+            const endpoint =
+                'https://angularkurz.itcooking.eu/api/v1/lessons/product/GetProductById/';
+            return this.http
+                .get(endpoint + id, this.jsonHttpOptions)
+                .pipe(catchError(this.handleError));
+        } else {
+            const endpoint =
+            'https://angularkurz.itcooking.eu/api/v1/auth/lessons/product/GetProductById/';
+
+            return this.http
+                .get(endpoint + id, this.jsonHttpOptions)
+                .pipe(catchError(this.handleError));
+        }
     }
 
     post(data: any): Observable<any> {
         const endpoint =
-            'https://angularkurz.itcooking.eu/api/v1/auth/lessons/product/CreateProduct';
+            'https://angularkurz.itcooking.eu/api/v1/auth/lessons/product/CreateProduct/';
 
         return this.http
             .post(endpoint, data, this.jsonHttpOptions)
@@ -69,20 +83,22 @@ export class ApiService {
     }
 
     put(id: number, data: any): Observable<any> {
+
         const endpoint =
             'https://angularkurz.itcooking.eu/api/v1/auth/lessons/product/UpdateProduct/';
 
         return this.http
-            .put(endpoint + id, data)
+            .put(endpoint + id, data, this.jsonHttpOptions)
             .pipe(catchError(this.handleError));
     }
 
-    putReview( data: any): Observable<any> {
-        console.log(data)
+    putReview(data: any): Observable<any> {
+
         const endpoint =
             'https://angularkurz.itcooking.eu/api/v1/lessons/product/CreateReview/';
-        return this.http.post(endpoint, data).pipe(catchError(this.handleError));
-
+        return this.http
+            .post(endpoint, data)
+            .pipe(catchError(this.handleError));
     }
 
     delete(id: number): Observable<any> {
@@ -98,10 +114,7 @@ export class ApiService {
         if (error.error instanceof ErrorEvent) {
             console.log('An error occured: ', error.error.message);
         } else {
-            alert(
-                `Error  code ${error.status}`
-
-            );
+            alert(`Error  code ${error.status}`);
         }
         return throwError(error);
     }

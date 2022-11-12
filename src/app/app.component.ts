@@ -21,8 +21,6 @@ constructor(private isLogged: AuthenticationService){}
         this.isLogged.isLogged(true);
      }
 
-
-
   }
   title = 'Metis-Ondrejka';
   rootPage:any = WelcomeComponent;

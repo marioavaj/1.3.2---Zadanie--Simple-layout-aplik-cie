@@ -50,6 +50,8 @@ export class ProductServiceService {
                 sellCountLastMonth: parseInt(newProductData.lastMonthSold),
                 vendors: this.vendorToApi,
                 reviews: newReview,
+                ownerName: 'Marián Ondrejka',
+                ownerUserName: 'm.ondrejka',
             };
 
             this.api
@@ -89,6 +91,8 @@ export class ProductServiceService {
                         description: newProductData.description.toString(),
                         vendors: this.vendorToApi,
                         reviews: newReview,
+                        ownerName: 'Marián Ondrejka',
+                        ownerUserName: 'm.ondrejka',
                     };
                 }
             });
@@ -103,6 +107,7 @@ export class ProductServiceService {
                             item[index] = productFromApi;
                             this.productDataObservable.next(productFromApi);
                         }
+                        console.log('vkladam do api ' + productToApi);
                     });
 
                     alert(
@@ -122,12 +127,11 @@ export class ProductServiceService {
         let text =
             'Do you really want to delete product ' + nameToComfirm + ' ?';
         if (confirm(text) == true) {
-
             this.api
                 .delete(data.id)
                 .toPromise()
                 .then((e) => {
-                    console.log(e);//vrati null
+                    console.log(e); //vrati null
                     alert('Product ' + nameToComfirm + ' has been deleted');
                 })
                 .catch((err) => {
@@ -142,18 +146,16 @@ export class ProductServiceService {
     }
 
     addReviews(data: Product) {
-     let message = data.reviews?.slice(-1).toLocaleString();
-     console.log(message);
-       const reviewToApi={
-            "productId": data.id,
-            "message": message
-        }
+        let message = data.reviews?.slice(-1).toLocaleString();
+        console.log(message);
+        const reviewToApi = {
+            productId: data.id,
+            message: message,
+        };
         this.api
             .putReview(reviewToApi)
             .toPromise()
-            .then((data) => {
-                console.log(data);
-            })
+            .then(() => {})
             .catch((err) => {
                 console.log(err);
             });
@@ -180,6 +182,8 @@ export class ProductServiceService {
                             description: apiData.description,
                             Vendors: apiData.vendors,
                             editPermission: apiData.editPermission,
+                            ownerName: apiData.ownerName,
+                            ownerUserName: apiData.ownerUsername,
                         };
                     });
 
@@ -258,6 +262,4 @@ export class ProductServiceService {
             }
         );
     }
-
-
 }

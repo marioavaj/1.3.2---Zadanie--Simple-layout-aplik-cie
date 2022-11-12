@@ -48,6 +48,7 @@ import { ModalLogOutComponent } from './modal-window/ModalLogOut/modal-log-out/m
         ModalAddEditProductComponent,
         ModalLogInComponent,
         ModalLogOutComponent,
+
     ],
     imports: [
         RouterModule,

@@ -53,7 +53,6 @@ export class FilterComponent
             this.myProductsFilter = false;
         }
         this.filter(this.whatIsSearched);
-        console.log(this.data);
     }
 
     // spusti sa po ngOnChanges, spusta sa iba raz!!!!!!!! este nie je nacitany html!!!!! Spracovanie pociatocnych dat, externe sluzby, asynchronne, idealne miesto pre inicializovanie dat z DB
@@ -86,8 +85,8 @@ export class FilterComponent
         let result: Product[] = [];
         if (
             (this.data && whatIsSearched?.length >= 2) ||
-            (this.data && this.onStock === true) ||
-            (this.data && this.myProductsFilter === true)
+            (this.data && this.onStock) ||
+            this.myProductsFilter
         ) {
             this.data.forEach((item) => {
                 if (
@@ -95,9 +94,8 @@ export class FilterComponent
                         .toLocaleLowerCase()
                         .includes(whatIsSearched.toLocaleLowerCase()) &&
                     this.onStock === false &&
-                    item.stockCount >= 0 && item.editPermission == true
+                    item.stockCount >= 0
                 ) {
-
                     result.push(item);
                     this.outputEvent.emit(result);
                 } else if (
@@ -105,8 +103,8 @@ export class FilterComponent
                         .toLocaleLowerCase()
                         .includes(whatIsSearched.toLocaleLowerCase()) &&
                     this.onStock === true &&
-                    item.stockCount > 0 && item.editPermission == true)
-
+                    item.stockCount > 0
+                )
                     result.push(item);
 
                 this.outputEvent.emit(result);

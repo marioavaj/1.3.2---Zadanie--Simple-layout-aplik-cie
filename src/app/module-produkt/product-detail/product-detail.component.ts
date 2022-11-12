@@ -61,6 +61,7 @@ export class ProductDetailComponent implements OnInit {
     }
 
     deleteProduct(data: Product) {
+        console.log(data.editPermission)
         if (data.editPermission) {
             this.productService.deleteProduct(data);
         } else alert('You have not permission to delete this product');

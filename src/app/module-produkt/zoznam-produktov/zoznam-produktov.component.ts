@@ -19,6 +19,7 @@ export class ZoznamProduktovComponent implements OnInit {
     onStockCheckBox: boolean;
     myProducts:boolean
     isLogged:boolean;
+    myproductClicked: boolean;
 
     constructor(
         private productService: ProductServiceService,
@@ -49,6 +50,9 @@ export class ZoznamProduktovComponent implements OnInit {
     isClicked() {
         this.sortByClicked = !this.sortByClicked;
     }
+    myProductIsClicked(){
+        this.myproductClicked = !this.myproductClicked;
+    }
 
     openModalNewProduct() {
         this.modal.openDialog(ModalAddEditProductComponent);
@@ -57,6 +61,7 @@ export class ZoznamProduktovComponent implements OnInit {
     displayProducts() {
         this.productService.getProductList().then((products: any[]) => {
             this.productList = products;
+            console.log(products)
         });
         this.filteredData = this.productList;
         this.sortByClicked = false;

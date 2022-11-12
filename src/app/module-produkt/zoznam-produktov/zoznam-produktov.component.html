@@ -14,11 +14,16 @@
         (checkBoXInput)="inputCheckBox($event)"
     ></app-filter-option>
 
-    <app-filter-option-my-product #myProductsFilter
-        [myProductsFilter]="false"
-        (myProductsFilterOutput)="myProductsCheckBox($event)"
+    <mat-checkbox *ngIf="isLogged"
+        (click)="myProductIsClicked()"
+        style="
+            margin: 5px 0 auto 0.2em;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        "
     >
-    </app-filter-option-my-product>
+        <span> My product </span>
+
+    </mat-checkbox>
 
     <mat-checkbox
         (click)="isClicked()"
@@ -43,7 +48,7 @@
         <app-product
             [data]="filteredProducts"
             *ngFor="
-                let filteredProducts of filteredData | sortByPipe: sortByClicked
+                let filteredProducts of filteredData | myProduct: myproductClicked | sortByPipe: sortByClicked
             "
         ></app-product>
     </div>

@@ -21,6 +21,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AdminComponent } from './admin/admin.component';
 import { FilterOptionMyProductComponent } from './filter-option-my-product/filter-option-my-product.component';
+import { MyProductPipe } from '../my-product.pipe';
 
 @NgModule({
     declarations: [
@@ -34,6 +35,7 @@ import { FilterOptionMyProductComponent } from './filter-option-my-product/filte
         ShoppingCartListComponent,
         AdminComponent,
         FilterOptionMyProductComponent,
+        MyProductPipe
 
     ],
     imports: [
@@ -67,6 +69,6 @@ import { FilterOptionMyProductComponent } from './filter-option-my-product/filte
         FilterOptionMyProductComponent
     ],
 
-    providers: [SortByPipePipe],
+    providers: [SortByPipePipe, MyProductPipe],
 })
 export class ModuleProduktModule {}

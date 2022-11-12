@@ -25,26 +25,14 @@
                     {{ data.price + "€" }}
                 </div>
             </div>
-            <div class="stock">
-                <span class="title stock">Stock:</span>
-                <ng-container>
-                    <div class="priceStockValue" *ngIf="data.stockCount !== 0">
-                        {{ data.stockCount }}
-                    </div>
-                    <div class="alertColor" *ngIf="data.stockCount === 0">
-                        Nedostupný
-                    </div>
-                </ng-container>
-            </div>
+
+            <div *ngIf="data.editPermission ===true && user.user.firstName  !=undefined">{{manager}}</div>
+
         </div>
 
-        <span class="descriptionName" *ngIf="data.description"
-            >Description:</span
-        >
-        <h3 class="descriptionName" *ngIf="!data.description"></h3>
-        <div class="description">
-            {{ data.description }}
-        </div>
+
+
+
         <button
             *ngIf="data.stockCount !== 0"
             class="addToCart"

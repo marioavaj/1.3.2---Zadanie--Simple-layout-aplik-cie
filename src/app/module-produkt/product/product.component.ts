@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
 
 import { ProductServiceService } from 'src/app/Services/product-service.service';
 import { ShopingCartServiceService } from 'src/app/Services/shoping-cart-service.service';
@@ -10,17 +11,25 @@ import { Product } from '../../models/Product';
     styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
-    @Input() data: any;
+    @Input() data: Product;
     @ViewChild('productPosition') productPosition: ElementRef<HTMLElement>;
+    manager: string;
 
     public clickedItem: Product;
 
     constructor(
         private createItem: ShopingCartServiceService,
-        private productService: ProductServiceService
+        private productService: ProductServiceService,
+        public user: AuthenticationService
     ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+
+this.user.whoIs.subscribe((data)=>{
+    this.manager ="manager: " + data.firstName + " " + data.lastName
+})
+
+    }
 
     addToCart() {
         this.createItem.putData(this.data);

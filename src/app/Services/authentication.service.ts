@@ -18,13 +18,15 @@ import { User } from '../models/user';
 })
 export class AuthenticationService {
     authenticationStream = new BehaviorSubject<any>('');
+    whoIs = new BehaviorSubject<any>('');
+
     userLoginData: User;
-    user: User;
-    loginData;
+
+    loginData: User;
     public static token: any;
     isLogIn: boolean;
     stayByClicked: any;
-    static user: any;
+    user = new User();
 
     private get jsonHttpOptions() {
         let headers = new HttpHeaders();
@@ -39,7 +41,7 @@ export class AuthenticationService {
 
     constructor(private http: HttpClient) {}
 
-    authentication(loginData): Observable<any> {
+    authentication(loginData: User): Observable<any> {
         const endpoint =
             'https://angularkurz.itcooking.eu/api/user/authenticate';
 
@@ -61,19 +63,24 @@ export class AuthenticationService {
     }
 
     isLogged(isLogged: boolean) {
-        this.authenticationStream.next(isLogged);
 
+        this.authenticationStream.next(isLogged);
     }
+
+
+
     connectToApi(loginData, stayByClicked: boolean) {
         this.authentication(loginData)
             .pipe(take(1))
             .subscribe((loginResponse) => {
                 console.log(loginResponse);
                 AuthenticationService.token = loginResponse.token;
+
                 this.isLogIn = true; // v headu sluzi na zmenu ikony prihlasit/odhlasit
                 this.isLogged(this.isLogIn);
 
                 this.user = loginResponse; //ziska resposeData prav uzivatela
+                this.whoIs.next(this.user);
 
                 // ulozi token do LocalStorage po zakliknuti checkboxu pre trvale prihlasenie alebo odhlasenie
                 if (stayByClicked) {
@@ -87,7 +94,7 @@ export class AuthenticationService {
             });
     }
 
-    public static getUserToken(): string {
+    getUserToken(): string {
         return this.user.token;
     }
 }

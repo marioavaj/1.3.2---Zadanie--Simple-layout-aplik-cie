@@ -9,7 +9,9 @@ export interface Product {
     description?: string;
     vendors?: Vendor[];
     reviews?: string[];
-    editPermission: boolean
+    editPermission: boolean;
+    ownerName: string;
+    ownerUsername: string
 }
 
 export interface Vendor {
@@ -36,4 +38,7 @@ export interface newProductToApi {
     sellCountLastMonth: number;
     vendors: VendorsInApi[];
     reviews: string[];
+    ownerName: string;
+    ownerUserName: string
+
 }

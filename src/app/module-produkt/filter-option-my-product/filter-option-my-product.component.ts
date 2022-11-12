@@ -17,7 +17,7 @@ export class FilterOptionMyProductComponent implements OnInit {
 
   myProductsOnChange(): void {
       this.myProductsFilter = !this.myProductsFilter;
-      this.myProductsFilterOutput.emit(this.myProductsFilter);
+      //this.myProductsFilterOutput.emit(this.myProductsFilter);
 
   }
 }
