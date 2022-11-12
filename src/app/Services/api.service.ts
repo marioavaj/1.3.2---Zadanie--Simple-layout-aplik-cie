@@ -22,12 +22,13 @@ export class ApiService {
         if (this.token) {
             headers = headers.set(
                 'Authorization',
-                'Basic bS5vbmRyZWprYTpqbjNlOUJhTQ=='
+                'Basic '+ AuthenticationService.token
             );
         } else if (this.tokenFromLS) {
             headers = headers.set(
                 'Authorization',
-                'Basic bS5vbmRyZWprYTpqbjNlOUJhTQ=='
+                'Basic '+ AuthenticationService.token
+
             );
         }
 
