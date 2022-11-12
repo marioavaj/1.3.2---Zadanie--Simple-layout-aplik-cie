@@ -18,14 +18,8 @@ import { User } from '../models/user';
 })
 export class AuthenticationService {
     authenticationStream = new BehaviorSubject<any>('');
-    whoIs = new BehaviorSubject<any>('');
-
-    userLoginData: User;
-
-    loginData: User;
     public static token: any;
     isLogIn: boolean;
-    stayByClicked: any;
     user = new User();
     userName: string | null;
 
@@ -67,7 +61,7 @@ export class AuthenticationService {
         this.authenticationStream.next(isLogged);
     }
 
-    userNamefromLS(userName:string | null){
+    userNamefromLS(userName: string | null) {
         this.authenticationStream.next(userName);
     }
 
@@ -77,15 +71,11 @@ export class AuthenticationService {
             .subscribe((loginResponse) => {
                 console.log(loginResponse);
                 AuthenticationService.token = loginResponse.token;
-
                 this.isLogIn = true; // v headu sluzi na zmenu ikony prihlasit/odhlasit
                 this.isLogged(this.isLogIn);
-                this.user = loginResponse; //ziska resposeData prav uzivatela
+                this.user = loginResponse; //ziska resposeData  uzivatela
                 this.userName = this.user.firstName + ' ' + this.user.lastName;
                 this.userNamefromLS(this.userName);
-
-                this.whoIs.next(this.user);
-
                 // ulozi token do LocalStorage po zakliknuti checkboxu pre trvale prihlasenie alebo odhlasenie
                 if (stayByClicked) {
                     localStorage.setItem(
@@ -100,7 +90,5 @@ export class AuthenticationService {
             });
     }
 
-    getUserToken(): string {
-        return this.user.token;
-    }
+
 }

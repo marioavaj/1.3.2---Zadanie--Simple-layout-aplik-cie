@@ -12,7 +12,7 @@ import { ApiService } from './api.service';
 
 @Injectable({ providedIn: 'root' })
 export class ProductServiceService {
-    productData: any;
+    productData;
     productById: Product[];
     sortedData: Product[];
     dataStream = new BehaviorSubject<any>(0);
@@ -50,8 +50,8 @@ export class ProductServiceService {
                 sellCountLastMonth: parseInt(newProductData.lastMonthSold),
                 vendors: this.vendorToApi,
                 reviews: newReview,
-                ownerName: 'Marián Ondrejka',
-                ownerUserName: 'm.ondrejka',
+                ownerName: newProductData.ownerName,
+                ownerUserName: newProductData.ownerUserName,
             };
 
             this.api
@@ -91,8 +91,8 @@ export class ProductServiceService {
                         description: newProductData.description.toString(),
                         vendors: this.vendorToApi,
                         reviews: newReview,
-                        ownerName: 'Marián Ondrejka',
-                        ownerUserName: 'm.ondrejka',
+                        ownerName: this.productData.ownerName,
+                        ownerUserName: newProductData.ownerUserName,
                     };
                 }
             });
@@ -107,7 +107,6 @@ export class ProductServiceService {
                             item[index] = productFromApi;
                             this.productDataObservable.next(productFromApi);
                         }
-                        console.log('vkladam do api ' + productToApi);
                     });
 
                     alert(
