@@ -20,16 +20,14 @@ export class ApiService {
         headers = headers.set('Content-Type', 'application/json');
 
         if (AuthenticationService.token) {
-
             headers = headers.set(
                 'Authorization',
-                'Basic '+ AuthenticationService.token
+                'Basic ' + AuthenticationService.token
             );
         } else if (this.tokenFromLS) {
             headers = headers.set(
                 'Authorization',
-                'Basic '+ AuthenticationService.token
-
+                'Basic ' + AuthenticationService.token
             );
         }
 
@@ -38,12 +36,8 @@ export class ApiService {
         };
     }
 
-    constructor(
-        private http: HttpClient,
-
-    ) {
+    constructor(private http: HttpClient) {
         this.tokenFromLS = localStorage.getItem('Dk4kdoSkf5*gjd'); //nacita token z LS
-
     }
 
     get(): Observable<any> {
@@ -54,7 +48,6 @@ export class ApiService {
                 .get(endpoint, this.jsonHttpOptions)
                 .pipe(catchError(this.handleError));
         } else {
-
             const endpoint =
                 'https://angularkurz.itcooking.eu/api/v1/auth/lessons/product/GetProducts';
             return this.http
