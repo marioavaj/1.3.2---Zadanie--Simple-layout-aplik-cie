@@ -19,6 +19,7 @@ export class ModalLogOutComponent implements OnInit {
         localStorage.removeItem('Dk4kdoSkf5*gjd'); //vymaze kluc s tokenom
         localStorage.removeItem('Dk4kdoSkf5*g5464jd');
         this.authenticationService.isLogged(false); //zmeni ikonku v header na prihlasit
+        this.authenticationService.reloadCurrentRoute();
         this.dialogRef.close(); //zavrie okno
     }
 }

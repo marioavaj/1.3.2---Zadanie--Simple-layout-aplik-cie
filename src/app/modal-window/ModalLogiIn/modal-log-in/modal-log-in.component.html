@@ -1,4 +1,4 @@
-<h3>Logg In</h3>
+<h3>Log In</h3>
 
 <form class="form" [formGroup]="logginGroup">
     <mat-form-field appearance="fill">
@@ -11,10 +11,9 @@
         <input matInput formControlName="password" />
         <mat-error>This field is required</mat-error>
     </mat-form-field>
-
 </form>
 <div class="stayButtonsWrapper">
-    <mat-checkbox  (click)="stayLoggedIn()">Stay Logged in</mat-checkbox>
+    <mat-checkbox (click)="stayLoggedIn()">Stay Logged in</mat-checkbox>
     <div>
         <button mat-button color="primary" (click)="LogIn()">Login</button>
         <button mat-button color="warn" (click)="closeModal()">Cancel</button>

@@ -12,6 +12,7 @@ import { AuthenticationService } from './authentication.service';
 })
 export class ApiService {
     tokenFromLS: string | null;
+    router: any;
 
     private get jsonHttpOptions() {
         let headers = new HttpHeaders();
@@ -19,16 +20,13 @@ export class ApiService {
         headers = headers.set('X-Requested-With', 'XMLHttpRequest');
         headers = headers.set('Content-Type', 'application/json');
 
-        if (AuthenticationService.token) {
+        if (this.authentication.token) {
             headers = headers.set(
                 'Authorization',
-                'Basic ' + AuthenticationService.token
+                'Basic ' + this.authentication.token
             );
         } else if (this.tokenFromLS) {
-            headers = headers.set(
-                'Authorization',
-                'Basic ' + AuthenticationService.token
-            );
+            headers = headers.set('Authorization', 'Basic ' + this.tokenFromLS);
         }
 
         return {
@@ -36,12 +34,19 @@ export class ApiService {
         };
     }
 
-    constructor(private http: HttpClient) {
+    constructor(
+        private http: HttpClient,
+        private authentication: AuthenticationService
+    ) {
         this.tokenFromLS = localStorage.getItem('Dk4kdoSkf5*gjd'); //nacita token z LS
     }
 
     get(): Observable<any> {
-        if (!AuthenticationService.token) {
+        if (
+            // this.authentication.token == undefined;
+            this.authentication.token == undefined &&
+            this.tokenFromLS == null
+        ) {
             const endpoint =
                 'https://angularkurz.itcooking.eu/api/v1/lessons/product/GetProducts';
             return this.http
@@ -57,7 +62,10 @@ export class ApiService {
     }
 
     getById(id: number): Observable<any> {
-        if (!AuthenticationService.token) {
+        if (
+            this.authentication.token == undefined ||
+            this.tokenFromLS == null
+        ) {
             const endpoint =
                 'https://angularkurz.itcooking.eu/api/v1/lessons/product/GetProductById/';
             return this.http
@@ -114,6 +122,6 @@ export class ApiService {
         } else {
             alert(`Error  code ${error.status}`);
         }
-        return throwError(error);
+        return throwError(() => error);
     }
 }

@@ -11,29 +11,30 @@ import { ProductServiceService } from '../../Services/product-service.service';
     styleUrls: ['./zoznam-produktov.component.scss'],
 })
 export class ZoznamProduktovComponent implements OnInit {
-     productData: any;
-     productList: any[];
+    productData: Product[];
+    productList: Product[];
     sortByClicked: boolean;
     lastReview: string;
     filteredData: Product[];
     onStockCheckBox: boolean;
-    myProducts:boolean
-    isLogged:boolean;
+    myProducts: boolean;
+    isLogged: boolean;
     myproductClicked: boolean;
+
+
 
     constructor(
         private productService: ProductServiceService,
         private modal: ModalService,
-        private isLoggedService: AuthenticationService,
-
+        private isLoggedService: AuthenticationService
     ) {}
 
     ngOnInit(): void {
+        this.displayProducts();
+        this.isLoggedService.authenticationStream.subscribe((value) => {
+            this.isLogged = value;
 
-      this.displayProducts();
-      this.isLoggedService.authenticationStream.subscribe((value) => {
-        this.isLogged = value;
-    });
+        });
     }
 
     onFilterDone(item: Product[]) {
@@ -43,14 +44,14 @@ export class ZoznamProduktovComponent implements OnInit {
         this.onStockCheckBox = onStock;
     }
 
-    myProductsCheckBox(myProducts: boolean){
+    myProductsCheckBox(myProducts: boolean) {
         this.myProducts = myProducts;
     }
 
     isClicked() {
         this.sortByClicked = !this.sortByClicked;
     }
-    myProductIsClicked(){
+    myProductIsClicked() {
         this.myproductClicked = !this.myproductClicked;
     }
 
@@ -61,7 +62,6 @@ export class ZoznamProduktovComponent implements OnInit {
     displayProducts() {
         this.productService.getProductList().then((products: any[]) => {
             this.productList = products;
-            console.log(products)
         });
         this.filteredData = this.productList;
         this.sortByClicked = false;

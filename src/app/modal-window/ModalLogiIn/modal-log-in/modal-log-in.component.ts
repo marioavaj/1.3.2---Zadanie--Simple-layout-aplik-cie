@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 
 @Component({
@@ -21,13 +22,11 @@ export class ModalLogInComponent implements OnInit {
 
     constructor(
         private dialogRef: MatDialogRef<ModalLogInComponent>,
-        private authentication: AuthenticationService
+        private authentication: AuthenticationService,
+        private router: Router
     ) {}
 
-    ngOnInit(): void {
-
-
-    }
+    ngOnInit(): void {}
 
     stayLoggedIn() {
         this.stayByClicked = !this.stayByClicked;
@@ -37,7 +36,7 @@ export class ModalLogInComponent implements OnInit {
         this.dialogRef.close();
     }
 
-    LogIn(): void {
+    LogIn() {
         this.logginGroup.markAllAsTouched();
         this.logginGroup.updateValueAndValidity();
 
@@ -48,6 +47,7 @@ export class ModalLogInComponent implements OnInit {
             username: userName,
             password: password,
         };
+
         this.authentication.connectToApi(this.userData, this.stayByClicked);
 
         this.closeModal();

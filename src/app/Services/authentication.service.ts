@@ -4,6 +4,7 @@ import {
     HttpHeaders,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import {
     BehaviorSubject,
     catchError,
@@ -18,7 +19,7 @@ import { User } from '../models/user';
 })
 export class AuthenticationService {
     authenticationStream = new BehaviorSubject<any>('');
-    public static token: any;
+    token: any;
     isLogIn: boolean;
     user = new User();
     userName: string | null;
@@ -34,7 +35,7 @@ export class AuthenticationService {
         };
     }
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private router: Router) {}
 
     authentication(loginData: User): Observable<any> {
         const endpoint =
@@ -69,24 +70,33 @@ export class AuthenticationService {
         this.authentication(loginData)
             .pipe(take(1))
             .subscribe((loginResponse) => {
-                console.log(loginResponse);
-                AuthenticationService.token = loginResponse.token;
+                this.token = loginResponse.token;
                 this.isLogIn = true; // v headu sluzi na zmenu ikony prihlasit/odhlasit
                 this.isLogged(this.isLogIn);
                 this.user = loginResponse; //ziska resposeData  uzivatela
                 this.userName = this.user.firstName + ' ' + this.user.lastName;
                 this.userNamefromLS(this.userName);
                 // ulozi token do LocalStorage po zakliknuti checkboxu pre trvale prihlasenie alebo odhlasenie
+
+                this.reloadCurrentRoute(); //refresh zoznamu produktov po prihlaserni
+
                 if (stayByClicked) {
-                    localStorage.setItem(
-                        'Dk4kdoSkf5*gjd',
-                        AuthenticationService.token
-                    );
+                    localStorage.setItem('Dk4kdoSkf5*gjd', this.token);
                     localStorage.setItem('Dk4kdoSkf5*g5464jd', this.userName);
                 } else {
                     localStorage.removeItem('Dk4kdoSkf5*gjd');
                     localStorage.removeItem('Dk4kdoSkf5*g5464jd');
                 }
+            });
+    }
+
+    reloadCurrentRoute() {
+        let currentUrl = this.router.url;
+        this.router
+            .navigateByUrl('/', { skipLocationChange: true })
+            .then(() => {
+                this.router.navigate([currentUrl]);
+                console.log(currentUrl);
             });
     }
 }

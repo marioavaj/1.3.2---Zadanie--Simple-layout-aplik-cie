@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-            <div *ngIf="data.editPermission === true">{{ manager }}</div>
+            <div *ngIf="data.ownerName != null">Manager: {{ data.ownerName }}</div>
         </div>
 
         <button

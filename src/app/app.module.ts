@@ -23,7 +23,7 @@ import { ShowNewHead } from './Shared/directives/showNewHead.directives';
 import { Hidden } from './Shared/directives/hidden.directive';
 import { FooterComponent } from './Footer/footer/footer.component';
 import { ModalWindowComponent } from './modal-window/modal-window.component';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ModalAddEditProductComponent } from './modal-window/ModalAddEditProduct/modal-add-edit-product/modal-add-edit-product.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalLogInComponent } from './modal-window/ModalLogiIn/modal-log-in/modal-log-in.component';
@@ -48,7 +48,6 @@ import { ModalLogOutComponent } from './modal-window/ModalLogOut/modal-log-out/m
         ModalAddEditProductComponent,
         ModalLogInComponent,
         ModalLogOutComponent,
-
     ],
     imports: [
         RouterModule,
@@ -63,7 +62,7 @@ import { ModalLogOutComponent } from './modal-window/ModalLogOut/modal-log-out/m
         MatButtonModule,
         MatTooltipModule,
         MatDialogModule,
-        HttpClientModule
+        HttpClientModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

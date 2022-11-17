@@ -35,7 +35,8 @@ import { MyProductPipe } from '../my-product.pipe';
         ShoppingCartListComponent,
         AdminComponent,
         FilterOptionMyProductComponent,
-        MyProductPipe
+        MyProductPipe,
+
 
     ],
     imports: [
@@ -50,7 +51,9 @@ import { MyProductPipe } from '../my-product.pipe';
         MatFormFieldModule,
         MatInputModule,
         MatStepperModule,
-        MatDialogModule
+        MatDialogModule,
+
+
     ],
 
     exports: [

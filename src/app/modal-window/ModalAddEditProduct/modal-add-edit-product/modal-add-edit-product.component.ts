@@ -148,7 +148,6 @@ export class ModalAddEditProductComponent implements OnInit {
     }
 
     cancelModal() {
-        alert('Operation has been canceled');
         this.dialogRef.close();
     }
 
